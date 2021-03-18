@@ -25,10 +25,12 @@ namespace Altapay\Response;
 
 class ChargeSubscriptionResponse extends ReservationOfFixedAmountResponse
 {
+    /** @var float */
     public $CaptureResult;
+    
     /**
      * @param float $CaptureAmount
-     * @return CaptureReservationResponse
+     * @return $this
      */
     public function setCaptureAmount($CaptureAmount)
     {
