@@ -25,4 +25,16 @@ namespace Altapay\Response;
 
 class ReserveSubscriptionResponse extends ChargeSubscriptionResponse
 {
+    /** @var float */
+    public $PreauthAmount;
+
+    /**
+     * @param float $PreauthAmount
+     * @return $this
+     */
+    public function setPreauthAmount($PreauthAmount)
+    {
+        $this->PreauthAmount = (float)$PreauthAmount;
+        return $this;
+    }
 }
