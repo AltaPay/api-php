@@ -101,7 +101,7 @@ class Transaction extends AbstractResponse
     public $CreditCardMaskedPan;
 
     /**
-     * @var string
+     * @var bool
      */
     public $IsTokenized;
 
@@ -286,6 +286,18 @@ class Transaction extends AbstractResponse
     public $InvoiceOrderInfo;
 
     /**
+     * @param string $IsTokenized
+     *
+     * @return $this
+     */
+    protected function setIsTokenized($IsTokenized)
+    {
+        $this->IsTokenized = filter_var($IsTokenized, FILTER_VALIDATE_BOOLEAN);
+
+        return $this;
+    }
+
+    /**
      * @param string $CreatedDate
      *
      * @return $this
@@ -310,7 +322,7 @@ class Transaction extends AbstractResponse
     }
 
     /**
-     * @param float $ReservedAmount
+     * @param string $ReservedAmount
      *
      * @return $this
      */
@@ -322,7 +334,7 @@ class Transaction extends AbstractResponse
     }
 
     /**
-     * @param float $CapturedAmount
+     * @param string $CapturedAmount
      *
      * @return $this
      */
@@ -334,7 +346,7 @@ class Transaction extends AbstractResponse
     }
 
     /**
-     * @param float $CreditedAmount
+     * @param string $CreditedAmount
      *
      * @return $this
      */
@@ -346,7 +358,7 @@ class Transaction extends AbstractResponse
     }
 
     /**
-     * @param float $SurchargeAmount
+     * @param string $SurchargeAmount
      *
      * @return $this
      */
@@ -358,7 +370,7 @@ class Transaction extends AbstractResponse
     }
 
     /**
-     * @param float $RefundedAmount
+     * @param string $RefundedAmount
      *
      * @return $this
      */
@@ -370,7 +382,7 @@ class Transaction extends AbstractResponse
     }
 
     /**
-     * @param float $RecurringDefaultAmount
+     * @param string $RecurringDefaultAmount
      *
      * @return $this
      */
@@ -382,7 +394,7 @@ class Transaction extends AbstractResponse
     }
 
     /**
-     * @param float $FraudRiskScore
+     * @param string $FraudRiskScore
      *
      * @return $this
      */

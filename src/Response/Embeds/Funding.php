@@ -69,6 +69,12 @@ class Funding extends AbstractResponse
     /** @var string */
     public $DownloadLink;
 
+    /** @var string */
+    public $ReferenceText;
+
+    /** @var string */
+    public $AccountNumber;
+
     /**
      * @param string $FundingDate
      *
