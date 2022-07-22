@@ -13,7 +13,7 @@ class ResponseInfo extends Callback
     {
         $response          = $this->call();
         $registeredAddress = null;
-        if (isset($response->Transactions[0]->CustomerInfo->RegisteredAddress)) {
+        if (isset($response->Transactions[0]->CustomerInfo)) {
             $registeredAddress = $response->Transactions[0]->CustomerInfo->RegisteredAddress;
         }
 

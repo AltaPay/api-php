@@ -145,7 +145,7 @@ class CaptureReservation extends AbstractApi
     {
         $body = (string)$response->getBody();
         $xml  = new \SimpleXMLElement($body);
-        if ($xml->Body->Result == 'Error') {
+        if ((string)$xml->Body->Result === 'Error') {
             throw new \Exception($xml->Body->MerchantErrorMessage);
         }
 
