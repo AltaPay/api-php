@@ -334,7 +334,7 @@ class CardWalletAuthorize extends AbstractApi
     protected function getBasicHeaders()
     {
         $headers = parent::getBasicHeaders();
-        if (mb_strtolower($this->getHttpMethod()) == 'post') {
+        if (mb_strtolower($this->getHttpMethod()) === 'post') {
             $headers['Content-Type'] = 'application/x-www-form-urlencoded';
         }
 
@@ -351,7 +351,7 @@ class CardWalletAuthorize extends AbstractApi
     protected function getUrl(array $options)
     {
         $url = 'cardWallet/authorize';
-        if (mb_strtolower($this->getHttpMethod()) == 'get') {
+        if (mb_strtolower($this->getHttpMethod()) === 'get') {
             $query = $this->buildUrl($options);
             $url = sprintf('%s/?%s', $url, $query);
         }
@@ -375,7 +375,7 @@ class CardWalletAuthorize extends AbstractApi
         $this->doConfigureOptions();
         $headers = $this->getBasicHeaders();
         $requestParameters = [$this->getHttpMethod(), $this->parseUrl(), $headers];
-        if (mb_strtolower($this->getHttpMethod()) == 'post') {
+        if (mb_strtolower($this->getHttpMethod()) === 'post') {
             $requestParameters[] = $this->getPostOptions();
         }
 

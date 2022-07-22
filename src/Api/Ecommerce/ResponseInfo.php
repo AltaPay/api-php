@@ -6,11 +6,6 @@ use Altapay\Response\Embeds\Address;
 
 class ResponseInfo extends Callback
 {
-    public function __construct($postedData)
-    {
-        parent::__construct($postedData);
-    }
-
     /**
      * @return Address|null
      */
