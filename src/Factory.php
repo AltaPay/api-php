@@ -28,7 +28,6 @@ use Altapay\Api\Ecommerce;
 use Altapay\Api\Others;
 use Altapay\Api\Payments;
 use Altapay\Api\Subscription;
-use Altapay\Api\Test;
 
 class Factory
 {
@@ -54,9 +53,6 @@ class Factory
     const SUBSCRIPTION_CHARGE_SUBSCRIPTION = Subscription\ChargeSubscription::class;
     const SUBSCRIPTION_RESERVE_SUBSCRIPTION_CHARGE = Subscription\ReserveSubscriptionCharge::class;
     const SUBSCRIPTION_SETUP_SUBSCRIPTION = Subscription\SetupSubscription::class;
-
-    const TEST_AUTHENTICATION = Test\TestAuthentication::class;
-    const TEST_CONNECTION = Test\TestConnection::class;
 
     /**
      * @template T of object

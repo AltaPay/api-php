@@ -2,7 +2,7 @@
 
 namespace Altapay\ApiTest;
 
-use Altapay\Api\Test\TestAuthentication;
+use Altapay\ApiTest\TestAuthentication;
 use Altapay\Exceptions\ClassDoesNotExistsException;
 use Altapay\Factory;
 
@@ -17,6 +17,8 @@ class FactoryTest extends AbstractTest
         $constants = $refClass->getConstants();
         $output    = [];
         foreach ($constants as $class) {
+            $this->assertTrue(is_string($class));
+            $this->assertTrue(class_exists($class));
             $output[] = [$class];
         }
 
