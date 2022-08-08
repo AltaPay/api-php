@@ -6,11 +6,6 @@ use Altapay\Response\Embeds\Address;
 
 class ResponseInfo extends Callback
 {
-    public function __construct($postedData)
-    {
-        parent::__construct($postedData);
-    }
-
     /**
      * @return Address|null
      */
@@ -18,7 +13,7 @@ class ResponseInfo extends Callback
     {
         $response          = $this->call();
         $registeredAddress = null;
-        if (isset($response->Transactions[0]->CustomerInfo->RegisteredAddress)) {
+        if (isset($response->Transactions[0]->CustomerInfo)) {
             $registeredAddress = $response->Transactions[0]->CustomerInfo->RegisteredAddress;
         }
 

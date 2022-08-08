@@ -103,17 +103,22 @@ class FundingDownload extends AbstractApi
      *
      * @param array<string, mixed> $options Resolved options
      *
-     * @return string
+     * @return ?string
      */
     protected function getUrl(array $options)
     {
-        return $options['link'];
+        $url = isset($options['link']) ? $options['link'] : null;
+        if (!is_string($url)) {
+            return null;
+        }
+
+        return $url;
     }
 
     /**
      * Parse the URL
      *
-     * @return string
+     * @return ?string
      */
     protected function parseUrl()
     {

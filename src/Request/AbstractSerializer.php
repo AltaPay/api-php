@@ -42,7 +42,7 @@ abstract class AbstractSerializer
      * @param object $object
      * @param string $property
      *
-     * @return mixed
+     * @return mixed Will return false if the property or getter does not exist
      */
     protected function get($object, $property)
     {

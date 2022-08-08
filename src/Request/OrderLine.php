@@ -158,7 +158,7 @@ class OrderLine extends AbstractSerializer
     /**
      * Serialize a object
      *
-     * @return array<string, string|numeric>
+     * @return array<string, mixed>
      */
     public function serialize()
     {

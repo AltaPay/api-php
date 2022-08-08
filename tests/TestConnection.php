@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Api\Test;
+namespace Altapay\ApiTest;
 
 use Altapay\AbstractApi;
 use Altapay\Authentication;
@@ -36,7 +36,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class TestConnection extends AbstractApi
 {
-
     /**
      * TestConnection constructor.
      *
@@ -93,17 +92,5 @@ class TestConnection extends AbstractApi
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
         return 'ok';
-    }
-
-    /**
-     * Handle exception response
-     *
-     * @param ClientException $exception
-     *
-     * @return false
-     */
-    protected function handleExceptionResponse(ClientException $exception)
-    {
-        return false;
     }
 }

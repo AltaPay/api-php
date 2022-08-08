@@ -2,7 +2,7 @@
 
 namespace Altapay\ApiTest\Api;
 
-use Altapay\Api\Test\TestConnection;
+use Altapay\ApiTest\TestConnection;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Altapay\Exceptions\ClientException;

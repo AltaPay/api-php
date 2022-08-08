@@ -86,7 +86,7 @@ abstract class AbstractResponse
                     if ($childKey === false) {
                         $data = ResponseSerializer::serialize($className, $child);
                     } else {
-                        $data = ResponseSerializer::serializeChildren($className, $child, $builder['array']);
+                        $data = ResponseSerializer::serializeChildren($className, $child, $childKey);
                     }
                 } else {
                     $data = trim((string)$child);

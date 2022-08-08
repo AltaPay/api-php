@@ -331,7 +331,7 @@ abstract class AbstractApi
     /**
      * Build url
      *
-     * @param array<string, string> $options
+     * @param array<string, mixed> $options
      *
      * @return bool|string
      */
