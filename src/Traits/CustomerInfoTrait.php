@@ -29,7 +29,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 trait CustomerInfoTrait
 {
-
     /**
      * Customer info - used for fraud detection
      *

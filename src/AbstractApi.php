@@ -39,7 +39,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 abstract class AbstractApi
 {
-
     /**
      * Test gateway url
      */

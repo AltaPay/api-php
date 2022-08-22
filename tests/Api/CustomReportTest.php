@@ -8,7 +8,6 @@ use GuzzleHttp\Psr7\Response;
 
 class CustomReportTest extends AbstractApiTest
 {
-
     /**
      * @return CustomReport
      */

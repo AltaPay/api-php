@@ -12,7 +12,6 @@ use GuzzleHttp\Psr7\Response;
 
 class CaptureReservationTest extends AbstractApiTest
 {
-
     /**
      * @return CaptureReservation
      */

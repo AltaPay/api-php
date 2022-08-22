@@ -13,7 +13,6 @@ use GuzzleHttp\Psr7\Response;
 
 abstract class AbstractApiTest extends AbstractTest
 {
-
     /**
      * @return Client
      */

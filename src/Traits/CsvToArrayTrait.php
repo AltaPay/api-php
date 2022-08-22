@@ -30,7 +30,6 @@ use Psr\Http\Message\ResponseInterface;
  */
 trait CsvToArrayTrait
 {
-
     /**
      * Convert csv response to array
      *
