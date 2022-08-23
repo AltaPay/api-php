@@ -11,7 +11,6 @@ use GuzzleHttp\Psr7\Response;
 
 class ChargeSubscriptionTest extends AbstractApiTest
 {
-
     /**
      * @return ChargeSubscription
      */

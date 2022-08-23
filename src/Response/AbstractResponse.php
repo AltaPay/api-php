@@ -31,7 +31,6 @@ use Altapay\Serializer\ResponseSerializer;
  */
 abstract class AbstractResponse
 {
-
     /**
      * Header of the result
      *

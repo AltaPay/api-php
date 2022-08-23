@@ -28,7 +28,6 @@ namespace Altapay\Types;
  */
 class FraudServices implements TypeInterface
 {
-
     /**
      * Allowed fraud services
      *

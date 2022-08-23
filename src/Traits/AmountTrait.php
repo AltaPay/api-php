@@ -27,7 +27,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 trait AmountTrait
 {
-
     /**
      * The amount to calculate the surcharge from
      *

@@ -13,7 +13,6 @@ use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 
 class CreditTest extends AbstractApiTest
 {
-
     /**
      * @return Credit
      */

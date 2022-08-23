@@ -9,7 +9,6 @@ use GuzzleHttp\Psr7\Response;
 
 class CalculateSurchargeTest extends AbstractApiTest
 {
-
     /**
      * @return CalculateSurcharge
      */

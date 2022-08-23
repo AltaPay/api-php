@@ -28,7 +28,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 trait CurrencyTrait
 {
-
     /**
      * Either 3 letter or 3 digit currency code. ISO-4217
      *

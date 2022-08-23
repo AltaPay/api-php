@@ -21,22 +21,43 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Api\Subscription;
+namespace Altapay\Api\Test;
 
-use Altapay\Api\Payments\ReservationOfFixedAmount;
-use Altapay\Response\SetupSubscriptionResponse;
-use Altapay\Serializer\ResponseSerializer;
+use Altapay\AbstractApi;
+use Altapay\Authentication;
+use Altapay\Exceptions\ClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * This method is used to setup a subscription for later use with
- * chargeSubscription or reserveSubscriptionCharge.
+ * This method requires no authentication and is presented for your system to test the connection to our system.
  */
-class SetupSubscription extends ReservationOfFixedAmount
+class TestConnection extends AbstractApi
 {
+    /**
+     * TestConnection constructor.
+     *
+     * @param string $baseUrl
+     */
+    public function __construct($baseUrl = null)
+    {
+        $auth = new Authentication('', '', null);
+        parent::__construct($auth);
+        $this->baseUrl = $baseUrl;
+    }
+
+    /**
+     * Is authentication required for this
+     *
+     * @return bool
+     */
+    protected function authRequired()
+    {
+        return false;
+    }
+
     /**
      * Configure options
      *
@@ -46,29 +67,6 @@ class SetupSubscription extends ReservationOfFixedAmount
      */
     protected function configureOptions(OptionsResolver $resolver)
     {
-        parent::configureOptions($resolver);
-        $resolver->remove('type');
-
-        $resolver->setDefault('type', 'subscription');
-        $resolver->setAllowedValues('type', [
-            'subscription', 'subscriptionAndCharge', 'subscriptionAndReserve', 'verifyCard'
-        ]);
-    }
-
-    /**
-     * Handle response
-     *
-     * @param Request           $request
-     * @param ResponseInterface $response
-     *
-     * @return SetupSubscriptionResponse
-     */
-    protected function handleResponse(Request $request, ResponseInterface $response)
-    {
-        $body = (string) $response->getBody();
-        $xml = new \SimpleXMLElement($body);
-
-        return ResponseSerializer::serialize(SetupSubscriptionResponse::class, $xml->Body, $xml->Header);
     }
 
     /**
@@ -80,7 +78,31 @@ class SetupSubscription extends ReservationOfFixedAmount
      */
     protected function getUrl(array $options)
     {
-        $query = $this->buildUrl($options);
-        return sprintf('setupSubscription/?%s', $query);
+        return 'testConnection';
+    }
+
+    /**
+     * Handle response
+     *
+     * @param Request           $request
+     * @param ResponseInterface $response
+     *
+     * @return string
+     */
+    protected function handleResponse(Request $request, ResponseInterface $response)
+    {
+        return 'ok';
+    }
+
+    /**
+     * Handle exception response
+     *
+     * @param ClientException $exception
+     *
+     * @return false
+     */
+    protected function handleExceptionResponse(ClientException $exception)
+    {
+        return false;
     }
 }

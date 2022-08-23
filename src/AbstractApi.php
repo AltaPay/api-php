@@ -39,7 +39,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 abstract class AbstractApi
 {
-
     /**
      * Test gateway url
      */
@@ -53,7 +52,7 @@ abstract class AbstractApi
     /**
      * PHP API version
      */
-    const PHP_API_VERSION = '3.2.5';
+    const PHP_API_VERSION = '3.2.6';
 
     /**
      * Event dispatcher

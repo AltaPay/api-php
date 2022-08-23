@@ -28,7 +28,6 @@ namespace Altapay\Request;
  */
 class Card
 {
-
     /**
      * Card number
      *

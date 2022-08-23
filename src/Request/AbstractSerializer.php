@@ -28,7 +28,6 @@ namespace Altapay\Request;
  */
 abstract class AbstractSerializer
 {
-
     /**
      * Serialize a object
      *

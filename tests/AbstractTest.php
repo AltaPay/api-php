@@ -7,7 +7,6 @@ use Faker\Factory;
 
 abstract class AbstractTest extends \PHPUnit\Framework\TestCase
 {
-
     /**
      * @return \Faker\Generator
      */

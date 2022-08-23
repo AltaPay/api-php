@@ -21,44 +21,66 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Traits;
+namespace Altapay\Api\Test;
 
-use Altapay\Request\Customer;
-use Symfony\Component\OptionsResolver\Options;
+use Altapay\AbstractApi;
+use Altapay\Exceptions\ClientException;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-trait CustomerInfoTrait
+/**
+ * This method requires authentication and is presented for your system
+ * to test the username/password before doing any "real" API calls.
+ */
+class TestAuthentication extends AbstractApi
 {
     /**
-     * Customer info - used for fraud detection
-     *
-     * @param Customer $customer
-     *
-     * @return $this
-     */
-    public function setCustomerInfo(Customer $customer)
-    {
-        $this->unresolvedOptions['customer_info'] = $customer;
-        $createdDate = $customer->getCreatedDate();
-        if ($createdDate) {
-            $this->unresolvedOptions['customer_created_date'] = $createdDate->format('Y-m-d');
-        }
-        return $this;
-    }
-
-    /**
-     * Resolve amount option
+     * Configure options
      *
      * @param OptionsResolver $resolver
      *
      * @return void
      */
-    protected function setCustomerInfoResolver(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setAllowedTypes('customer_info', Customer::class);
-        /** @noinspection PhpUnusedParameterInspection */
-        $resolver->setNormalizer('customer_info', function (Options $options, Customer $value) {
-            return $value->serialize();
-        });
+    }
+
+    /**
+     * Url to api call
+     *
+     * @param array<string, mixed> $options Resolved options
+     *
+     * @return string
+     */
+    protected function getUrl(array $options)
+    {
+        return 'login';
+    }
+
+    /**
+     * Handle response
+     *
+     * @param Request           $request
+     * @param ResponseInterface $response
+     *
+     * @return string
+     */
+    protected function handleResponse(Request $request, ResponseInterface $response)
+    {
+        return 'ok';
+    }
+
+    /**
+     * Handle exception response
+     *
+     * @param ClientException $exception
+     *
+     * @return false
+     */
+    protected function handleExceptionResponse(ClientException $exception)
+    {
+        return false;
     }
 }
