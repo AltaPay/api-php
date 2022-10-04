@@ -223,6 +223,7 @@ abstract class AbstractApi
         $this->setCurrencyResolver($resolver);
         $this->setShopOrderIdResolver($resolver);
         $this->setTransactionInfoResolver($resolver);
+        $this->setAgreementResolver($resolver);
         $this->setCustomerInfoResolver($resolver);
         $this->setValidationUrlResolver($resolver);
         $this->setAppleDomainResolver($resolver);
@@ -461,6 +462,16 @@ abstract class AbstractApi
     {
     }
 
+    /**
+     * Resolve agreement info option
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     */
+    protected function setAgreementResolver(OptionsResolver $resolver)
+    {
+    }
     /**
      * Resolve amount option
      *

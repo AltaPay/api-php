@@ -195,6 +195,7 @@ class ReservationOfFixedAmount extends AbstractApi
             'cvc',
             'credit_card_token',
             'transaction_info',
+            'agreement',
             'fraud_service',
             'surcharge',
             'customer_info',

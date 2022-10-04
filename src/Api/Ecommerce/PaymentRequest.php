@@ -46,7 +46,8 @@ class PaymentRequest extends AbstractApi
     use Traits\TransactionInfoTrait;
     use Traits\CustomerInfoTrait;
     use Traits\OrderlinesTrait;
-
+    use Traits\AgreementTrait;
+    
     /**
      * The language of the payment form
      *
@@ -71,6 +72,20 @@ class PaymentRequest extends AbstractApi
     public function setType($type)
     {
         $this->unresolvedOptions['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * The type of the authorization
+     *
+     * @param string $agreement
+     *
+     * @return $this
+     */
+    public function setAgreement($agreement)
+    {
+        $this->unresolvedOptions['agreement'] = $agreement;
 
         return $this;
     }
@@ -258,6 +273,7 @@ class PaymentRequest extends AbstractApi
             'language',
             'transaction_info',
             'type',
+            'agreement',
             'ccToken',
             'sale_reconciliation_identifier',
             'sale_invoice_number',

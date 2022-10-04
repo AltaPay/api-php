@@ -269,6 +269,7 @@ class CardWalletAuthorize extends AbstractApi
             'customer_info',
             'config',
             'transaction_info',
+            'agreement',
             'sales_tax',
             'cookie',
             'ccToken',
