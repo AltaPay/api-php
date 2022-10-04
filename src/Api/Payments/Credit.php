@@ -101,7 +101,7 @@ class Credit extends AbstractApi
         $resolver->setRequired(['terminal', 'shop_orderid', 'amount', 'currency']);
 
         $resolver->setDefined([
-            'transaction_info', 'payment_source', 'credit_card_token',
+            'transaction_info', 'agreement', 'payment_source', 'credit_card_token',
             'cardnum', 'emonth', 'eyear', 'cvc'
         ]);
 
