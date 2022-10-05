@@ -124,7 +124,7 @@ class InvoiceReservation extends AbstractApi
 
         $resolver->setDefined([
             'accountNumber', 'bankCode', 'fraud_service', 'customer_info', 'orderLines',
-            'transaction_info', 'agreement'
+            'transaction_info'
         ]);
         $resolver->setAllowedTypes('accountNumber', 'string');
         $resolver->setAllowedTypes('bankCode', 'string');
