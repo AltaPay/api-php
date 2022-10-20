@@ -46,7 +46,7 @@ class PaymentRequest extends AbstractApi
     use Traits\TransactionInfoTrait;
     use Traits\CustomerInfoTrait;
     use Traits\OrderlinesTrait;
-
+    use Traits\AgreementTrait;
     /**
      * The language of the payment form
      *
@@ -74,7 +74,18 @@ class PaymentRequest extends AbstractApi
 
         return $this;
     }
+    
+    /**
+     * @param string $agreement
+     *
+     * @return $this
+     */
+    public function setAgreement($agreement)
+    {
+        $this->unresolvedOptions['agreement'] = $agreement;
 
+        return $this;
+    }
     /**
      * Use the credit_card_token from a previous payment to allow your customer to buy with the same credit card again
      *
@@ -258,6 +269,7 @@ class PaymentRequest extends AbstractApi
             'language',
             'transaction_info',
             'type',
+            'agreement',
             'ccToken',
             'sale_reconciliation_identifier',
             'sale_invoice_number',

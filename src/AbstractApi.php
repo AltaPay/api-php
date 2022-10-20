@@ -52,7 +52,7 @@ abstract class AbstractApi
     /**
      * PHP API version
      */
-    const PHP_API_VERSION = '3.2.6';
+    const PHP_API_VERSION = '3.2.7';
 
     /**
      * Event dispatcher
@@ -217,6 +217,7 @@ abstract class AbstractApi
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
         $this->setTransactionResolver($resolver);
+        $this->setAgreementResolver($resolver);
         $this->setOrderLinesResolver($resolver);
         $this->setAmountResolver($resolver);
         $this->setTerminalResolver($resolver);
@@ -395,6 +396,16 @@ abstract class AbstractApi
     {
     }
 
+    /**
+     * Resolve agreement info option
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     */
+    protected function setAgreementResolver(OptionsResolver $resolver)
+    {
+    }
     /**
      * Resolve orderlines
      *
