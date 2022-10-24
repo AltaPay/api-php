@@ -39,6 +39,19 @@ class ChargeSubscription extends AbstractApi
 {
     use Traits\TransactionsTrait;
     use Traits\AmountTrait;
+    use Traits\AgreementTrait;
+    
+    /**
+     * @param string $agreement
+     *
+     * @return $this
+     */
+    public function setAgreement($agreement)
+    {
+        $this->unresolvedOptions['agreement'] = $agreement;
+
+        return $this;
+    }
 
     /**
      * If you wish to define the reconciliation identifier used in the reconciliation csv files
@@ -63,7 +76,7 @@ class ChargeSubscription extends AbstractApi
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired('transaction_id');
-        $resolver->setDefined(['amount', 'reconciliation_identifier']);
+        $resolver->setDefined(['amount', 'reconciliation_identifier', 'agreement']);
         $resolver->addAllowedTypes('reconciliation_identifier', 'string');
     }
 

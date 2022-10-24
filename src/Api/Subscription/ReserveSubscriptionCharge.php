@@ -40,6 +40,19 @@ class ReserveSubscriptionCharge extends AbstractApi
 {
     use Traits\TransactionsTrait;
     use Traits\AmountTrait;
+    use Traits\AgreementTrait;
+    
+    /**
+     * @param string $agreement
+     *
+     * @return $this
+     */
+    public function setAgreement($agreement)
+    {
+        $this->unresolvedOptions['agreement'] = $agreement;
+
+        return $this;
+    }
 
     /**
      * Configure options
@@ -51,7 +64,7 @@ class ReserveSubscriptionCharge extends AbstractApi
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired('transaction_id');
-        $resolver->setDefined(['amount', 'reconciliation_identifier']);
+        $resolver->setDefined(['amount', 'reconciliation_identifier', 'agreement']);
         $resolver->addAllowedTypes('reconciliation_identifier', 'string');
     }
 
