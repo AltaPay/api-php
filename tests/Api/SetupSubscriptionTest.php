@@ -38,7 +38,7 @@ class SetupSubscriptionTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]
@@ -56,7 +56,7 @@ class SetupSubscriptionTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]
@@ -83,7 +83,7 @@ class SetupSubscriptionTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]

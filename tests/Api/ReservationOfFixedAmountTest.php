@@ -55,7 +55,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]
@@ -73,7 +73,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]
@@ -103,7 +103,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]
@@ -132,7 +132,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]
@@ -155,7 +155,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]
@@ -179,7 +179,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]
@@ -197,7 +197,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setCurrency(957);
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]
@@ -224,7 +224,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]
@@ -247,7 +247,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]
@@ -286,7 +286,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]
@@ -342,7 +342,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]
@@ -368,7 +368,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]
@@ -393,7 +393,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setShopOrderId('order id');
         $api->setAgreement(
             [
-                'id' => '232323232', 
+                'id' => '232323232',
                 'agreement_type' => 'unscheduled',
                 'agreement[unscheduled]' => 'incremental'
             ]

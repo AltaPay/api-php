@@ -68,9 +68,8 @@ class PaymentRequestResponse extends AbstractResponse
     public $CardHolderErrorMessage;
    
     /** @var string */
-    public $MerchantErrorCode; 
+    public $MerchantErrorCode;
     
     /** @var string */
     public $CardHolderMessageMustBeShown;
-    
 }
