@@ -7,6 +7,7 @@ use Altapay\Response\SetupSubscriptionResponse as SetupSubscriptionResponse;
 use Altapay\Api\Subscription\SetupSubscription;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
+use Altapay\Response\PaymentRequestResponse;
 
 class SetupSubscriptionTest extends AbstractApiTest
 {
@@ -65,8 +66,8 @@ class SetupSubscriptionTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertSame($this->getExceptedUri('setupSubscription/'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertSame($this->getExceptedUri('setupSubscription'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertSame('my terminal', $parts['terminal']);
         $this->assertSame('order id', $parts['shop_orderid']);
         $this->assertSame('200.5', $parts['amount']);
@@ -90,7 +91,7 @@ class SetupSubscriptionTest extends AbstractApiTest
         );
         $response = $api->call();
 
-        $this->assertInstanceOf(SetupSubscriptionResponse::class, $response);
+        $this->assertInstanceOf(PaymentRequestResponse::class, $response);
         $this->assertSame('Success', $response->Result);
         $this->assertCount(1, $response->Transactions);
     }
