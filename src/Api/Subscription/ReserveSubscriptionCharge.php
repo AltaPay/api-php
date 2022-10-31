@@ -43,7 +43,7 @@ class ReserveSubscriptionCharge extends AbstractApi
     use Traits\AgreementTrait;
     
     /**
-     * @param string $agreement
+     * @param array<string> $agreement
      *
      * @return $this
      */

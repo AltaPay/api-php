@@ -377,7 +377,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
 
         $this->assertInstanceOf(PaymentRequestResponse::class, $response);
         $this->assertSame('Success', $response->Result);
-        $this->assertCount(1, $response->Transactions);
+        $this->assertCount(1, (array)$response->Transactions);
     }
 
     public function test_real_api_call_response(): void
