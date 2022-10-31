@@ -25,46 +25,8 @@ namespace Altapay\Response\Embeds;
 
 use Altapay\Response\AbstractResponse;
 
-class Terminal extends AbstractResponse
+class Method extends AbstractResponse
 {
-    /**
-     * Childs of the response
-     *
-     * @var array<string, array<string, mixed>>
-     */
-    protected $childs = [
-        'Natures' => [
-            'class' => Nature::class,
-            'array' => 'Nature'
-        ],
-        'Currencies' => [
-            'class' => Currency::class,
-            'array' => 'Currency'
-        ],
-        'Methods' => [
-            'class' => Method::class,
-            'array' => 'Method'
-        ],
-    ];
-
     /** @var string */
-    public $Title;
-
-    /** @var string */
-    public $Country;
-
-    /**
-     * @var Nature[]
-     */
-    public $Natures;
-
-    /**
-     * @var Currency[]
-     */
-    public $Currencies;
-
-    /**
-     * @var Method[]
-     */
-    public $Methods;
+    public $Method;
 }
