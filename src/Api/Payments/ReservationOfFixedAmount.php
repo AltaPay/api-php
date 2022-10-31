@@ -25,56 +25,63 @@ namespace Altapay\Api\Payments;
 
 use Altapay\AbstractApi;
 use Altapay\Exceptions;
-use Altapay\Request\Config;
+use Altapay\Request\Card;
+use Altapay\Response\ReservationOfFixedAmountResponse;
 use Altapay\Response\PaymentRequestResponse;
 use Altapay\Serializer\ResponseSerializer;
 use Altapay\Traits;
 use Altapay\Types;
-use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * This will create a MO/TO payment. The payment can be made with a credit card, or a credit card token and the CVV.
+ */
 class ReservationOfFixedAmount extends AbstractApi
 {
-    use Traits\TerminalTrait;
     use Traits\AmountTrait;
+    use Traits\TerminalTrait;
     use Traits\CurrencyTrait;
     use Traits\ShopOrderIdTrait;
     use Traits\TransactionInfoTrait;
     use Traits\CustomerInfoTrait;
     use Traits\OrderlinesTrait;
     use Traits\AgreementTrait;
+
     /**
-     * The language of the payment form
+     * The id of the order in your web shop
      *
-     * @param string $language
+     * @param string $shopOrderId
      *
      * @return $this
      */
-    public function setLanguage($language)
+    public function setShopOrderId($shopOrderId)
     {
-        $this->unresolvedOptions['language'] = $language;
+        $this->unresolvedOptions['shop_orderid'] = $shopOrderId;
 
         return $this;
     }
 
     /**
-     * The type of the authorization
+     * Set the credit card
      *
-     * @param string $type
+     * @param Card $card
      *
      * @return $this
      */
-    public function setType($type)
+    public function setCard(Card $card)
     {
-        $this->unresolvedOptions['type'] = $type;
+        $this->unresolvedOptions['cardnum'] = $card->getCardNumber();
+        $this->unresolvedOptions['emonth']  = $card->getExpiryMonth();
+        $this->unresolvedOptions['eyear']   = $card->getExpiryYear();
+        $this->unresolvedOptions['cvc']     = $card->getCvc();
 
         return $this;
     }
-    
+
     /**
      * @param string $agreement
      *
@@ -86,7 +93,6 @@ class ReservationOfFixedAmount extends AbstractApi
 
         return $this;
     }
-
     /**
      * A credit card token previously received from an eCommerce payment or an other MO/TO payment.
      *
@@ -98,20 +104,9 @@ class ReservationOfFixedAmount extends AbstractApi
     public function setCreditCardToken($token, $cvc = null)
     {
         $this->unresolvedOptions['credit_card_token'] = $token;
-
-        return $this;
-    }
-
-    /**
-     * If you wish to define the reconciliation identifier used in the reconciliation csv files
-     *
-     * @param string $identifier
-     *
-     * @return $this
-     */
-    public function setSaleReconciliationIdentifier($identifier)
-    {
-        $this->unresolvedOptions['sale_reconciliation_identifier'] = $identifier;
+        if ($cvc) {
+            $this->unresolvedOptions['cvc'] = $cvc;
+        }
 
         return $this;
     }
@@ -131,20 +126,62 @@ class ReservationOfFixedAmount extends AbstractApi
     }
 
     /**
-     * This sets the sales tax amount that will be used on capture
+     * The type of payment
      *
-     * @param float $tax
+     * @param string $type
      *
      * @return $this
      */
-    public function setSalesTax($tax)
+    public function setType($type)
     {
-        $this->unresolvedOptions['sales_tax'] = $tax;
+        $this->unresolvedOptions['type'] = $type;
 
         return $this;
     }
 
     /**
+     * If you wish to define the reconciliation identifier used in the reconciliation csv files
+     *
+     * @param string $identifier
+     *
+     * @return $this
+     */
+    public function setSaleReconciliationIdentifier($identifier)
+    {
+        $this->unresolvedOptions['sale_reconciliation_identifier'] = $identifier;
+
+        return $this;
+    }
+
+    /**
+     * The source of the payment.
+     *
+     * @param string $paymentSource
+     *
+     * @return $this
+     */
+    public function setPaymentSource($paymentSource)
+    {
+        $this->unresolvedOptions['payment_source'] = $paymentSource;
+
+        return $this;
+    }
+
+    /**
+     * If you wish to decide which fraud detection service to use
+     *
+     * @param string $fraudService
+     *
+     * @return $this
+     */
+    public function setFraudService($fraudService)
+    {
+        $this->unresolvedOptions['fraud_service'] = $fraudService;
+
+        return $this;
+    }
+
+        /**
      * The cookie to be sent to your callback urls
      *
      * @param string $cookie
@@ -159,43 +196,15 @@ class ReservationOfFixedAmount extends AbstractApi
     }
 
     /**
-     * The source of the payment
+     * The surcharge amount to apply to the payment.
      *
-     * @param string $source
-     *
-     * @return $this
-     */
-    public function setPaymentSource($source)
-    {
-        $this->unresolvedOptions['payment_source'] = $source;
-
-        return $this;
-    }
-
-    /**
-     * Set config
-     *
-     * @param Config $config
+     * @param float $surcharge
      *
      * @return $this
      */
-    public function setConfig(Config $config)
+    public function setSurcharge($surcharge)
     {
-        $this->unresolvedOptions['config'] = $config;
-
-        return $this;
-    }
-
-    /**
-     * If you wish to decide pr. Payment wich fraud detection service to use
-     *
-     * @param string $service
-     *
-     * @return $this
-     */
-    public function setFraudService($service)
-    {
-        $this->unresolvedOptions['fraud_service'] = $service;
+        $this->unresolvedOptions['surcharge'] = $surcharge;
 
         return $this;
     }
@@ -215,49 +224,6 @@ class ReservationOfFixedAmount extends AbstractApi
     }
 
     /**
-     * If the this is given the organisation number field in the invoice payment form is prepopulated
-     *
-     * @param string $number
-     *
-     * @return $this
-     */
-    public function setOrganisationNumber($number)
-    {
-        $this->unresolvedOptions['organisation_number'] = $number;
-
-        return $this;
-    }
-
-    /**
-     * To require having account enabled for an invoice payment for this specific customer, set this to true
-     * To disable account for this specific customer, set to false
-     *
-     * @param bool $offer
-     *
-     * @return $this
-     */
-    public function setAccountOffer($offer)
-    {
-        $this->unresolvedOptions['account_offer'] = $offer;
-
-        return $this;
-    }
-
-    /**
-     * This is the date when the customer account was first created in system.
-     *
-     * @param string $customerCreatedDate
-     *
-     * @return $this
-     */
-    public function setCustomerCreatedDate($customerCreatedDate)
-    {
-        $this->unresolvedOptions['customer_created_date'] = $customerCreatedDate;
-
-        return $this;
-    }
-
-    /**
      * Configure options
      *
      * @param OptionsResolver $resolver
@@ -266,53 +232,62 @@ class ReservationOfFixedAmount extends AbstractApi
      */
     protected function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired(['terminal', 'shop_orderid', 'amount', 'currency']);
-        $resolver->setDefined([
-            'language',
-            'transaction_info',
+        $resolver->setRequired([
+            'terminal',
+            'shop_orderid',
+            'amount',
+            'currency',
             'type',
-            'agreement',
+            'payment_source'
+        ]);
+        $resolver->setDefault('type', 'payment');
+        $resolver->setAllowedValues('type', Types\PaymentTypes::getAllowed());
+        $resolver->setAllowedValues('payment_source', Types\PaymentSources::getAllowed());
+        $resolver->setDefault('payment_source', 'eCommerce');
+
+        $resolver->setDefined([
+            'cardnum',
+            'emonth',
+            'eyear',
+            'cvc',
             'credit_card_token',
             'sale_reconciliation_identifier',
             'sale_invoice_number',
-            'sales_tax',
-            'cookie',
-            'payment_source',
-            'customer_info',
-            'customer_created_date',
-            'config',
+            'transaction_info',
+            'agreement',
             'fraud_service',
+            'cookie',
+            'surcharge',
+            'customer_info',
             'shipping_method',
-            'organisation_number',
-            'account_offer',
+            'customer_created_date',
             'orderLines'
         ]);
-
-        $resolver->setAllowedValues('language', Types\LanguageTypes::getAllowed());
-        $resolver->setDefault('type', 'payment');
-        $resolver->setAllowedValues('type', Types\PaymentTypes::getAllowed());
-        $resolver->setAllowedValues('sale_reconciliation_identifier', function ($value) {
-            return mb_strlen($value) <= 100;
-        });
+        $resolver->setAllowedTypes('surcharge', ['int', 'float']);
         $resolver->setAllowedValues('sale_invoice_number', function ($value) {
             return mb_strlen($value) <= 100;
         });
-        $resolver->setAllowedTypes('sales_tax', ['int', 'float']);
-        $resolver->setDefault('payment_source', 'eCommerce');
-        $resolver->setAllowedValues('payment_source', Types\PaymentSources::getAllowed());
-        $resolver->setAllowedTypes('config', Config::class);
-        /** @noinspection PhpUnusedParameterInspection */
-        $resolver->setNormalizer('config', function (Options $options, Config $value) {
-            return $value->serialize();
+        $resolver->setNormalizer('cardnum', function (Options $options, $value) {
+            if (isset($options['credit_card_token'])) {
+                throw new \InvalidArgumentException(
+                    sprintf('You can not set both a credit card and a credit card token')
+                );
+            }
+
+            return $value;
         });
-        
-        $resolver->setAllowedValues('organisation_number', function ($value) {
-            return mb_strlen($value) <= 20;
-        });
-        $resolver->setAllowedTypes('account_offer', 'bool');
-        /** @noinspection PhpUnusedParameterInspection */
-        $resolver->setNormalizer('account_offer', function (Options $options, $value) {
-            return $value ? 'required' : 'disabled';
+
+        $resolver->setNormalizer('credit_card_token', function (Options $options, $value) {
+            $fields = ['cardnum', 'emonth', 'eyear'];
+            foreach ($fields as $field) {
+                if (isset($options[$field])) {
+                    throw new \InvalidArgumentException(
+                        sprintf('You can not set both a credit card token and a credit card')
+                    );
+                }
+            }
+
+            return $value;
         });
     }
 

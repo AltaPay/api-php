@@ -15,7 +15,7 @@ class SetupSubscriptionTest extends AbstractApiTest
      */
     protected function getapi()
     {
-        $client = $this->getXmlClient(__DIR__ . '/Results/reservationoffixedamount.xml');
+        $client = $this->getXmlClient(__DIR__ . '/Results/reservation.xml');
 
         return (new SetupSubscription($this->getAuth()))
             ->setClient($client);
@@ -36,6 +36,13 @@ class SetupSubscriptionTest extends AbstractApiTest
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
+        $api->setAgreement(
+            [
+                'id' => '232323232', 
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
         $api->setSurcharge(155.23);
         $api->call();
     }
@@ -47,6 +54,13 @@ class SetupSubscriptionTest extends AbstractApiTest
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
+        $api->setAgreement(
+            [
+                'id' => '232323232', 
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
         $api->setSurcharge(155.23);
         $api->call();
         $request = $api->getRawRequest();
@@ -67,7 +81,13 @@ class SetupSubscriptionTest extends AbstractApiTest
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
-
+        $api->setAgreement(
+            [
+                'id' => '232323232', 
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
         $response = $api->call();
 
         $this->assertInstanceOf(SetupSubscriptionResponse::class, $response);
