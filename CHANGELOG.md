@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add agreement setters for ChargeSubscription and ReserveSubscriptionCharge class
 - Add additional parameters for ReservationOfFixedAmount class
 - Add new property and setters for Terminal class
+- Add `subscription_model` as a new goods type for order line 
 ### Fixes
 - Avoid throwing exception for missing setters or properties in response
 
