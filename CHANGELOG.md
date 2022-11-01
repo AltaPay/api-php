@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.2.8] - 2022-11-01
 ### Added
+- Supports API changes from 20221026
 - Add agreement setters for ChargeSubscription and ReserveSubscriptionCharge class
 - Add additional parameters for ReservationOfFixedAmount class
 - Add new property and setters for Terminal class
