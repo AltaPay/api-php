@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add additional parameters for ReservationOfFixedAmount class
 - Add new property and setters for Terminal class
 ### Fixes
-- Do not throw exception for missing setters or properties in response
+- Avoid throwing exception for missing setters or properties in response
 
 ## [3.2.7] - 2022-10-04
 ### Added
