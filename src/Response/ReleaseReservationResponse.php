@@ -89,7 +89,7 @@ class ReleaseReservationResponse extends AbstractResponse
     /**
      * MerchantErrorCode
      *
-     * @var string 
+     * @var string
      */
     public $MerchantErrorCode;
 }
