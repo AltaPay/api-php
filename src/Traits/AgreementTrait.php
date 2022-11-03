@@ -32,7 +32,7 @@ trait AgreementTrait
      * This is a one-dimensional associative array.
      * This is where you put any value that you would like to bind to the payment.
      *
-     * @param array<int, string> $agreement
+     * @param array<string> $agreement
      *
      * @return $this
      */

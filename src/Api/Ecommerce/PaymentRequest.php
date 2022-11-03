@@ -76,7 +76,7 @@ class PaymentRequest extends AbstractApi
     }
     
     /**
-     * @param string $agreement
+     * @param array<string> $agreement
      *
      * @return $this
      */

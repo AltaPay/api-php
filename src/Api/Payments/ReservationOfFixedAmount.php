@@ -24,11 +24,14 @@
 namespace Altapay\Api\Payments;
 
 use Altapay\AbstractApi;
+use Altapay\Exceptions;
 use Altapay\Request\Card;
 use Altapay\Response\ReservationOfFixedAmountResponse;
+use Altapay\Response\PaymentRequestResponse;
 use Altapay\Serializer\ResponseSerializer;
 use Altapay\Traits;
 use Altapay\Types;
+use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
@@ -46,6 +49,8 @@ class ReservationOfFixedAmount extends AbstractApi
     use Traits\ShopOrderIdTrait;
     use Traits\TransactionInfoTrait;
     use Traits\CustomerInfoTrait;
+    use Traits\OrderlinesTrait;
+    use Traits\AgreementTrait;
 
     /**
      * The id of the order in your web shop
@@ -79,6 +84,17 @@ class ReservationOfFixedAmount extends AbstractApi
     }
 
     /**
+     * @param array<string> $agreement
+     *
+     * @return $this
+     */
+    public function setAgreement($agreement)
+    {
+        $this->unresolvedOptions['agreement'] = $agreement;
+
+        return $this;
+    }
+    /**
      * A credit card token previously received from an eCommerce payment or an other MO/TO payment.
      *
      * @param string $token A credit card token previously received from an eCommerce payment or an other MO/TO payment.
@@ -97,6 +113,20 @@ class ReservationOfFixedAmount extends AbstractApi
     }
 
     /**
+     * This sets the invoice number to be used on capture
+     *
+     * @param string $number
+     *
+     * @return $this
+     */
+    public function setSaleInvoiceNumber($number)
+    {
+        $this->unresolvedOptions['sale_invoice_number'] = $number;
+
+        return $this;
+    }
+
+    /**
      * The type of payment
      *
      * @param string $type
@@ -106,6 +136,20 @@ class ReservationOfFixedAmount extends AbstractApi
     public function setType($type)
     {
         $this->unresolvedOptions['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * If you wish to define the reconciliation identifier used in the reconciliation csv files
+     *
+     * @param string $identifier
+     *
+     * @return $this
+     */
+    public function setSaleReconciliationIdentifier($identifier)
+    {
+        $this->unresolvedOptions['sale_reconciliation_identifier'] = $identifier;
 
         return $this;
     }
@@ -134,6 +178,20 @@ class ReservationOfFixedAmount extends AbstractApi
     public function setFraudService($fraudService)
     {
         $this->unresolvedOptions['fraud_service'] = $fraudService;
+
+        return $this;
+    }
+
+        /**
+     * The cookie to be sent to your callback urls
+     *
+     * @param string $cookie
+     *
+     * @return $this
+     */
+    public function setCookie($cookie)
+    {
+        $this->unresolvedOptions['cookie'] = $cookie;
 
         return $this;
     }
@@ -181,12 +239,12 @@ class ReservationOfFixedAmount extends AbstractApi
             'amount',
             'currency',
             'type',
-            'payment_source',
+            'payment_source'
         ]);
-        $resolver->setAllowedValues('type', Types\PaymentTypes::getAllowed());
         $resolver->setDefault('type', 'payment');
+        $resolver->setAllowedValues('type', Types\PaymentTypes::getAllowed());
         $resolver->setAllowedValues('payment_source', Types\PaymentSources::getAllowed());
-        $resolver->setDefault('payment_source', 'moto');
+        $resolver->setDefault('payment_source', 'eCommerce');
 
         $resolver->setDefined([
             'cardnum',
@@ -194,18 +252,22 @@ class ReservationOfFixedAmount extends AbstractApi
             'eyear',
             'cvc',
             'credit_card_token',
+            'sale_reconciliation_identifier',
+            'sale_invoice_number',
             'transaction_info',
             'agreement',
             'fraud_service',
+            'cookie',
             'surcharge',
             'customer_info',
             'shipping_method',
-            'customer_created_date'
+            'customer_created_date',
+            'orderLines'
         ]);
-        $resolver->setAllowedValues('fraud_service', Types\FraudServices::getAllowed());
         $resolver->setAllowedTypes('surcharge', ['int', 'float']);
-        $resolver->setAllowedValues('shipping_method', Types\ShippingMethods::getAllowed());
-
+        $resolver->setAllowedValues('sale_invoice_number', function ($value) {
+            return mb_strlen($value) <= 100;
+        });
         $resolver->setNormalizer('cardnum', function (Options $options, $value) {
             if (isset($options['credit_card_token'])) {
                 throw new \InvalidArgumentException(
@@ -247,6 +309,19 @@ class ReservationOfFixedAmount extends AbstractApi
     }
 
     /**
+     * @return array<string, string>
+     */
+    protected function getBasicHeaders()
+    {
+        $headers = parent::getBasicHeaders();
+        if (mb_strtolower($this->getHttpMethod()) === 'post') {
+            $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        }
+
+        return $headers;
+    }
+
+    /**
      * Url to api call
      *
      * @param array<string, mixed> $options Resolved options
@@ -255,8 +330,60 @@ class ReservationOfFixedAmount extends AbstractApi
      */
     protected function getUrl(array $options)
     {
-        $query = $this->buildUrl($options);
+        $url = 'reservation';
+        if (mb_strtolower($this->getHttpMethod()) === 'get') {
+            $query = $this->buildUrl($options);
+            $url   = sprintf('%s/?%s', $url, $query);
+        }
 
-        return sprintf('reservationOfFixedAmount/?%s', $query);
+        return $url;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getHttpMethod()
+    {
+        return 'POST';
+    }
+
+    /**
+     * @return \Altapay\Response\AbstractResponse|PaymentRequestResponse|bool|void
+     *
+     * @throws \Altapay\Exceptions\ResponseHeaderException
+     * @throws \Altapay\Exceptions\ResponseMessageException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    protected function doResponse()
+    {
+        $this->doConfigureOptions();
+        $headers           = $this->getBasicHeaders();
+        $requestParameters = [$this->getHttpMethod(), $this->parseUrl(), $headers];
+        if (mb_strtolower($this->getHttpMethod()) === 'post') {
+            $requestParameters[] = $this->getPostOptions();
+        }
+        $request       = new Request(...$requestParameters);
+        $this->request = $request;
+        try {
+            $response       = $this->getClient()->send($request);
+            $this->response = $response;
+
+            $output = $this->handleResponse($request, $response);
+            $this->validateResponse($output);
+
+            return $output;
+        } catch (GuzzleHttpClientException $e) {
+            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
+        }
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPostOptions()
+    {
+        $options = $this->options;
+
+        return http_build_query($options, '', '&');
     }
 }

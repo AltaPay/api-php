@@ -18,6 +18,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
+use Altapay\Response\PaymentRequestResponse;
 
 class ReservationOfFixedAmountTest extends AbstractApiTest
 {
@@ -26,7 +27,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
      */
     protected function getapi()
     {
-        $client = $this->getXmlClient(__DIR__ . '/Results/reservationoffixedamount.xml');
+        $client = $this->getXmlClient(__DIR__ . '/Results/reservation.xml');
 
         return (new ReservationOfFixedAmount($this->getAuth()))
             ->setClient($client);
@@ -52,22 +53,37 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
+        $api->setAgreement(
+            [
+                'id' => '232323232',
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
         $api->call();
     }
 
     public function test_url(): void
     {
         $api = $this->getapi();
+
         $api->setTerminal('my terminal');
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
+        $api->setAgreement(
+            [
+                'id' => '232323232',
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
         $api->setSurcharge(155.23);
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertSame($this->getExceptedUri('reservationOfFixedAmount/'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertSame($this->getExceptedUri('reservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertSame('my terminal', $parts['terminal']);
         $this->assertSame('order id', $parts['shop_orderid']);
         $this->assertSame('200.5', $parts['amount']);
@@ -85,12 +101,20 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
+        $api->setAgreement(
+            [
+                'id' => '232323232',
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
+        
         $api->setSurcharge(155.23);
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertSame($this->getExceptedUri('reservationOfFixedAmount/'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertSame($this->getExceptedUri('reservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertSame('terminal object', $parts['terminal']);
     }
 
@@ -106,6 +130,13 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setAmount(200.50);
         $api->setCurrency('danske kroner');
         $api->setShopOrderId('order id');
+        $api->setAgreement(
+            [
+                'id' => '232323232',
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
         $api->setSurcharge(155.23);
         $api->call();
     }
@@ -122,7 +153,13 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
-
+        $api->setAgreement(
+            [
+                'id' => '232323232',
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
         $api->setCard(new Card('1234', '10', '12', '100'));
         $api->setCreditCardToken('token');
         $api->call();
@@ -140,7 +177,13 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
-
+        $api->setAgreement(
+            [
+                'id' => '232323232',
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
         $api->setCreditCardToken('token');
         $api->setCard(new Card('1234', '10', '12', '100'));
         $api->call();
@@ -152,12 +195,20 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setTerminal('my terminal');
         $api->setAmount(200.50);
         $api->setCurrency(957);
+        $api->setAgreement(
+            [
+                'id' => '232323232',
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
         $api->setShopOrderId('order id');
 
         $api->setCard(new Card('1234', '10', '12', '100'));
         $api->call();
         $request = $api->getRawRequest();
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertSame($this->getExceptedUri('reservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertSame('1234', $parts['cardnum']);
         $this->assertSame('12', $parts['eyear']);
         $this->assertSame('10', $parts['emonth']);
@@ -171,11 +222,18 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
-
+        $api->setAgreement(
+            [
+                'id' => '232323232',
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
         $api->setCreditCardToken('credit card token', '200');
         $api->call();
         $request = $api->getRawRequest();
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertSame($this->getExceptedUri('reservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertSame('credit card token', $parts['credit_card_token']);
         $this->assertSame('200', $parts['cvc']);
     }
@@ -187,12 +245,19 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
-
+        $api->setAgreement(
+            [
+                'id' => '232323232',
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
         $api->setCustomerInfo($this->getCustomerInfo());
         $api->call();
 
         $request = $api->getRawRequest();
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertSame($this->getExceptedUri('reservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertSame('my address', $parts['customer_info']['billing_address']);
         $this->assertSame('Last name', $parts['customer_info']['billing_lastname']);
         $this->assertSame('2000', $parts['customer_info']['billing_postal']);
@@ -219,7 +284,13 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
-
+        $api->setAgreement(
+            [
+                'id' => '232323232',
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
         $billing             = new Address();
         $billing->Firstname  = 'First name';
         $billing->Lastname   = 'Last name';
@@ -251,7 +322,8 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->call();
 
         $request = $api->getRawRequest();
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertSame($this->getExceptedUri('reservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertSame('2001-11-28', $parts['customer_info']['birthdate']);
         $this->assertSame('my@mail.com', $parts['customer_info']['email']);
         $this->assertSame('username', $parts['customer_info']['username']);
@@ -260,41 +332,6 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $this->assertSame('20304050', $parts['customer_info']['bank_phone']);
     }
 
-    public function test_type(): void
-    {
-        $this->allowedTypes(
-            PaymentTypes::class,
-            'type',
-            'setType'
-        );
-    }
-
-    public function test_payment_source(): void
-    {
-        $this->allowedTypes(
-            PaymentSources::class,
-            'payment_source',
-            'setPaymentSource'
-        );
-    }
-
-    public function test_fraud_service(): void
-    {
-        $this->allowedTypes(
-            FraudServices::class,
-            'fraud_service',
-            'setFraudService'
-        );
-    }
-
-    public function test_shipping_method(): void
-    {
-        $this->allowedTypes(
-            ShippingMethods::class,
-            'shipping_method',
-            'setShippingMethod'
-        );
-    }
 
     public function test_transaction_info(): void
     {
@@ -303,14 +340,21 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
-
+        $api->setAgreement(
+            [
+                'id' => '232323232',
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
         $transactionInfo[] = 'Trans 1';
         $transactionInfo[] = 'Trans 2';
         $api->setTransactionInfo($transactionInfo);
         $api->call();
 
         $request = $api->getRawRequest();
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertSame($this->getExceptedUri('reservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertCount(2, $parts['transaction_info']);
         $this->assertSame('Trans 2', $parts['transaction_info'][1]);
     }
@@ -322,17 +366,23 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
-
+        $api->setAgreement(
+            [
+                'id' => '232323232',
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
         $response = $api->call();
 
         $this->assertInstanceOf(ReservationOfFixedAmountResponse::class, $response);
         $this->assertSame('Success', $response->Result);
-        $this->assertCount(1, $response->Transactions);
+        $this->assertCount(1, (array)$response->Transactions);
     }
 
     public function test_real_api_call_response(): void
     {
-        $client = $this->getXmlClient(__DIR__ . '/Results/reservationoffixedamount_2.xml');
+        $client = $this->getXmlClient(__DIR__ . '/Results/reservation.xml');
 
         $api = (new ReservationOfFixedAmount($this->getAuth()))
             ->setClient($client);
@@ -341,7 +391,13 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $api->setAmount(200.50);
         $api->setCurrency(957);
         $api->setShopOrderId('order id');
-
+        $api->setAgreement(
+            [
+                'id' => '232323232',
+                'agreement_type' => 'unscheduled',
+                'agreement[unscheduled]' => 'incremental'
+            ]
+        );
         $response = $api->call();
         $this->assertInstanceOf(ReservationOfFixedAmountResponse::class, $response);
     }

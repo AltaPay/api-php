@@ -136,15 +136,7 @@ abstract class AbstractResponse
      */
     private function elementSetter($object, $data, \SimpleXMLElement $element)
     {
-        if (!$this->set($object, $data, $element)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'The parameter "%s" does not have a setter or a property in class "%s"',
-                    $element->getName(),
-                    get_called_class()
-                )
-            );
-        }
+        $this->set($object, $data, $element);
     }
 
     /**

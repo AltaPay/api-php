@@ -26,7 +26,7 @@ namespace Altapay\Request;
 class OrderLine extends AbstractSerializer
 {
     /** @var array<int, string> */
-    private static $goodsTypes = ['shipment', 'handling', 'item'];
+    private static $goodsTypes = ['shipment', 'handling', 'item', 'subscription_model'];
 
     /**
      * Description of item

@@ -60,4 +60,16 @@ class PaymentRequestResponse extends AbstractResponse
 
     /** @var string */
     public $ApplePaySession;
+
+    /** @var string */
+    public $MerchantErrorMessage;
+
+    /** @var string */
+    public $CardHolderErrorMessage;
+   
+    /** @var string */
+    public $MerchantErrorCode;
+    
+    /** @var string */
+    public $CardHolderMessageMustBeShown;
 }

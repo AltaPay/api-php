@@ -22,6 +22,12 @@
                     <Currency>DKK</Currency>
                     <Currency>EUR</Currency>
                 </Currencies>
+                <Methods>
+                    <Method>CredoraxAcquirer</Method>
+                    <Method>Przelewy24Acquirer</Method>
+                    <Method>KlarnaPaymentsAcquirer</Method>
+                    <Method>IdealAcquirer</Method>
+                </Methods>
             </Terminal>
             <Terminal>
                 <Title>AltaPay BankPayment Terminal</Title>
@@ -32,6 +38,9 @@
                 <Currencies>
                     <Currency>EUR</Currency>
                 </Currencies>
+                <Methods>
+                    <Method>IdealAcquirer</Method>
+                </Methods>
             </Terminal>
         </Terminals>
     </Body>

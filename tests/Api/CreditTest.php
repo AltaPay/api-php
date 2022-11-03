@@ -18,7 +18,7 @@ class CreditTest extends AbstractApiTest
      */
     protected function getCredit()
     {
-        $client = $this->getXmlClient(__DIR__ . '/Results/reservationoffixedamount.xml');
+        $client = $this->getXmlClient(__DIR__ . '/Results/reservation.xml');
 
         return (new Credit($this->getAuth()))
             ->setClient($client);

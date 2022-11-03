@@ -25,7 +25,9 @@ namespace Altapay\Api\Subscription;
 
 use Altapay\Api\Payments\ReservationOfFixedAmount;
 use Altapay\Response\SetupSubscriptionResponse;
+use Altapay\Response\PaymentRequestResponse;
 use Altapay\Serializer\ResponseSerializer;
+use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
@@ -65,10 +67,23 @@ class SetupSubscription extends ReservationOfFixedAmount
      */
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
-        $body = (string) $response->getBody();
-        $xml = new \SimpleXMLElement($body);
+        $body = (string)$response->getBody();
+        $xml  = new \SimpleXMLElement($body);
 
         return ResponseSerializer::serialize(SetupSubscriptionResponse::class, $xml->Body, $xml->Header);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    protected function getBasicHeaders()
+    {
+        $headers = parent::getBasicHeaders();
+        if (mb_strtolower($this->getHttpMethod()) === 'post') {
+            $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        }
+
+        return $headers;
     }
 
     /**
@@ -80,7 +95,60 @@ class SetupSubscription extends ReservationOfFixedAmount
      */
     protected function getUrl(array $options)
     {
-        $query = $this->buildUrl($options);
-        return sprintf('setupSubscription/?%s', $query);
+        $url = 'setupSubscription';
+        if (mb_strtolower($this->getHttpMethod()) === 'get') {
+            $query = $this->buildUrl($options);
+            $url   = sprintf('%s/?%s', $url, $query);
+        }
+
+        return $url;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getHttpMethod()
+    {
+        return 'POST';
+    }
+
+    /**
+     * @return \Altapay\Response\AbstractResponse|PaymentRequestResponse|bool|void
+     *
+     * @throws \Altapay\Exceptions\ResponseHeaderException
+     * @throws \Altapay\Exceptions\ResponseMessageException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    protected function doResponse()
+    {
+        $this->doConfigureOptions();
+        $headers           = $this->getBasicHeaders();
+        $requestParameters = [$this->getHttpMethod(), $this->parseUrl(), $headers];
+        if (mb_strtolower($this->getHttpMethod()) === 'post') {
+            $requestParameters[] = $this->getPostOptions();
+        }
+        $request       = new Request(...$requestParameters);
+        $this->request = $request;
+        try {
+            $response       = $this->getClient()->send($request);
+            $this->response = $response;
+
+            $output = $this->handleResponse($request, $response);
+            $this->validateResponse($output);
+
+            return $output;
+        } catch (GuzzleHttpClientException $e) {
+            throw new \Altapay\Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
+        }
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPostOptions()
+    {
+        $options = $this->options;
+
+        return http_build_query($options, '', '&');
     }
 }

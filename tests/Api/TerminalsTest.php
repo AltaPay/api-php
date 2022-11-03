@@ -65,6 +65,7 @@ class TerminalsTest extends AbstractApiTest
         $this->assertSame('AltaPay Multi-Nature Terminal', $terminal->Title);
         $this->assertSame('DK', $terminal->Country);
         $this->assertCount(4, $terminal->Natures);
+        $this->assertCount(4, $terminal->Methods);
     }
 
     public function test_attr_fail(): void
