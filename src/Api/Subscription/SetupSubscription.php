@@ -63,14 +63,14 @@ class SetupSubscription extends ReservationOfFixedAmount
      * @param Request           $request
      * @param ResponseInterface $response
      *
-     * @return PaymentRequestResponse
+     * @return SetupSubscriptionResponse
      */
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string)$response->getBody();
         $xml  = new \SimpleXMLElement($body);
 
-        return ResponseSerializer::serialize(PaymentRequestResponse::class, $xml->Body, $xml->Header);
+        return ResponseSerializer::serialize(SetupSubscriptionResponse::class, $xml->Body, $xml->Header);
     }
 
     /**

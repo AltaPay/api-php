@@ -91,7 +91,7 @@ class SetupSubscriptionTest extends AbstractApiTest
         );
         $response = $api->call();
 
-        $this->assertInstanceOf(PaymentRequestResponse::class, $response);
+        $this->assertInstanceOf(SetupSubscriptionResponse::class, $response);
         $this->assertSame('Success', $response->Result);
         $this->assertCount(1, (array)$response->Transactions);
     }

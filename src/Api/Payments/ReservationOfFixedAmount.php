@@ -298,14 +298,14 @@ class ReservationOfFixedAmount extends AbstractApi
      * @param Request           $request
      * @param ResponseInterface $response
      *
-     * @return PaymentRequestResponse
+     * @return ReservationOfFixedAmountResponse
      */
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string)$response->getBody();
         $xml  = new \SimpleXMLElement($body);
 
-        return ResponseSerializer::serialize(PaymentRequestResponse::class, $xml->Body, $xml->Header);
+        return ResponseSerializer::serialize(ReservationOfFixedAmountResponse::class, $xml->Body, $xml->Header);
     }
 
     /**

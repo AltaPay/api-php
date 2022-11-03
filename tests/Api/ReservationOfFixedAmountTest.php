@@ -375,7 +375,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         );
         $response = $api->call();
 
-        $this->assertInstanceOf(PaymentRequestResponse::class, $response);
+        $this->assertInstanceOf(ReservationOfFixedAmountResponse::class, $response);
         $this->assertSame('Success', $response->Result);
         $this->assertCount(1, (array)$response->Transactions);
     }
@@ -399,7 +399,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
             ]
         );
         $response = $api->call();
-        $this->assertInstanceOf(PaymentRequestResponse::class, $response);
+        $this->assertInstanceOf(ReservationOfFixedAmountResponse::class, $response);
     }
 
     /**

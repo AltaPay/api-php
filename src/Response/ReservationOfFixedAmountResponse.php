@@ -61,4 +61,16 @@ class ReservationOfFixedAmountResponse extends AbstractResponse
      * @var Transaction[]
      */
     public $Transactions;
+
+    /** @var string */
+    public $PaymentRequestId;
+
+    /** @var string */
+    public $Url;
+
+    /** @var string */
+    public $DynamicJavascriptUrl;
+   
+    /** @var string */
+    public $MerchantErrorCode;
 }
