@@ -258,21 +258,24 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $request = $api->getRawRequest();
         $this->assertSame($this->getExceptedUri('reservation'), $request->getUri()->getPath());
         parse_str($request->getBody()->getContents(), $parts);
-        $this->assertSame('my address', $parts['customer_info']['billing_address']);
-        $this->assertSame('Last name', $parts['customer_info']['billing_lastname']);
-        $this->assertSame('2000', $parts['customer_info']['billing_postal']);
-        $this->assertSame('Somewhere', $parts['customer_info']['billing_city']);
-        $this->assertSame('0', $parts['customer_info']['billing_region']);
-        $this->assertSame('DK', $parts['customer_info']['billing_country']);
-        $this->assertSame('First name', $parts['customer_info']['billing_firstname']);
+    
+        /** @var array<string> $customerInfo */
+        $customerInfo = $parts['customer_info'];
+        $this->assertSame('my address', $customerInfo['billing_address']);
+        $this->assertSame('Last name', $customerInfo['billing_lastname']);
+        $this->assertSame('2000', $customerInfo['billing_postal']);
+        $this->assertSame('Somewhere', $customerInfo['billing_city']);
+        $this->assertSame('0', $customerInfo['billing_region']);
+        $this->assertSame('DK', $customerInfo['billing_country']);
+        $this->assertSame('First name', $customerInfo['billing_firstname']);
 
-        $this->assertSame('First name', $parts['customer_info']['shipping_firstname']);
-        $this->assertSame('Last name', $parts['customer_info']['shipping_lastname']);
-        $this->assertSame('my address', $parts['customer_info']['shipping_address']);
-        $this->assertSame('Somewhere', $parts['customer_info']['shipping_city']);
-        $this->assertSame('0', $parts['customer_info']['shipping_region']);
-        $this->assertSame('2000', $parts['customer_info']['shipping_postal']);
-        $this->assertSame('DK', $parts['customer_info']['shipping_country']);
+        $this->assertSame('First name', $customerInfo['shipping_firstname']);
+        $this->assertSame('Last name', $customerInfo['shipping_lastname']);
+        $this->assertSame('my address', $customerInfo['shipping_address']);
+        $this->assertSame('Somewhere', $customerInfo['shipping_city']);
+        $this->assertSame('0', $customerInfo['shipping_region']);
+        $this->assertSame('2000', $customerInfo['shipping_postal']);
+        $this->assertSame('DK', $customerInfo['shipping_country']);
 
         $this->assertSame('2016-11-25', $parts['customer_created_date']);
     }
@@ -324,12 +327,15 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $request = $api->getRawRequest();
         $this->assertSame($this->getExceptedUri('reservation'), $request->getUri()->getPath());
         parse_str($request->getBody()->getContents(), $parts);
-        $this->assertSame('2001-11-28', $parts['customer_info']['birthdate']);
-        $this->assertSame('my@mail.com', $parts['customer_info']['email']);
-        $this->assertSame('username', $parts['customer_info']['username']);
-        $this->assertSame('50607080', $parts['customer_info']['customer_phone']);
-        $this->assertSame('bank name', $parts['customer_info']['bank_name']);
-        $this->assertSame('20304050', $parts['customer_info']['bank_phone']);
+    
+        /** @var array<string> $customerInfo */
+        $customerInfo = $parts['customer_info'];
+        $this->assertSame('2001-11-28', $customerInfo['birthdate']);
+        $this->assertSame('my@mail.com', $customerInfo['email']);
+        $this->assertSame('username', $customerInfo['username']);
+        $this->assertSame('50607080', $customerInfo['customer_phone']);
+        $this->assertSame('bank name', $customerInfo['bank_name']);
+        $this->assertSame('20304050', $customerInfo['bank_phone']);
     }
 
 
@@ -355,6 +361,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $request = $api->getRawRequest();
         $this->assertSame($this->getExceptedUri('reservation'), $request->getUri()->getPath());
         parse_str($request->getBody()->getContents(), $parts);
+        /** @var array<array<int,string>> $parts['transaction_info'] */
         $this->assertCount(2, $parts['transaction_info']);
         $this->assertSame('Trans 2', $parts['transaction_info'][1]);
     }

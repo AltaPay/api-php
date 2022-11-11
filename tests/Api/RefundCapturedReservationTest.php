@@ -119,9 +119,10 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
         $this->assertSame($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
         parse_str($request->getBody()->getContents(), $parts);
+        /** @var array<array<int,string>> $parts['orderLines'] */
         $this->assertCount(2, $parts['orderLines']);
+        /** @var array<string> $line */
         $line = $parts['orderLines'][1];
-
         $this->assertSame('Brown sugar', $line['description']);
         $this->assertSame('productid2', $line['itemId']);
         $this->assertSame('2.5', $line['quantity']);
@@ -147,6 +148,7 @@ class RefundCapturedReservationTest extends AbstractApiTest
 
         $this->assertSame($this->getExceptedUri('refundCapturedReservation'), $request->getUri()->getPath());
         parse_str($request->getBody()->getContents(), $parts);
+        /** @var array<array<int,string>> $parts['orderLines'] */
         $this->assertCount(1, $parts['orderLines']);
     }
 

@@ -35,7 +35,7 @@ trait CsvToArrayTrait
      *
      * @param bool $includeHeader
      *
-     * @return array<int, array<int, string>>
+     * @return array<int, array<int, string|null>>
      */
     public function __toArray($includeHeader = false)
     {
@@ -52,7 +52,7 @@ trait CsvToArrayTrait
             if (++$lineNumber <= 1 && ! $includeHeader) {
                 continue;
             }
-
+            
             $output[] = str_getcsv($line, ';', '"');
         }
         return $output;

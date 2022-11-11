@@ -105,7 +105,9 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertSame('required', $parts['account_offer']);
 
         // Orderlines
+        /** @var array<array<int,string>> $parts['orderLines'] */
         $this->assertCount(2, $parts['orderLines']);
+        /** @var array<string> $line */
         $line = $parts['orderLines'][1];
         $this->assertSame('Brown sugar', $line['description']);
         $this->assertSame('productid2', $line['itemId']);
@@ -116,6 +118,7 @@ class PaymentRequestTest extends AbstractApiTest
 
         // Config
         $this->assertIsArray($parts['config']);
+        /** @var array<string> $config */
         $config = $parts['config'];
         $this->assertSame(sprintf('%s/%s', self::CONFIG_URL, 'form'), $config['callback_form']);
         $this->assertSame(sprintf('%s/%s', self::CONFIG_URL, 'ok'), $config['callback_ok']);
@@ -126,21 +129,26 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertSame(sprintf('%s/%s', self::CONFIG_URL, 'verify'), $config['callback_verify_order']);
 
         // Customer info
-        $this->assertSame('my address', $parts['customer_info']['billing_address']);
-        $this->assertSame('Last name', $parts['customer_info']['billing_lastname']);
-        $this->assertSame('2000', $parts['customer_info']['billing_postal']);
-        $this->assertSame('Somewhere', $parts['customer_info']['billing_city']);
-        $this->assertSame('0', $parts['customer_info']['billing_region']);
-        $this->assertSame('DK', $parts['customer_info']['billing_country']);
-        $this->assertSame('First name', $parts['customer_info']['billing_firstname']);
-        $this->assertSame('First name', $parts['customer_info']['shipping_firstname']);
-        $this->assertSame('Last name', $parts['customer_info']['shipping_lastname']);
-        $this->assertSame('my address', $parts['customer_info']['shipping_address']);
-        $this->assertSame('Somewhere', $parts['customer_info']['shipping_city']);
-        $this->assertSame('0', $parts['customer_info']['shipping_region']);
-        $this->assertSame('2000', $parts['customer_info']['shipping_postal']);
-        $this->assertSame('DK', $parts['customer_info']['shipping_country']);
-        $this->assertSame('2016-11-25', $parts['customer_created_date']);
+        /** @var array<string> $customerInfo */
+        $customerInfo = $parts['customer_info'];
+        $this->assertSame('my address', $customerInfo['billing_address']);
+        $this->assertSame('Last name', $customerInfo['billing_lastname']);
+        $this->assertSame('2000', $customerInfo['billing_postal']);
+        $this->assertSame('Somewhere', $customerInfo['billing_city']);
+        $this->assertSame('0', $customerInfo['billing_region']);
+        $this->assertSame('DK', $customerInfo['billing_country']);
+        $this->assertSame('First name', $customerInfo['billing_firstname']);
+        $this->assertSame('First name', $customerInfo['shipping_firstname']);
+        $this->assertSame('Last name', $customerInfo['shipping_lastname']);
+        $this->assertSame('my address', $customerInfo['shipping_address']);
+        $this->assertSame('Somewhere', $customerInfo['shipping_city']);
+        $this->assertSame('0', $customerInfo['shipping_region']);
+        $this->assertSame('2000', $customerInfo['shipping_postal']);
+        $this->assertSame('DK', $customerInfo['shipping_country']);
+
+        /** @var string $date */
+        $date = $parts['customer_created_date'];
+        $this->assertSame('2016-11-25', $date);
     }
 
     public function test_response(): void

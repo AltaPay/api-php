@@ -33,9 +33,11 @@ class QueryGiftcardTest extends AbstractApiTest
         parse_str($api->getRawRequest()->getUri()->getQuery(), $parts);
 
         $this->assertSame('my terminal', $parts['terminal']);
-        $this->assertSame('account', $parts['giftcard']['account_identifier']);
-        $this->assertSame('provider', $parts['giftcard']['provider']);
-        $this->assertSame('1234-1234', $parts['giftcard']['token']);
+        /** @var array<string> $giftcard */
+        $giftcard = $parts['giftcard'];
+        $this->assertSame('account', $giftcard['account_identifier']);
+        $this->assertSame('provider', $giftcard['provider']);
+        $this->assertSame('1234-1234', $giftcard['token']);
     }
 
     public function test_response(): void
