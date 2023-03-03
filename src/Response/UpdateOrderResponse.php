@@ -23,8 +23,6 @@
 
 namespace Altapay\Response;
 
-use Altapay\Response\Embeds\Transaction;
-
 /**
  * Class UpdateOrder
  */

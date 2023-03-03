@@ -27,7 +27,6 @@ use Altapay\AbstractApi;
 use Altapay\Exceptions;
 use Altapay\Serializer\ResponseSerializer;
 use Altapay\Response\UpdateOrderResponse;
-use Altapay\Response\PaymentRequestResponse;
 use Altapay\Traits\AmountTrait;
 use Altapay\Traits\OrderlinesTrait;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
