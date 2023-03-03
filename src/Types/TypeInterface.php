@@ -35,7 +35,7 @@ interface TypeInterface
     /**
      * Is the requested value allowed
      *
-     * @param string $value
+     * @param array<string>|string $value
      *
      * @return bool
      */
