@@ -48,6 +48,7 @@ class Factory
     const PAYMENTS_INVOICE_RESERVATION = Payments\InvoiceReservation::class;
     const PAYMENTS_REFUND_CAPTURED_RESERVATION = Payments\RefundCapturedReservation::class;
     const PAYMENTS_RELEASE_RESERVATION = Payments\ReleaseReservation::class;
+    const PAYMENTS_UPDATE_ORDER = Payments\UpdaterRder::class;
     const PAYMENTS_RESERVATION_OF_FIXED_AMOUNT = Payments\ReservationOfFixedAmount::class;
 
     const SUBSCRIPTION_CHARGE_SUBSCRIPTION = Subscription\ChargeSubscription::class;
