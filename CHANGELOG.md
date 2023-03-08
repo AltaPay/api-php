@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.2.9] - 2023-03-03
 ### Added
-- Adding support for updateOrder API
+- Add support for updateOrder API
 
 ## [3.2.8] - 2022-11-01
 ### Added
