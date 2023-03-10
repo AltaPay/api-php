@@ -37,6 +37,7 @@ use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Altapay\Request\Config;
 
 /**
  * This will create a MO/TO payment. The payment can be made with a credit card, or a credit card token and the CVV.
@@ -169,6 +170,20 @@ class ReservationOfFixedAmount extends AbstractApi
     }
 
     /**
+     * Set config
+     *
+     * @param Config $config
+     *
+     * @return $this
+     */
+    public function setConfig(Config $config)
+    {
+        $this->unresolvedOptions['config'] = $config;
+
+        return $this;
+    }
+
+    /**
      * If you wish to decide which fraud detection service to use
      *
      * @param string $fraudService
@@ -254,6 +269,7 @@ class ReservationOfFixedAmount extends AbstractApi
             'credit_card_token',
             'sale_reconciliation_identifier',
             'sale_invoice_number',
+            'config',
             'transaction_info',
             'agreement',
             'fraud_service',
@@ -264,6 +280,11 @@ class ReservationOfFixedAmount extends AbstractApi
             'customer_created_date',
             'orderLines'
         ]);
+        $resolver->setAllowedTypes('config', Config::class);
+        /** @noinspection PhpUnusedParameterInspection */
+        $resolver->setNormalizer('config', function (Options $options, Config $value) {
+            return $value->serialize();
+        });
         $resolver->setAllowedTypes('surcharge', ['int', 'float']);
         $resolver->setAllowedValues('sale_invoice_number', function ($value) {
             return mb_strlen($value) <= 100;
