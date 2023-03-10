@@ -32,6 +32,7 @@ Docs: https://testgateway.altapaysecure.com/merchant.php/help/Merchant_API
 | x [Refund captured reservation](payments/refund_captured_reservation.md) | Sometimes after delivering the goods/services and capturing the funds you want to repay/refund the customer. Either you want to make a full refund or you only want to make a partial refund. |
 | x [Reservation of fixed amount](payments/reservation_of_fixed_amount.md) | This will create a MO/TO payment. The payment can be made with a credit card, or a credit card token and the CVV |
 | x [Credit](payments/credit.md) | This will create a Credit payment. The payment can be made with a credit card, or a credit card token and the CVV |
+| x [Update Order](payments/update_order.md) | This method is used to update the order amount and add, remove or update order lines |
 | - [Invoice reservation](payments/invoice_reservation.md) | |
 
 ### Subscription

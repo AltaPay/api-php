@@ -21,23 +21,13 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Types;
+namespace Altapay\Response;
 
-interface TypeInterface
+/**
+ * Class UpdateOrder
+ */
+class UpdateOrderResponse extends AbstractResponse
 {
-    /**
-     * Get allowed values
-     *
-     * @return array<int, string>
-     */
-    public static function getAllowed();
-
-    /**
-     * Is the requested value allowed
-     *
-     * @param array<string>|string $value
-     *
-     * @return bool
-     */
-    public static function isAllowed($value);
+    /** @var string */
+    public $Result;
 }
