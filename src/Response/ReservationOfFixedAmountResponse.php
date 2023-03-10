@@ -66,6 +66,9 @@ class ReservationOfFixedAmountResponse extends AbstractResponse
     public $PaymentRequestId;
 
     /** @var string */
+    public $RedirectUrl;
+
+    /** @var string */
     public $Url;
 
     /** @var string */
