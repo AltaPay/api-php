@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.3.0] - 2023-03-15
 ### Added
 - Add config parameter in the reservation API
+- Support redirect url in reservation API
 
 ## [3.2.9] - 2023-03-03
 ### Added
