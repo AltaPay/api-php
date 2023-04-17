@@ -26,7 +26,7 @@ $orderline = new \Altapay\Request\OrderLine(
 taxAmount | Tax amount should be the total tax amount for order line | float
 unitCode | Measurement unit, e.g., kg. | string
 discount | The discount in percent | float
-setGoodsType(string) | The type of order line it is. Should be one of the following | Can only be shipment, handling or item
+setGoodsType(string) | The type of order line it is. Should be one of the following | Can only be shipment, handling, item, digital, discount, gift_card, physical, sales_tax or subscription_model
 imageUrl | Full url for icon of the item | string
 
 ```php

@@ -69,7 +69,7 @@ class OrderLineTest extends AbstractTest
         if ($exception) {
             $this->expectException(\InvalidArgumentException::class);
             $this->expectExceptionMessage(
-                'goodsType should be one of "shipment|handling|item|subscription_model" you have selected "' . $type . '"'
+                'goodsType should be one of "shipment|handling|item|digital|discount|gift_card|physical|sales_tax|subscription_model" you have selected "' . $type . '"'
             );
         }
 
