@@ -24,9 +24,11 @@
 namespace Altapay\Api\Test;
 
 use Altapay\AbstractApi;
+use Altapay\Exceptions;
 use Altapay\Exceptions\ClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -87,10 +89,9 @@ class TestAuthentication extends AbstractApi
     }
 
     /**
-     * @return \Altapay\Response\AbstractResponse|PaymentRequestResponse|bool|void
-     *
-     * @throws \Altapay\Exceptions\ResponseHeaderException
-     * @throws \Altapay\Exceptions\ResponseMessageException
+     * @return string
+     * @throws Exceptions\ResponseHeaderException
+     * @throws Exceptions\ResponseMessageException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function doResponse()
@@ -108,7 +109,6 @@ class TestAuthentication extends AbstractApi
             $this->response = $response;
 
             $output = $this->handleResponse($request, $response);
-            $this->validateResponse($output);
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
