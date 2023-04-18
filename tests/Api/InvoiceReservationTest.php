@@ -39,8 +39,8 @@ class InvoiceReservationTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        $this->assertSame($this->getExceptedUri('createInvoiceReservation/'), $request->getUri()->getPath());
-        parse_str($request->getUri()->getQuery(), $parts);
+        $this->assertSame($this->getExceptedUri('createInvoiceReservation'), $request->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertSame('my terminal', $parts['terminal']);
         $this->assertSame('order id', $parts['shop_orderid']);
         $this->assertSame('200.5', $parts['amount']);
@@ -64,7 +64,7 @@ class InvoiceReservationTest extends AbstractApiTest
         $api->call();
         $request = $api->getRawRequest();
 
-        parse_str($request->getUri()->getQuery(), $parts);
+        parse_str($request->getBody()->getContents(), $parts);
         $this->assertSame('subscriptionAndCharge', $parts['type']);
         $this->assertSame('account', $parts['accountNumber']);
         $this->assertSame('mail_order', $parts['payment_source']);
