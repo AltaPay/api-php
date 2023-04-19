@@ -197,7 +197,7 @@ class ReservationOfFixedAmount extends AbstractApi
         return $this;
     }
 
-        /**
+    /**
      * The cookie to be sent to your callback urls
      *
      * @param string $cookie

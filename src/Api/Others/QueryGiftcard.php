@@ -51,7 +51,6 @@ class QueryGiftcard extends AbstractApi
      */
     public function setGiftcard(Giftcard $giftcard)
     {
-
         $this->unresolvedOptions['giftcard'] = [
           'account_identifier' => $giftcard->getAccount(),
           'provider'           => $giftcard->getProvider(),
@@ -95,12 +94,12 @@ class QueryGiftcard extends AbstractApi
      */
     protected function getBasicHeaders()
     {
-      $headers = parent::getBasicHeaders();
-      if (mb_strtolower($this->getHttpMethod()) === 'post') {
-        $headers['Content-Type'] = 'application/x-www-form-urlencoded';
-      }
+        $headers = parent::getBasicHeaders();
+        if (mb_strtolower($this->getHttpMethod()) === 'post') {
+            $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        }
 
-      return $headers;
+        return $headers;
     }
 
     /**
@@ -112,13 +111,13 @@ class QueryGiftcard extends AbstractApi
      */
     protected function getUrl(array $options)
     {
-      $url = 'queryGiftCard';
-      if (mb_strtolower($this->getHttpMethod()) === 'get') {
-        $query = $this->buildUrl($options);
-        $url   = sprintf('%s/?%s', $url, $query);
-      }
+        $url = 'queryGiftCard';
+        if (mb_strtolower($this->getHttpMethod()) === 'get') {
+            $query = $this->buildUrl($options);
+            $url   = sprintf('%s/?%s', $url, $query);
+        }
 
-      return $url;
+        return $url;
     }
 
     /**
@@ -126,7 +125,7 @@ class QueryGiftcard extends AbstractApi
      */
     protected function getHttpMethod()
     {
-      return 'POST';
+        return 'POST';
     }
 
     /**
@@ -137,25 +136,25 @@ class QueryGiftcard extends AbstractApi
      */
     protected function doResponse()
     {
-      $this->doConfigureOptions();
-      $headers           = $this->getBasicHeaders();
-      $requestParameters = [$this->getHttpMethod(), $this->parseUrl(), $headers];
-      if (mb_strtolower($this->getHttpMethod()) === 'post') {
-        $requestParameters[] = $this->getPostOptions();
-      }
-      $request       = new Request(...$requestParameters);
-      $this->request = $request;
-      try {
-        $response       = $this->getClient()->send($request);
-        $this->response = $response;
+        $this->doConfigureOptions();
+        $headers           = $this->getBasicHeaders();
+        $requestParameters = [$this->getHttpMethod(), $this->parseUrl(), $headers];
+        if (mb_strtolower($this->getHttpMethod()) === 'post') {
+            $requestParameters[] = $this->getPostOptions();
+        }
+        $request       = new Request(...$requestParameters);
+        $this->request = $request;
+        try {
+            $response       = $this->getClient()->send($request);
+            $this->response = $response;
 
-        $output = $this->handleResponse($request, $response);
-        $this->validateResponse($output);
+            $output = $this->handleResponse($request, $response);
+            $this->validateResponse($output);
 
-        return $output;
-      } catch (GuzzleHttpClientException $e) {
-        throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
-      }
+            return $output;
+        } catch (GuzzleHttpClientException $e) {
+            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
+        }
     }
 
     /**
@@ -163,8 +162,8 @@ class QueryGiftcard extends AbstractApi
      */
     protected function getPostOptions()
     {
-      $options = $this->options;
+        $options = $this->options;
 
-      return http_build_query($options, '', '&');
+        return http_build_query($options, '', '&');
     }
 }
