@@ -33,6 +33,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -51,11 +52,7 @@ class QueryGiftcard extends AbstractApi
      */
     public function setGiftcard(Giftcard $giftcard)
     {
-        $this->unresolvedOptions['giftcard'] = [
-          'account_identifier' => $giftcard->getAccount(),
-          'provider'           => $giftcard->getProvider(),
-          'token'              => $giftcard->getToken(),
-        ];
+        $this->unresolvedOptions['giftcard'] = $giftcard;
 
         return $this;
     }
@@ -70,7 +67,11 @@ class QueryGiftcard extends AbstractApi
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(['terminal', 'giftcard']);
-        $resolver->setAllowedTypes('giftcard', ['array']);
+        $resolver->setAllowedTypes('giftcard', [Giftcard::class]);
+
+        $resolver->setNormalizer('giftcard', function (Options $options, Giftcard $value) {
+            return $value->serialize();
+        });
     }
 
     /**

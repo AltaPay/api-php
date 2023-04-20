@@ -23,7 +23,7 @@
 
 namespace Altapay\Request;
 
-class Giftcard
+class Giftcard extends AbstractSerializer
 {
     /**
      * The card number of the gift card.
@@ -88,5 +88,19 @@ class Giftcard
     public function getToken()
     {
         return $this->token;
+    }
+
+    /**
+     * Serialize a object
+     *
+     * @return array<string, mixed>
+     */
+    public function serialize()
+    {
+        return [
+            'account_identifier' => $this->getAccount(),
+            'provider' => $this->getProvider(),
+            'token' => $this->getToken()
+        ];
     }
 }
