@@ -24,9 +24,11 @@
 namespace Altapay\Api\Test;
 
 use Altapay\AbstractApi;
+use Altapay\Exceptions;
 use Altapay\Exceptions\ClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -48,6 +50,19 @@ class TestAuthentication extends AbstractApi
     }
 
     /**
+     * @return array<string, string>
+     */
+    protected function getBasicHeaders()
+    {
+        $headers = parent::getBasicHeaders();
+        if (mb_strtolower($this->getHttpMethod()) === 'post') {
+            $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        }
+
+        return $headers;
+    }
+
+    /**
      * Url to api call
      *
      * @param array<string, mixed> $options Resolved options
@@ -56,7 +71,59 @@ class TestAuthentication extends AbstractApi
      */
     protected function getUrl(array $options)
     {
-        return 'login';
+        $url = 'login';
+        if (mb_strtolower($this->getHttpMethod()) === 'get') {
+            $query = $this->buildUrl($options);
+            $url   = sprintf('%s/?%s', $url, $query);
+        }
+
+        return $url;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getHttpMethod()
+    {
+        return 'POST';
+    }
+
+    /**
+     * @return string
+     * @throws Exceptions\ResponseHeaderException
+     * @throws Exceptions\ResponseMessageException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    protected function doResponse()
+    {
+        $this->doConfigureOptions();
+        $headers           = $this->getBasicHeaders();
+        $requestParameters = [$this->getHttpMethod(), $this->parseUrl(), $headers];
+        if (mb_strtolower($this->getHttpMethod()) === 'post') {
+            $requestParameters[] = $this->getPostOptions();
+        }
+        $request       = new Request(...$requestParameters);
+        $this->request = $request;
+        try {
+            $response       = $this->getClient()->send($request);
+            $this->response = $response;
+
+            $output = $this->handleResponse($request, $response);
+
+            return $output;
+        } catch (GuzzleHttpClientException $e) {
+            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
+        }
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPostOptions()
+    {
+        $options = $this->options;
+
+        return http_build_query($options, '', '&');
     }
 
     /**

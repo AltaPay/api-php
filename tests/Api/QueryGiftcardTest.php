@@ -28,9 +28,11 @@ class QueryGiftcardTest extends AbstractApiTest
         $api->setTerminal('my terminal');
         $api->setGiftcard($card);
         $api->call();
+        $request = $api->getRawRequest();
 
-        $this->assertSame($this->getExceptedUri('queryGiftCard/'), $api->getRawRequest()->getUri()->getPath());
-        parse_str($api->getRawRequest()->getUri()->getQuery(), $parts);
+
+        $this->assertSame($this->getExceptedUri('queryGiftCard'), $api->getRawRequest()->getUri()->getPath());
+        parse_str($request->getBody()->getContents(), $parts);
 
         $this->assertSame('my terminal', $parts['terminal']);
         /** @var array<string> $giftcard */

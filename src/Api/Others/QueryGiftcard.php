@@ -24,13 +24,16 @@
 namespace Altapay\Api\Others;
 
 use Altapay\AbstractApi;
+use Altapay\Exceptions;
 use Altapay\Request\Giftcard;
 use Altapay\Response\GiftcardResponse;
 use Altapay\Serializer\ResponseSerializer;
 use Altapay\Traits\TerminalTrait;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -50,6 +53,7 @@ class QueryGiftcard extends AbstractApi
     public function setGiftcard(Giftcard $giftcard)
     {
         $this->unresolvedOptions['giftcard'] = $giftcard;
+
         return $this;
     }
 
@@ -63,7 +67,11 @@ class QueryGiftcard extends AbstractApi
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(['terminal', 'giftcard']);
-        $resolver->setAllowedTypes('giftcard', Giftcard::class);
+        $resolver->setAllowedTypes('giftcard', [Giftcard::class]);
+
+        $resolver->setNormalizer('giftcard', function (Options $options, Giftcard $value) {
+            return $value->serialize();
+        });
     }
 
     /**
@@ -83,6 +91,19 @@ class QueryGiftcard extends AbstractApi
     }
 
     /**
+     * @return array<string, string>
+     */
+    protected function getBasicHeaders()
+    {
+        $headers = parent::getBasicHeaders();
+        if (mb_strtolower($this->getHttpMethod()) === 'post') {
+            $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        }
+
+        return $headers;
+    }
+
+    /**
      * Url to api call
      *
      * @param array<string, mixed> $options Resolved options
@@ -91,16 +112,59 @@ class QueryGiftcard extends AbstractApi
      */
     protected function getUrl(array $options)
     {
-        /** @var Giftcard $card */
-        $card = $options['giftcard'];
+        $url = 'queryGiftCard';
+        if (mb_strtolower($this->getHttpMethod()) === 'get') {
+            $query = $this->buildUrl($options);
+            $url   = sprintf('%s/?%s', $url, $query);
+        }
 
-        $options['giftcard'] = [
-            'account_identifier' => $card->getAccount(),
-            'provider'           => $card->getProvider(),
-            'token'              => $card->getToken(),
-        ];
+        return $url;
+    }
 
-        $query = $this->buildUrl($options);
-        return sprintf('queryGiftCard/?%s', $query);
+    /**
+     * @return string
+     */
+    protected function getHttpMethod()
+    {
+        return 'POST';
+    }
+
+    /**
+     * @return GiftcardResponse
+     * @throws \Altapay\Exceptions\ResponseHeaderException
+     * @throws \Altapay\Exceptions\ResponseMessageException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    protected function doResponse()
+    {
+        $this->doConfigureOptions();
+        $headers           = $this->getBasicHeaders();
+        $requestParameters = [$this->getHttpMethod(), $this->parseUrl(), $headers];
+        if (mb_strtolower($this->getHttpMethod()) === 'post') {
+            $requestParameters[] = $this->getPostOptions();
+        }
+        $request       = new Request(...$requestParameters);
+        $this->request = $request;
+        try {
+            $response       = $this->getClient()->send($request);
+            $this->response = $response;
+
+            $output = $this->handleResponse($request, $response);
+            $this->validateResponse($output);
+
+            return $output;
+        } catch (GuzzleHttpClientException $e) {
+            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
+        }
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPostOptions()
+    {
+        $options = $this->options;
+
+        return http_build_query($options, '', '&');
     }
 }
