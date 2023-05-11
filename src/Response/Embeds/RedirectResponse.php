@@ -21,67 +21,14 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Response;
+namespace Altapay\Response\Embeds;
 
-use Altapay\Response\Embeds\Transaction;
-use Altapay\Response\Embeds\RedirectResponse;
+use Altapay\Response\AbstractResponse;
 
-class ReservationOfFixedAmountResponse extends AbstractResponse
+class RedirectResponse extends AbstractResponse
 {
     /**
-     * Childs of the response
-     *
-     * @var array<string, array<string, mixed>>
-     */
-    protected $childs = [
-        'Transactions' => [
-          'class' => Transaction::class,
-          'array' => 'Transaction'
-        ],
-        'RedirectResponse' => [
-          'class' => RedirectResponse::class,
-          'array' => false
-        ],
-    ];
-
-    /**
-     * Result
-     *
      * @var string
      */
-    public $Result;
-
-    /** @var string */
-    public $MerchantErrorMessage;
-
-    /** @var string */
-    public $CardHolderErrorMessage;
-
-    /** @var bool */
-    public $CardHolderMessageMustBeShown;
-
-    /**
-     * Transactions
-     *
-     * @var Transaction[]
-     */
-    public $Transactions;
-
-    /** @var string */
-    public $PaymentRequestId;
-
-    /** @var string */
-    public $RedirectUrl;
-
-    /** @var string */
     public $Url;
-
-    /** @var string */
-    public $DynamicJavascriptUrl;
-   
-    /** @var string */
-    public $MerchantErrorCode;
-
-    /** @var string */
-    public $RedirectResponse;
 }
