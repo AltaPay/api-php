@@ -65,7 +65,7 @@ class Address extends AbstractResponse
     /**
      * @var string|null
      */
-    public $Country;
+    public $country;
 
     /**
      * @var string
@@ -126,60 +126,60 @@ class Address extends AbstractResponse
     /**
      * Set the address.
      *
-     * @param string|null $address
+     * @param string|null $Address
      * @return $this
      */
-    public function setAddress($address)
+    public function setAddress($Address)
     {
-        $this->Address = $address;
+        $this->Address = $Address;
         return $this;
     }
     
     /**
      * Set the city.
      *
-     * @param string|null $city
+     * @param string|null $City
      * @return $this
      */
-    public function setCity($city)
+    public function setCity($City)
     {
-        $this->City = $city;
+        $this->City = $City;
         return $this;
     }
     
     /**
      * Set the postal code.
      *
-     * @param string|null $postalCode
+     * @param string|null $PostalCode
      * @return $this
      */
-    public function setPostalCode($postalCode)
+    public function setPostalCode($PostalCode)
     {
-        $this->PostalCode = $postalCode;
+        $this->PostalCode = $PostalCode;
         return $this;
     }
     
     /**
      * Set the region.
      *
-     * @param string $region
+     * @param string $Region
      * @return $this
      */
-    public function setRegion($region)
+    public function setRegion($Region)
     {
-        $this->Region = $region;
+        $this->Region = $Region;
         return $this;
     }
     
     /**
      * Set the country.
      *
-     * @param string|null $country
+     * @param string|null $Country
      * @return $this
      */
-    public function setCountry($country)
+    public function setCountry($Country)
     {
-        $this->Country = $country;
+        $this->Country = $Country;
         return $this;
     }
     
