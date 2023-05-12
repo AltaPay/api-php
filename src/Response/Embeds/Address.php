@@ -30,6 +30,11 @@ class Address extends AbstractResponse
     /**
      * @var string|null
      */
+    public $Email;
+    
+    /**
+     * @var string|null
+     */
     public $Firstname;
 
     /**
@@ -103,6 +108,126 @@ class Address extends AbstractResponse
     {
         $this->Lastname = $LastName;
 
+        return $this;
+    }
+    
+    /**
+     * @param string $Email
+     *
+     * @return $this
+     */
+    public function setEmail($Email)
+    {
+        $this->Email = $Email;
+        
+        return $this;
+    }
+    
+    /**
+     * Set the address.
+     *
+     * @param string|null $address
+     * @return $this
+     */
+    public function setAddress($address)
+    {
+        $this->Address = $address;
+        return $this;
+    }
+    
+    /**
+     * Set the city.
+     *
+     * @param string|null $city
+     * @return $this
+     */
+    public function setCity($city)
+    {
+        $this->City = $city;
+        return $this;
+    }
+    
+    /**
+     * Set the postal code.
+     *
+     * @param string|null $postalCode
+     * @return $this
+     */
+    public function setPostalCode($postalCode)
+    {
+        $this->PostalCode = $postalCode;
+        return $this;
+    }
+    
+    /**
+     * Set the region.
+     *
+     * @param string $region
+     * @return $this
+     */
+    public function setRegion($region)
+    {
+        $this->Region = $region;
+        return $this;
+    }
+    
+    /**
+     * Set the country.
+     *
+     * @param string|null $country
+     * @return $this
+     */
+    public function setCountry($country)
+    {
+        $this->Country = $country;
+        return $this;
+    }
+    
+    /**
+     * Set the billing address.
+     *
+     * @param string $billingAddress
+     * @return $this
+     */
+    public function setBillingAddress($billingAddress)
+    {
+        $this->billingAddress = $billingAddress;
+        return $this;
+    }
+    
+    /**
+     * Set the payment method.
+     *
+     * @param string $paymentMethod
+     * @return $this
+     */
+    public function setPaymentMethod($paymentMethod)
+    {
+        $this->paymentMethod = $paymentMethod;
+        return $this;
+    }
+    
+    /**
+     * Set the currency.
+     *
+     * @param string $currency
+     * @return $this
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+        return $this;
+    }
+    
+    /**
+     * Set the order amount.
+     *
+     * @param string $orderAmount
+     * @return $this
+     */
+    public function setOrderAmount($orderAmount)
+    {
+        $this->orderAmount = $orderAmount;
         return $this;
     }
 }
