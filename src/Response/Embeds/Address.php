@@ -65,7 +65,7 @@ class Address extends AbstractResponse
     /**
      * @var string|null
      */
-    public $country;
+    public $Country;
 
     /**
      * @var string
