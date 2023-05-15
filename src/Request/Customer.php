@@ -676,13 +676,13 @@ class Customer extends AbstractSerializer
     private static function setAddress(array &$output, $key, Address $object)
     {
         $fields = [
-            'Firstname'  => 'firstname',
-            'Lastname'   => 'lastname',
-            'Address'    => 'address',
-            'City'       => 'city',
-            'Region'     => 'region',
-            'PostalCode' => 'postal',
-            'Country'    => 'country'
+            'firstname'  => 'firstname',
+            'lastname'   => 'lastname',
+            'address'    => 'address',
+            'city'       => 'city',
+            'region'     => 'region',
+            'postalCode' => 'postal',
+            'country'    => 'country'
         ];
 
         foreach ($fields as $fieldKey => $fieldName) {

@@ -30,42 +30,42 @@ class Address extends AbstractResponse
     /**
      * @var string|null
      */
-    public $Email;
+    public $email;
     
     /**
      * @var string|null
      */
-    public $Firstname;
+    public $firstname;
 
     /**
      * @var string|null
      */
-    public $Lastname;
+    public $lastname;
 
     /**
      * @var string|null
      */
-    public $Address;
+    public $address;
 
     /**
      * @var string|null
      */
-    public $City;
+    public $city;
 
     /**
      * @var string|null
      */
-    public $PostalCode;
+    public $postalCode;
 
     /**
      * @var string
      */
-    public $Region;
+    public $region;
 
     /**
      * @var string|null
      */
-    public $Country;
+    public $country;
 
     /**
      * @var string
@@ -88,98 +88,98 @@ class Address extends AbstractResponse
     public $orderAmount;
 
     /**
-     * @param string $FirstName
+     * @param string $firstName
      *
      * @return $this
      */
-    public function setFirstName($FirstName)
+    public function setFirstName($firstName)
     {
-        $this->Firstname = $FirstName;
+        $this->firstname = $firstName;
 
         return $this;
     }
 
     /**
-     * @param string $LastName
+     * @param string $lastName
      *
      * @return $this
      */
-    public function setLastName($LastName)
+    public function setLastName($lastName)
     {
-        $this->Lastname = $LastName;
+        $this->lastname = $lastName;
 
         return $this;
     }
     
     /**
-     * @param string $Email
+     * @param string $email
      *
      * @return $this
      */
-    public function setEmail($Email)
+    public function setEmail($email)
     {
-        $this->Email = $Email;
-        
+        $this->email = $email;
+
         return $this;
     }
     
     /**
      * Set the address.
      *
-     * @param string|null $Address
+     * @param string|null $address
      * @return $this
      */
-    public function setAddress($Address)
+    public function setAddress($address)
     {
-        $this->Address = $Address;
+        $this->address = $address;
         return $this;
     }
-    
+
     /**
      * Set the city.
      *
-     * @param string|null $City
+     * @param string|null $city
      * @return $this
      */
-    public function setCity($City)
+    public function setCity($city)
     {
-        $this->City = $City;
+        $this->city = $city;
         return $this;
     }
     
     /**
      * Set the postal code.
      *
-     * @param string|null $PostalCode
+     * @param string|null $postalCode
      * @return $this
      */
-    public function setPostalCode($PostalCode)
+    public function setPostalCode($postalCode)
     {
-        $this->PostalCode = $PostalCode;
+        $this->postalCode = $postalCode;
         return $this;
     }
     
     /**
      * Set the region.
      *
-     * @param string $Region
+     * @param string $region
      * @return $this
      */
-    public function setRegion($Region)
+    public function setRegion($region)
     {
-        $this->Region = $Region;
+        $this->region = $region;
         return $this;
     }
-    
+
     /**
      * Set the country.
      *
-     * @param string|null $Country
+     * @param string|null $country
      * @return $this
      */
-    public function setCountry($Country)
+    public function setCountry($country)
     {
-        $this->Country = $Country;
+        $this->country = $country;
         return $this;
     }
     
