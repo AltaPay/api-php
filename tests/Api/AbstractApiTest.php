@@ -50,22 +50,22 @@ abstract class AbstractApiTest extends AbstractTest
     protected function getCustomerInfo()
     {
         $billing             = new Address();
-        $billing->Firstname  = 'First name';
-        $billing->Lastname   = 'Last name';
-        $billing->Address    = 'my address';
-        $billing->City       = 'Somewhere';
-        $billing->PostalCode = '2000';
-        $billing->Region     = '0';
-        $billing->Country    = 'DK';
+        $billing->firstname  = 'First name';
+        $billing->lastname   = 'Last name';
+        $billing->address    = 'my address';
+        $billing->city       = 'Somewhere';
+        $billing->postalCode = '2000';
+        $billing->region     = '0';
+        $billing->country    = 'DK';
 
         $shipping             = new Address();
-        $shipping->Firstname  = 'First name';
-        $shipping->Lastname   = 'Last name';
-        $shipping->Address    = 'my address';
-        $shipping->City       = 'Somewhere';
-        $shipping->PostalCode = '2000';
-        $shipping->Region     = '0';
-        $shipping->Country    = 'DK';
+        $shipping->firstname  = 'First name';
+        $shipping->lastname   = 'Last name';
+        $shipping->address    = 'my address';
+        $shipping->city       = 'Somewhere';
+        $shipping->postalCode = '2000';
+        $shipping->region     = '0';
+        $shipping->country    = 'DK';
 
         $customer = new Customer($billing);
         $customer->setShipping($shipping);

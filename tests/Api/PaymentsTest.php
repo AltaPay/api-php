@@ -245,23 +245,23 @@ class PaymentsTest extends AbstractApiTest
 
         $address = $data->BillingAddress;
         $this->assertInstanceOf(Address::class, $address);
-        $this->assertSame('Palle', $address->Firstname);
-        $this->assertSame('Simonsen', $address->Lastname);
-        $this->assertSame('Rosenkæret 13', $address->Address);
-        $this->assertSame('Søborg', $address->City);
-        $this->assertSame('2860', $address->PostalCode);
-        $this->assertSame('DK', $address->Country);
+        $this->assertSame('Palle', $address->firstname);
+        $this->assertSame('Simonsen', $address->lastname);
+        $this->assertSame('Rosenkæret 13', $address->address);
+        $this->assertSame('Søborg', $address->city);
+        $this->assertSame('2860', $address->postalCode);
+        $this->assertSame('DK', $address->country);
 
         $this->assertInstanceOf(Address::class, $data->ShippingAddress);
 
         $address = $data->ShippingAddress;
         $this->assertInstanceOf(Address::class, $address);
-        $this->assertNull($address->Firstname);
-        $this->assertNull($address->Lastname);
-        $this->assertNull($address->Address);
-        $this->assertNull($address->City);
-        $this->assertNull($address->PostalCode);
-        $this->assertNull($address->Country);
+        $this->assertNull($address->firstname);
+        $this->assertNull($address->lastname);
+        $this->assertNull($address->address);
+        $this->assertNull($address->city);
+        $this->assertNull($address->postalCode);
+        $this->assertNull($address->country);
 
         $this->assertInstanceOf(Address::class, $data->RegisteredAddress);
     }

@@ -66,11 +66,11 @@ class InvoiceTextTest extends AbstractApiTest
         $this->assertSame('Password', $response->TextInfos[0]->Name);
         $this->assertSame('xxxxxx', $response->TextInfos[0]->Value);
         $this->assertInstanceOf(Address::class, $response->Address);
-        $this->assertSame('John', $response->Address->Firstname);
-        $this->assertSame('John', $response->Address->Lastname);
-        $this->assertSame('Anywhere Street 12', $response->Address->Address);
-        $this->assertSame('Anywhere City', $response->Address->City);
-        $this->assertSame('1111', $response->Address->PostalCode);
-        $this->assertSame('DK', $response->Address->Country);
+        $this->assertSame('John', $response->Address->firstname);
+        $this->assertSame('John', $response->Address->lastname);
+        $this->assertSame('Anywhere Street 12', $response->Address->address);
+        $this->assertSame('Anywhere City', $response->Address->city);
+        $this->assertSame('1111', $response->Address->postalCode);
+        $this->assertSame('DK', $response->Address->country);
     }
 }
