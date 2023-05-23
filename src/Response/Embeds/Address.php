@@ -27,6 +27,12 @@ use Altapay\Response\AbstractResponse;
 
 class Address extends AbstractResponse
 {
+
+    /**
+     * @var string|null
+     */
+    public $Email;
+
     /**
      * @var string|null
      */
@@ -83,6 +89,18 @@ class Address extends AbstractResponse
     public $orderAmount;
 
     /**
+     * @param string $email
+     *
+     * @return $this
+     */
+    public function setEmail($email)
+    {
+        $this->Email = $email;
+
+        return $this;
+    }
+
+    /**
      * @param string $FirstName
      *
      * @return $this
@@ -102,6 +120,66 @@ class Address extends AbstractResponse
     public function setLastName($LastName)
     {
         $this->Lastname = $LastName;
+
+        return $this;
+    }
+
+    /**
+     * @param string $address
+     *
+     * @return $this
+     */
+    public function setAddress($address)
+    {
+        $this->Address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @param string $city
+     *
+     * @return $this
+     */
+    public function setCity($city)
+    {
+        $this->City = $city;
+
+        return $this;
+    }
+
+    /**
+     * @param string $postalCode
+     *
+     * @return $this
+     */
+    public function setPostalCode($postalCode)
+    {
+        $this->PostalCode = $postalCode;
+
+        return $this;
+    }
+
+    /**
+     * @param string $region
+     *
+     * @return $this
+     */
+    public function setRegion($region)
+    {
+        $this->Region = $region;
+
+        return $this;
+    }
+
+    /**
+     * @param string $country
+     *
+     * @return $this
+     */
+    public function setCountry($country)
+    {
+        $this->Country = $country;
 
         return $this;
     }
