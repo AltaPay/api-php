@@ -1,4 +1,4 @@
-[<](../index.md) Altapay - PHP Api - Customer Info
+[<](../index.md) Altapay - PHP Api - Order line
 ==================================================
 
 A order line object requries
