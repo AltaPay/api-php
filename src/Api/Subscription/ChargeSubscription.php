@@ -42,6 +42,8 @@ class ChargeSubscription extends AbstractApi
     use Traits\TransactionsTrait;
     use Traits\AmountTrait;
     use Traits\AgreementTrait;
+    use Traits\TransactionInfoTrait;
+    use Traits\OrderlinesTrait;
     
     /**
      * @param array<string> $agreement
@@ -78,7 +80,7 @@ class ChargeSubscription extends AbstractApi
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired('transaction_id');
-        $resolver->setDefined(['amount', 'reconciliation_identifier', 'agreement']);
+        $resolver->setDefined(['amount', 'reconciliation_identifier', 'agreement', 'transaction_info', 'orderLines']);
         $resolver->addAllowedTypes('reconciliation_identifier', 'string');
     }
 
