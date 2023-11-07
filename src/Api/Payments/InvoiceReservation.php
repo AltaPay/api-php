@@ -193,7 +193,7 @@ class InvoiceReservation extends AbstractApi
 
     /**
      * @return InvoiceReservationResponse
-     * @throws \Exception|GuzzleException|ResponseHeaderException|ResponseMessageException
+     * @throws \Exception|Exceptions\ClientException|GuzzleException|ResponseHeaderException|ResponseMessageException
      */
     protected function doResponse()
     {

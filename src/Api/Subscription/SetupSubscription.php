@@ -24,6 +24,7 @@
 namespace Altapay\Api\Subscription;
 
 use Altapay\Api\Payments\ReservationOfFixedAmount;
+use Altapay\Exceptions\ClientException;
 use Altapay\Exceptions\ResponseHeaderException;
 use Altapay\Exceptions\ResponseMessageException;
 use Altapay\Response\SetupSubscriptionResponse;
@@ -118,7 +119,7 @@ class SetupSubscription extends ReservationOfFixedAmount
     /**
      * @return \Altapay\Response\AbstractResponse|PaymentRequestResponse|bool|void
      *
-     * @throws \Exception|GuzzleException|ResponseHeaderException|ResponseMessageException
+     * @throws \Exception|GuzzleException|ResponseHeaderException|ResponseMessageException|ClientException
      */
     protected function doResponse()
     {
@@ -139,7 +140,7 @@ class SetupSubscription extends ReservationOfFixedAmount
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            throw new \Altapay\Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
+            throw new ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
         }
     }
 

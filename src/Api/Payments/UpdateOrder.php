@@ -145,7 +145,7 @@ class UpdateOrder extends AbstractApi
 
     /**
      * Generate the response
-     * @throws \Exception|GuzzleException|ResponseHeaderException|ResponseMessageException
+     * @throws \Exception|Exceptions\ClientException|GuzzleException|ResponseHeaderException|ResponseMessageException
      */
     protected function doResponse()
     {

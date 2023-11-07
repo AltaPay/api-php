@@ -130,7 +130,7 @@ class ReserveSubscriptionCharge extends AbstractApi
 
     /**
      * @return ReserveSubscriptionResponse
-     * @throws \Exception|GuzzleException|ResponseHeaderException|ResponseMessageException
+     * @throws \Exception|Exceptions\ClientException|GuzzleException|ResponseHeaderException|ResponseMessageException
      */
     protected function doResponse()
     {

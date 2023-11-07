@@ -374,7 +374,7 @@ class ReservationOfFixedAmount extends AbstractApi
     /**
      * @return \Altapay\Response\AbstractResponse|PaymentRequestResponse|bool|void
      *
-     * @throws \Exception|GuzzleException|ResponseHeaderException|ResponseMessageException
+     * @throws \Exception|Exceptions\ClientException|GuzzleException|ResponseHeaderException|ResponseMessageException
      */
     protected function doResponse()
     {

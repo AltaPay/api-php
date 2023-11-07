@@ -144,7 +144,7 @@ class ChargeSubscription extends AbstractApi
 
     /**
      * @return ChargeSubscriptionResponse
-     * @throws \Exception|GuzzleException|ResponseHeaderException|ResponseMessageException
+     * @throws \Exception|Exceptions\ClientException|GuzzleException|ResponseHeaderException|ResponseMessageException
      */
     protected function doResponse()
     {

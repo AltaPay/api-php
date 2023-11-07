@@ -266,7 +266,7 @@ abstract class AbstractApi
      * Generate the response
      *
      * @return AbstractResponse|string|array<Transaction>
-     * @throws GuzzleException|ResponseHeaderException|ResponseMessageException
+     * @throws GuzzleException|Exceptions\ClientException|ResponseHeaderException|ResponseMessageException
      */
     protected function doResponse()
     {
