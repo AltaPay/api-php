@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.3.6] - 2023-11-07
 ### Fixes
-- Remove the restriction for the ("-") hyphen in the 'shoporderid'.
+- Remove the restrictions in the 'shoporderid',
 
 ## [3.3.5] - 2023-05-23
 ### Fixes
