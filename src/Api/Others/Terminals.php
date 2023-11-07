@@ -33,7 +33,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * This method will allow you to extract a list of terminals that you have access to.
- * The list will contains some details about the terminals
+ * The list will contain some details about the terminals
  */
 class Terminals extends AbstractApi
 {
@@ -51,10 +51,11 @@ class Terminals extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request           $request
+     * @param Request $request
      * @param ResponseInterface $response
      *
      * @return TerminalsResponse
+     * @throws \Exception
      */
     protected function handleResponse(Request $request, ResponseInterface $response)
     {

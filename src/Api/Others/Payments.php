@@ -94,10 +94,11 @@ class Payments extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request           $request
+     * @param Request $request
      * @param ResponseInterface $response
      *
      * @return Transaction[]
+     * @throws \Exception
      */
     protected function handleResponse(Request $request, ResponseInterface $response)
     {

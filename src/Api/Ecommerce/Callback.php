@@ -48,6 +48,7 @@ class Callback
 
     /**
      * @return CallbackResponse
+     * @throws \Exception
      */
     public function call()
     {

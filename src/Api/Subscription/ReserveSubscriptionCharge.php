@@ -25,11 +25,13 @@ namespace Altapay\Api\Subscription;
 
 use Altapay\AbstractApi;
 use Altapay\Exceptions;
+use Altapay\Exceptions\ResponseHeaderException;
+use Altapay\Exceptions\ResponseMessageException;
 use Altapay\Response\ReserveSubscriptionResponse;
 use Altapay\Serializer\ResponseSerializer;
 use Altapay\Traits;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -73,10 +75,11 @@ class ReserveSubscriptionCharge extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request           $request
+     * @param Request $request
      * @param ResponseInterface $response
      *
      * @return ReserveSubscriptionResponse
+     * @throws \Exception
      */
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
@@ -127,9 +130,7 @@ class ReserveSubscriptionCharge extends AbstractApi
 
     /**
      * @return ReserveSubscriptionResponse
-     * @throws \Altapay\Exceptions\ResponseHeaderException
-     * @throws \Altapay\Exceptions\ResponseMessageException
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Exception|GuzzleException|ResponseHeaderException|ResponseMessageException
      */
     protected function doResponse()
     {

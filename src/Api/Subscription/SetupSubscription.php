@@ -24,12 +24,14 @@
 namespace Altapay\Api\Subscription;
 
 use Altapay\Api\Payments\ReservationOfFixedAmount;
+use Altapay\Exceptions\ResponseHeaderException;
+use Altapay\Exceptions\ResponseMessageException;
 use Altapay\Response\SetupSubscriptionResponse;
 use Altapay\Response\PaymentRequestResponse;
 use Altapay\Serializer\ResponseSerializer;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -60,10 +62,11 @@ class SetupSubscription extends ReservationOfFixedAmount
     /**
      * Handle response
      *
-     * @param Request           $request
+     * @param Request $request
      * @param ResponseInterface $response
      *
      * @return SetupSubscriptionResponse
+     * @throws \Exception
      */
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
@@ -115,9 +118,7 @@ class SetupSubscription extends ReservationOfFixedAmount
     /**
      * @return \Altapay\Response\AbstractResponse|PaymentRequestResponse|bool|void
      *
-     * @throws \Altapay\Exceptions\ResponseHeaderException
-     * @throws \Altapay\Exceptions\ResponseMessageException
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Exception|GuzzleException|ResponseHeaderException|ResponseMessageException
      */
     protected function doResponse()
     {

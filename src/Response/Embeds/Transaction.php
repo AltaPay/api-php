@@ -30,7 +30,7 @@ use Altapay\Response\Embeds\PaymentInfo;
 class Transaction extends AbstractResponse
 {
     /**
-     * Childs of the response
+     * Children of the response
      *
      * @var array<string, array<string, mixed>>
      */
@@ -301,6 +301,7 @@ class Transaction extends AbstractResponse
      * @param string $CreatedDate
      *
      * @return $this
+     * @throws \Exception
      */
     protected function setCreatedDate($CreatedDate)
     {
@@ -313,6 +314,7 @@ class Transaction extends AbstractResponse
      * @param string $UpdatedDate
      *
      * @return $this
+     * @throws \Exception
      */
     protected function setUpdatedDate($UpdatedDate)
     {

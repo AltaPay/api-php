@@ -28,7 +28,7 @@ use Altapay\Response\Embeds\GiftCardAccount;
 class GiftcardResponse extends AbstractResponse
 {
     /**
-     * Childs of the response
+     * Children of the response
      *
      * @var array<string, array<string, mixed>>
      */

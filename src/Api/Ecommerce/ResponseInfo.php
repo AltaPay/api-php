@@ -8,6 +8,7 @@ class ResponseInfo extends Callback
 {
     /**
      * @return Address|null
+     * @throws \Exception
      */
     public function getRegisteredAddress()
     {

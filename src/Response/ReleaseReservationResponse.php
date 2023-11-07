@@ -31,7 +31,7 @@ use Altapay\Response\Embeds\Transaction;
 class ReleaseReservationResponse extends AbstractResponse
 {
     /**
-     * Childs of the response
+     * Children of the response
      *
      * @var array<string, array<string, mixed>>
      */

@@ -32,7 +32,7 @@ use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Used to get a list of fundings, which details when and how much money is transfered to your companys bank account.
+ * Used to get a list of fundings, which details when and how much money is transferred to your company's bank account.
  */
 class FundingList extends AbstractApi
 {
@@ -65,10 +65,11 @@ class FundingList extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request           $request
+     * @param Request $request
      * @param ResponseInterface $response
      *
      * @return FundingsResponse
+     * @throws \Exception
      */
     protected function handleResponse(Request $request, ResponseInterface $response)
     {

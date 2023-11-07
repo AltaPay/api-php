@@ -49,6 +49,7 @@ class Header extends AbstractResponse
      * @param string $date
      *
      * @return $this
+     * @throws \Exception
      */
     public function setDate($date)
     {

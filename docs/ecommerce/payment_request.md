@@ -80,7 +80,7 @@ $request->setCurrency('SEK');
 
 | Method  | Description | Type |
 |---|---|---|
-| setOrganisationNumber(string) | If the organisation_number parameter is given the organisation number field in the invoice payment form is prepopulated, and if no other payment options is enabled on the terminal the form will auto submit. | string
+| setOrganisationNumber(string) | If the organisation_number parameter is given the organisation number field in the invoice payment form is pre-populated, and if no other payment options is enabled on the terminal the form will auto submit. | string
 | setAccountOffer(string) | To require having account enabled for an invoice payment for this specific customer, set this to required. To disable account for this specific customer, set to disabled. | string
 
 ### Required on specific payments

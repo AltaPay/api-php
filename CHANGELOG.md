@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.7] - 2023-11-08
+### Fixes
+- Add `@throws` annotations in the PHPDoc blocks throughout the codebase.
+
 ## [3.3.5] - 2023-05-23
 ### Fixes
 - Add option to use `transaction_info` and `orderLines` for `ChargeSubscription`
@@ -54,7 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.2.5] - 2022-06-14
 ### Fixes
 - Add missing setters for ApplePay
-- Fix broken intergrartion tests
+- Fix broken integration tests
 
 ## [3.2.4] - 2022-06-14
 ### Added
@@ -89,7 +93,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.1.0] - 2020-10-19
 ### Added
-- Support for installation and autoloading via composer
+- Support for installation and autoload via composer
 - Document all function arguments
 - Added DynamicJavascriptUrl on PensioCreatePaymentRequest
 - The previous exception is now forwarded

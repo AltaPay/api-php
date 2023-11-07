@@ -61,6 +61,7 @@ class Factory
      * @param class-string<T> $class
      *
      * @return T
+     * @throws ClassDoesNotExistsException
      */
     public static function create($class, Authentication $authentication = null)
     {

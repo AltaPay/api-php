@@ -40,6 +40,7 @@ class ResponseSerializer
      * @param \SimpleXMLElement $header
      *
      * @return T
+     * @throws \InvalidArgumentException
      */
     public static function serialize(
         $objectName,
@@ -62,6 +63,7 @@ class ResponseSerializer
      * @param string            $childKey
      *
      * @return array<int, T>
+     * @throws \InvalidArgumentException
      */
     public static function serializeChildren(
         $objectName,

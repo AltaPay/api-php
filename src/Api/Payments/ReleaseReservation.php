@@ -25,13 +25,15 @@ namespace Altapay\Api\Payments;
 
 use Altapay\AbstractApi;
 use Altapay\Exceptions;
+use Altapay\Exceptions\ResponseHeaderException;
+use Altapay\Exceptions\ResponseMessageException;
 use Altapay\Response\ReleaseReservationResponse;
 use Altapay\Response\PaymentRequestResponse;
 use Altapay\Serializer\ResponseSerializer;
 use Altapay\Traits\TransactionsTrait;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -62,10 +64,11 @@ class ReleaseReservation extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request           $request
+     * @param Request $request
      * @param ResponseInterface $response
      *
      * @return ReleaseReservationResponse
+     * @throws \Exception
      */
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
@@ -117,9 +120,7 @@ class ReleaseReservation extends AbstractApi
     /**
      * @return \Altapay\Response\AbstractResponse|PaymentRequestResponse|bool
      *
-     * @throws \Altapay\Exceptions\ResponseHeaderException
-     * @throws \Altapay\Exceptions\ResponseMessageException
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Exception|GuzzleException|ResponseHeaderException|ResponseMessageException
      */
     protected function doResponse()
     {

@@ -29,7 +29,7 @@ use Altapay\Response\Embeds\TextInfo;
 class InvoiceTextResponse extends AbstractResponse
 {
     /**
-     * Childs of the response
+     * Children of the response
      *
      * @var array<string, array<string, mixed>>
      */
@@ -92,6 +92,7 @@ class InvoiceTextResponse extends AbstractResponse
      * @param string $InvoiceDate
      *
      * @return $this
+     * @throws \Exception
      */
     public function setInvoiceDate($InvoiceDate)
     {
@@ -103,6 +104,7 @@ class InvoiceTextResponse extends AbstractResponse
      * @param string $DueDate
      *
      * @return $this
+     * @throws \Exception
      */
     public function setDueDate($DueDate)
     {

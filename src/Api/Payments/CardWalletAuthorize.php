@@ -24,13 +24,16 @@
 namespace Altapay\Api\Payments;
 
 use Altapay\AbstractApi;
-use Altapay\Exceptions;
+use Altapay\Exceptions\ClientException;
+use Altapay\Exceptions\ResponseHeaderException;
+use Altapay\Exceptions\ResponseMessageException;
 use Altapay\Serializer\ResponseSerializer;
 use Altapay\Request\Config;
 use Altapay\Traits;
 use Altapay\Types;
 use Altapay\Response\PaymentRequestResponse;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -201,7 +204,7 @@ class CardWalletAuthorize extends AbstractApi
     }
 
     /**
-     * If the this is given the organisation number field in the invoice payment form is prepopulated
+     * If this is given the organisation number field in the invoice payment form is pre-populated
      *
      * @param string $number
      *
@@ -319,6 +322,7 @@ class CardWalletAuthorize extends AbstractApi
      * @param ResponseInterface $response
      *
      * @return PaymentRequestResponse
+     * @throws \Exception
      */
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
@@ -369,6 +373,7 @@ class CardWalletAuthorize extends AbstractApi
 
     /**
      * Generate the response
+     * @throws \Exception|GuzzleException|ResponseHeaderException|ResponseMessageException|ClientException
      */
     protected function doResponse()
     {
@@ -389,7 +394,7 @@ class CardWalletAuthorize extends AbstractApi
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
+            throw new ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
         }
     }
 

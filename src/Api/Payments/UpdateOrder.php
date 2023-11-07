@@ -25,13 +25,15 @@ namespace Altapay\Api\Payments;
 
 use Altapay\AbstractApi;
 use Altapay\Exceptions;
+use Altapay\Exceptions\ResponseHeaderException;
+use Altapay\Exceptions\ResponseMessageException;
 use Altapay\Serializer\ResponseSerializer;
 use Altapay\Response\UpdateOrderResponse;
 use Altapay\Traits\AmountTrait;
 use Altapay\Traits\OrderlinesTrait;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -39,7 +41,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * When the funds of a payment has been reserved and the goods are ready for delivery
  * your system should capture the payment.
  *
- * By default auto reauth is enabled for all terminals (but is only supported by a few acquirers),
+ * By default, auto reauth is enabled for all terminals (but is only supported by a few acquirers),
  * which means if the capture fails the system will automatically try to reauth the payment and then capture again.
  * Reauthed payments, however, do not have cvv or 3d-secure protection, which means the
  * protection against chargebacks is not as good.
@@ -81,10 +83,11 @@ class UpdateOrder extends AbstractApi
     /**
      * Handle response
      *
-     * @param Request           $request
+     * @param Request $request
      * @param ResponseInterface $response
      *
      * @return UpdateOrderResponse
+     * @throws \Exception
      */
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
@@ -142,6 +145,7 @@ class UpdateOrder extends AbstractApi
 
     /**
      * Generate the response
+     * @throws \Exception|GuzzleException|ResponseHeaderException|ResponseMessageException
      */
     protected function doResponse()
     {
