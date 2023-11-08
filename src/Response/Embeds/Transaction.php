@@ -81,7 +81,7 @@ class Transaction extends AbstractResponse
     public $CardStatus;
 
     /**
-     * @var string
+     * @var CreditCard
      */
     public $CreditCardExpiry;
 
@@ -261,7 +261,7 @@ class Transaction extends AbstractResponse
     public $AddressVerificationDescription;
 
     /**
-     * @var string
+     * @var ChargebackEvent[]
      */
     public $ChargebackEvents;
 
