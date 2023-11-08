@@ -23,6 +23,7 @@
 
 namespace Altapay;
 
+use Altapay\Exceptions\ClientException;
 use Altapay\Exceptions\ResponseHeaderException;
 use Altapay\Exceptions\ResponseMessageException;
 use Altapay\Response\AbstractResponse;
@@ -157,7 +158,9 @@ abstract class AbstractApi
      * Generate the response
      *
      * @return AbstractResponse|string|array<Transaction>
-     * @throws GuzzleException|ResponseHeaderException|ResponseMessageException
+     * @throws GuzzleException
+     * @throws ResponseHeaderException
+     * @throws ResponseMessageException
      */
     public function call()
     {
@@ -266,7 +269,10 @@ abstract class AbstractApi
      * Generate the response
      *
      * @return AbstractResponse|string|array<Transaction>
-     * @throws GuzzleException|Exceptions\ClientException|ResponseHeaderException|ResponseMessageException
+     * @throws GuzzleException
+     * @throws ClientException
+     * @throws ResponseHeaderException
+     * @throws ResponseMessageException
      */
     protected function doResponse()
     {
@@ -290,7 +296,7 @@ abstract class AbstractApi
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
+            throw new ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
         }
     }
 

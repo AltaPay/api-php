@@ -137,6 +137,7 @@ class CardWalletSession extends AbstractApi
 
     /**
      * Generate the response
+     *
      * @throws \Exception
      * @throws ClientException
      * @throws GuzzleException
