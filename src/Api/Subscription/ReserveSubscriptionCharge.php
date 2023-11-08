@@ -24,7 +24,7 @@
 namespace Altapay\Api\Subscription;
 
 use Altapay\AbstractApi;
-use Altapay\Exceptions;
+use Altapay\Exceptions\ClientException;
 use Altapay\Exceptions\ResponseHeaderException;
 use Altapay\Exceptions\ResponseMessageException;
 use Altapay\Response\ReserveSubscriptionResponse;
@@ -130,7 +130,11 @@ class ReserveSubscriptionCharge extends AbstractApi
 
     /**
      * @return ReserveSubscriptionResponse
-     * @throws \Exception|Exceptions\ClientException|GuzzleException|ResponseHeaderException|ResponseMessageException
+     * @throws \Exception
+     * @throws ClientException
+     * @throws GuzzleException
+     * @throws ResponseHeaderException
+     * @throws ResponseMessageException
      */
     protected function doResponse()
     {
@@ -151,7 +155,7 @@ class ReserveSubscriptionCharge extends AbstractApi
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
+            throw new ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
         }
     }
 

@@ -24,7 +24,7 @@
 namespace Altapay\Api\Payments;
 
 use Altapay\AbstractApi;
-use Altapay\Exceptions;
+use Altapay\Exceptions\ClientException;
 use Altapay\Exceptions\ResponseHeaderException;
 use Altapay\Exceptions\ResponseMessageException;
 use Altapay\Request\Card;
@@ -374,7 +374,11 @@ class ReservationOfFixedAmount extends AbstractApi
     /**
      * @return \Altapay\Response\AbstractResponse|PaymentRequestResponse|bool|void
      *
-     * @throws \Exception|Exceptions\ClientException|GuzzleException|ResponseHeaderException|ResponseMessageException
+     * @throws \Exception
+     * @throws ClientException
+     * @throws GuzzleException
+     * @throws ResponseHeaderException
+     * @throws ResponseMessageException
      */
     protected function doResponse()
     {
@@ -395,7 +399,7 @@ class ReservationOfFixedAmount extends AbstractApi
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
+            throw new ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
         }
     }
 

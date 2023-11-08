@@ -137,7 +137,11 @@ class CardWalletSession extends AbstractApi
 
     /**
      * Generate the response
-     * @throws \Exception|GuzzleException|ResponseHeaderException|ResponseMessageException|ClientException
+     * @throws \Exception
+     * @throws ClientException
+     * @throws GuzzleException
+     * @throws ResponseHeaderException
+     * @throws ResponseMessageException
      */
     protected function doResponse()
     {

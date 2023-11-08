@@ -188,7 +188,11 @@ class RefundCapturedReservation extends AbstractApi
      * Generate the response
      *
      * @return \Altapay\Response\AbstractResponse
-     * @throws \Exception|GuzzleException|ResponseHeaderException|ResponseMessageException|ClientException
+     * @throws \Exception
+     * @throws ClientException
+     * @throws GuzzleException
+     * @throws ResponseHeaderException
+     * @throws ResponseMessageException
      */
     protected function doResponse()
     {
