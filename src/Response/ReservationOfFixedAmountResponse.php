@@ -29,7 +29,7 @@ use Altapay\Response\Embeds\RedirectResponse;
 class ReservationOfFixedAmountResponse extends AbstractResponse
 {
     /**
-     * Childs of the response
+     * Children of the response
      *
      * @var array<string, array<string, mixed>>
      */

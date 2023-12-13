@@ -39,7 +39,7 @@ abstract class AbstractResponse
     public $Header;
 
     /**
-     * Childs of the response
+     * Children of the response
      *
      * @var array<string, array<string, mixed>>
      */
@@ -47,6 +47,7 @@ abstract class AbstractResponse
 
     /**
      * @return void
+     * @throws \InvalidArgumentException
      */
     public function headerSetter(\SimpleXMLElement $xml = null)
     {
@@ -61,6 +62,7 @@ abstract class AbstractResponse
      * @param \SimpleXMLElement $xml
      *
      * @return static
+     * @throws \InvalidArgumentException
      */
     public function deserialize(\SimpleXMLElement $xml = null)
     {
@@ -106,6 +108,7 @@ abstract class AbstractResponse
      * @param \SimpleXMLElement $element
      *
      * @return void
+     * @throws \InvalidArgumentException
      */
     private function attributeSetter($object, \SimpleXMLElement $element)
     {

@@ -137,6 +137,7 @@ class OrderLine extends AbstractSerializer
      * @param string $goodsType
      *
      * @return $this
+     * @throws \InvalidArgumentException
      */
     public function setGoodsType($goodsType)
     {

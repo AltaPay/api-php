@@ -28,7 +28,7 @@ use Altapay\Response\AbstractResponse;
 class Funding extends AbstractResponse
 {
     /**
-     * Childs of the response
+     * Children of the response
      *
      * @var array<string, array<string, mixed>>
      */
@@ -79,6 +79,7 @@ class Funding extends AbstractResponse
      * @param string $FundingDate
      *
      * @return $this
+     * @throws \Exception
      */
     public function setFundingDate($FundingDate)
     {
@@ -90,6 +91,7 @@ class Funding extends AbstractResponse
      * @param string $CreatedDate
      *
      * @return $this
+     * @throws \Exception
      */
     public function setCreatedDate($CreatedDate)
     {

@@ -23,13 +23,16 @@
 
 namespace Altapay;
 
+use Altapay\Exceptions\ClientException;
+use Altapay\Exceptions\ResponseHeaderException;
+use Altapay\Exceptions\ResponseMessageException;
 use Altapay\Response\AbstractResponse;
 use Altapay\Response\Embeds\Transaction;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -52,7 +55,7 @@ abstract class AbstractApi
     /**
      * PHP API version
      */
-    const PHP_API_VERSION = '3.3.6';
+    const PHP_API_VERSION = '3.3.7';
 
     /**
      * Event dispatcher
@@ -155,6 +158,9 @@ abstract class AbstractApi
      * Generate the response
      *
      * @return AbstractResponse|string|array<Transaction>
+     * @throws GuzzleException
+     * @throws ResponseHeaderException
+     * @throws ResponseMessageException
      */
     public function call()
     {
@@ -263,6 +269,10 @@ abstract class AbstractApi
      * Generate the response
      *
      * @return AbstractResponse|string|array<Transaction>
+     * @throws GuzzleException
+     * @throws ClientException
+     * @throws ResponseHeaderException
+     * @throws ResponseMessageException
      */
     protected function doResponse()
     {
@@ -286,7 +296,7 @@ abstract class AbstractApi
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
+            throw new ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
         }
     }
 

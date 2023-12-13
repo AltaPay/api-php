@@ -53,6 +53,7 @@ class ReconciliationIdentifier extends AbstractResponse
      * @param string $Date
      *
      * @return $this
+     * @throws \Exception
      */
     public function setDate($Date)
     {

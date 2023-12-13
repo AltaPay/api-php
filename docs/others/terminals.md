@@ -1,7 +1,7 @@
 [<](../index.md) Altapay - PHP Api - Terminals
 ===========================================
 
-This method will allow you to extract a list of terminals that you have access to. The list will contains some details about the terminals..
+This method will allow you to extract a list of terminals that you have access to. The list will contain some details about the terminals.
 
 - [Request](#request)
     + [Required](#required)

@@ -24,11 +24,14 @@
 namespace Altapay\Api\Payments;
 
 use Altapay\AbstractApi;
-use Altapay\Exceptions;
+use Altapay\Exceptions\ClientException;
+use Altapay\Exceptions\ResponseHeaderException;
+use Altapay\Exceptions\ResponseMessageException;
 use Altapay\Serializer\ResponseSerializer;
 use Altapay\Traits\TerminalTrait;
 use Altapay\Response\PaymentRequestResponse;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -83,6 +86,7 @@ class CardWalletSession extends AbstractApi
      * @param ResponseInterface $response
      *
      * @return PaymentRequestResponse
+     * @throws \Exception
      */
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
@@ -133,6 +137,12 @@ class CardWalletSession extends AbstractApi
 
     /**
      * Generate the response
+     *
+     * @throws \Exception
+     * @throws ClientException
+     * @throws GuzzleException
+     * @throws ResponseHeaderException
+     * @throws ResponseMessageException
      */
     protected function doResponse()
     {
@@ -153,7 +163,7 @@ class CardWalletSession extends AbstractApi
 
             return $output;
         } catch (GuzzleHttpClientException $e) {
-            throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
+            throw new ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
         }
     }
 
