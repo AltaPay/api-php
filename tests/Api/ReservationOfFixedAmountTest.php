@@ -319,6 +319,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
         $customer->setUsername('username');
         $customer->setPhone('50607080');
         $customer->setBankName('bank name');
+        $customer->setCardHolderName('Test card');
         $customer->setBankPhone('20304050');
 
         $api->setCustomerInfo($customer);
