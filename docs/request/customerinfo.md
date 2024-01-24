@@ -43,7 +43,7 @@ setCreatedDate(DateTime) | When was the customer created | DateTime
 setOrganisationNumber(string) | The country specific organisation number for the customer, if it is a corporate customer. | string
 setPersonalIdentifyNumber(string) | The country specific personal identity number for the customer, for countries where it is applicable. eg. Norway, Sweden, Finland | string
 setGender(string) | What gender is the customer | String (f, female, m, male)
-
+setCardHolderName(string) | Set the cardholder name associated with the customer | string
 ```php
 $customer->setEmail('email@email.com');
 $customer->setBirthdate(new \DateTime('1982-07-23'));

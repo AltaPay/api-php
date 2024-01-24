@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.3.8] - 2023-12-04
 ### Added
-- Add `cardHolderName` setter for the Customer class.
+- Provide `setCardHolderName` method to set `customer_info[cardholder_name]` for the customer object.
 
 ## [3.3.7] - 2023-12-04
 ### Added
