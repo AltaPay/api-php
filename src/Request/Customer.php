@@ -207,6 +207,13 @@ class Customer extends AbstractSerializer
     private $clientSessionID;
 
     /**
+     * The name of the card holder.
+     *
+     * @var string
+     */
+    private $cardHolderName;
+
+    /**
      * Customer constructor.
      *
      * @param Address $billingAddress Billing address
@@ -364,6 +371,20 @@ class Customer extends AbstractSerializer
     public function setBankName($bankName)
     {
         $this->bankName = $bankName;
+
+        return $this;
+    }
+
+    /**
+     * Set Card Holder Name
+     *
+     * @param string $cardHolderName
+     *
+     * @return $this
+     */
+    public function setCardHolderName($cardHolderName)
+    {
+        $this->cardHolderName = $cardHolderName;
 
         return $this;
     }
@@ -614,6 +635,10 @@ class Customer extends AbstractSerializer
 
         if ($this->bankName) {
             $output['bank_name'] = $this->bankName;
+        }
+
+        if ($this->cardHolderName) {
+            $output['cardholder_name'] = $this->cardHolderName;
         }
 
         if ($this->bankPhone) {
