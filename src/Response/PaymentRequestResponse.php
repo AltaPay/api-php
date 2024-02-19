@@ -59,6 +59,9 @@ class PaymentRequestResponse extends AbstractResponse
     public $DynamicJavascriptUrl;
 
     /** @var string */
+    public $AppUrl;
+
+    /** @var string */
     public $Transactions;
 
     /** @var string */
