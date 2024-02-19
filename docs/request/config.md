@@ -12,5 +12,6 @@ $config->setCallbackRedirect($url);
 $config->setCallbackOpen($url);
 $config->setCallbackNotification($url);
 $config->setCallbackVerifyOrder($url);
+$config->setCallbackMobileAppRedirect($url);
 // Where $url is your url to your different callbacks
 ```
