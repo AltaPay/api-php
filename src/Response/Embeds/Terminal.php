@@ -45,6 +45,14 @@ class Terminal extends AbstractResponse
             'class' => Method::class,
             'array' => 'Method'
         ],
+        'Products' => [
+            'class' => Product::class,
+            'array' => 'Product'
+        ],
+        'PrimaryMethod' => [
+            'class' => PrimaryMethod::class,
+            'array' => false
+        ],
     ];
 
     /** @var string */
@@ -67,4 +75,34 @@ class Terminal extends AbstractResponse
      * @var Method[]
      */
     public $Methods;
+
+    /**
+     * @var Product[]
+     */
+    public $Products;
+
+    /**
+     * @var PrimaryMethod
+     */
+    public $PrimaryMethod;
+
+    /** @var string */
+    public $MerchantId;
+
+    /** @var string */
+    public $ShopName;
+
+    /** @var string */
+    public $LogoUrl;
+
+    /** @var string */
+    public $Description;
+
+    /** @var bool */
+    public $CanUseCredit;
+
+    /** @var bool */
+    public $CanIssueNewCredit;
+
+
 }

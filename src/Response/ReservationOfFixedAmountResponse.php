@@ -78,6 +78,9 @@ class ReservationOfFixedAmountResponse extends AbstractResponse
 
     /** @var string */
     public $DynamicJavascriptUrl;
+
+    /** @var string */
+    public $AppUrl;
    
     /** @var string */
     public $MerchantErrorCode;

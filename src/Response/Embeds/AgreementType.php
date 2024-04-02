@@ -21,61 +21,12 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Response;
+namespace Altapay\Response\Embeds;
 
-use Altapay\Response\Embeds\Transaction;
+use Altapay\Response\AbstractResponse;
 
-class PaymentRequestResponse extends AbstractResponse
+class AgreementType extends AbstractResponse
 {
-    /**
-     * Children of the response
-     *
-     * @var array<string, array<string, mixed>>
-     */
-    protected $childs = [
-        'Transactions' => [
-            'class' => Transaction::class,
-            'array' => 'Transaction'
-        ],
-    ];
-
-    /**
-     * The result
-     *
-     * @var string
-     */
-    public $Result;
-
     /** @var string */
-    public $PaymentRequestId;
-
-    /** @var string */
-    public $Url;
-
-    /** @var string */
-    public $RedirectUrl;
-
-    /** @var string */
-    public $DynamicJavascriptUrl;
-
-    /** @var string */
-    public $AppUrl;
-
-    /** @var string */
-    public $Transactions;
-
-    /** @var string */
-    public $ApplePaySession;
-
-    /** @var string */
-    public $MerchantErrorMessage;
-
-    /** @var string */
-    public $CardHolderErrorMessage;
-   
-    /** @var string */
-    public $MerchantErrorCode;
-    
-    /** @var string */
-    public $CardHolderMessageMustBeShown;
+    public $AgreementType;
 }

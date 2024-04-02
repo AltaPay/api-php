@@ -155,3 +155,4 @@ Object of `\Altapay\Response\PaymentRequestResponse`
 | `$response->PaymentRequestId` | The ID of the payment request | string
 | `$response->Url` | URL to a secure form you can redirect the user to | string
 | `$response->DynamicJavascriptUrl` | Javascript URL which you can open in a iframe | string
+| `$response->AppUrl` | URL you can use to initiate the credit card wallet payment in app | string

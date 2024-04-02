@@ -127,6 +127,7 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertSame(sprintf('%s/%s', self::CONFIG_URL, 'open'), $config['callback_open']);
         $this->assertSame(sprintf('%s/%s', self::CONFIG_URL, 'notification'), $config['callback_notification']);
         $this->assertSame(sprintf('%s/%s', self::CONFIG_URL, 'verify'), $config['callback_verify_order']);
+        $this->assertSame(sprintf('%s/%s', self::CONFIG_URL, 'mobile_app_redirect'), $config['callback_mobile_app_redirect']);
 
         // Customer info
         /** @var array<string> $customerInfo */
@@ -195,7 +196,8 @@ class PaymentRequestTest extends AbstractApiTest
             ->setCallbackRedirect(sprintf('%s/%s', self::CONFIG_URL, 'redirect'))
             ->setCallbackOpen(sprintf('%s/%s', self::CONFIG_URL, 'open'))
             ->setCallbackNotification(sprintf('%s/%s', self::CONFIG_URL, 'notification'))
-            ->setCallbackVerifyOrder(sprintf('%s/%s', self::CONFIG_URL, 'verify'));
+            ->setCallbackVerifyOrder(sprintf('%s/%s', self::CONFIG_URL, 'verify'))
+            ->setCallbackMobileAppRedirect(sprintf('%s/%s', self::CONFIG_URL, 'mobile_app_redirect'));
 
         return $config;
     }

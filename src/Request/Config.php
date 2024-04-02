@@ -46,6 +46,9 @@ class Config extends AbstractSerializer
     /** @var string */
     private $callbackVerifyOrder;
 
+    /** @var string */
+    private $callbackMobileAppRedirect;
+
     /**
      * @param string $callbackForm
      *
@@ -123,6 +126,18 @@ class Config extends AbstractSerializer
         return $this;
     }
 
+
+    /**
+     * @param string $callbackMobileAppRedirect
+     *
+     * @return $this
+     */
+    public function setCallbackMobileAppRedirect($callbackMobileAppRedirect)
+    {
+        $this->callbackMobileAppRedirect = $callbackMobileAppRedirect;
+        return $this;
+    }
+
     /**
      * Serialize a object
      *
@@ -138,6 +153,7 @@ class Config extends AbstractSerializer
             'callback_open' => $this->callbackOpen,
             'callback_notification' => $this->callbackNotification,
             'callback_verify_order' => $this->callbackVerifyOrder,
+            'callback_mobile_app_redirect' => $this->callbackMobileAppRedirect,
         ];
     }
 }
