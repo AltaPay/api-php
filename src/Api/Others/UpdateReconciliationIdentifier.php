@@ -40,144 +40,142 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class UpdateReconciliationIdentifier extends AbstractApi
 {
 
-  /**
-   * @var $paymentId
-   */
-  private $paymentId;
+    /** @var string */
+    private $paymentId;
 
-  /**
-   * Current merchant reconciliation identifier which should be updated.
-   *
-   * @param $paymentId
-   * @return void
-   */
-  public function setPaymentId($paymentId)
-  {
-    $this->paymentId = $paymentId;
-  }
-
-  /**
-   * Current merchant reconciliation identifier which should be updated.
-   *
-   * @param string $currentMerchantReconciliationIdentifier
-   *
-   * @return $this
-   */
-  public function setCurrentMerchantReconciliationIdentifier($currentMerchantReconciliationIdentifier)
-  {
-    $this->unresolvedOptions['currentMerchantReconciliationIdentifier'] = $currentMerchantReconciliationIdentifier;
-
-    return $this;
-  }
-
-  /**
-   * A new value that will replace the current one.
-   *
-   * @param string $newMerchantReconciliationIdentifier
-   *
-   * @return $this
-   */
-  public function setNewMerchantReconciliationIdentifier($newMerchantReconciliationIdentifier)
-  {
-    $this->unresolvedOptions['newMerchantReconciliationIdentifier'] = $newMerchantReconciliationIdentifier;
-
-    return $this;
-  }
-
-  /**
-   * Configure options
-   *
-   * @param OptionsResolver $resolver
-   *
-   * @return void
-   */
-  protected function configureOptions(OptionsResolver $resolver)
-  {
-    $resolver->setRequired(['currentMerchantReconciliationIdentifier', 'newMerchantReconciliationIdentifier']);
-    $resolver->setAllowedTypes('currentMerchantReconciliationIdentifier', 'string');
-    $resolver->setAllowedTypes('newMerchantReconciliationIdentifier', 'string');
-  }
-
-  /**
-   * @param Request $request
-   * @param ResponseInterface $response
-   * @return \Altapay\Response\AbstractResponse|\Altapay\Response\Embeds\Transaction[]|UpdateReconciliationIdentifierResponse|string
-   * @throws \Exception
-   */
-  protected function handleResponse(Request $request, ResponseInterface $response)
-  {
-    $body = (string)$response->getBody();
-    $xml = new \SimpleXMLElement($body);
-
-    return ResponseSerializer::serialize(UpdateReconciliationIdentifierResponse::class, $xml->Body, $xml->Header);
-  }
-
-  /**
-   * @return array<string, string>
-   */
-  protected function getBasicHeaders()
-  {
-    $headers = parent::getBasicHeaders();
-    $headers['Content-Type'] = 'application/x-www-form-urlencoded';
-
-    return $headers;
-  }
-
-  /**
-   * Url to api call
-   *
-   * @param array<string, mixed> $options Resolved options
-   *
-   * @return string
-   */
-  protected function getUrl(array $options)
-  {
-    return 'updateOrder/' . $this->paymentId . '/reconciliationIdentifier';
-  }
-
-  /**
-   * @return string
-   */
-  protected function getHttpMethod()
-  {
-    return 'PATCH';
-  }
-
-  /**
-   * @return \Altapay\Response\AbstractResponse|\Altapay\Response\Embeds\Transaction[]|UpdateReconciliationIdentifierResponse|string
-   * @throws ResponseHeaderException
-   * @throws ResponseMessageException
-   * @throws \GuzzleHttp\Exception\GuzzleException
-   */
-  protected function doResponse()
-  {
-    $this->doConfigureOptions();
-    $headers = $this->getBasicHeaders();
-    $requestParameters = [$this->getHttpMethod(), $this->parseUrl(), $headers];
-    $requestParameters[] = $this->getPostOptions();
-
-    $request = new Request(...$requestParameters);
-    $this->request = $request;
-    try {
-      $response = $this->getClient()->send($request);
-      $this->response = $response;
-
-      $output = $this->handleResponse($request, $response);
-      $this->validateResponse($output);
-
-      return $output;
-    } catch (GuzzleHttpClientException $e) {
-      throw new ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
+    /**
+     * Current merchant reconciliation identifier which should be updated.
+     *
+     * @param string $paymentId
+     * @return void
+     */
+    public function setPaymentId($paymentId)
+    {
+        $this->paymentId = $paymentId;
     }
-  }
 
-  /**
-   * @return string
-   */
-  protected function getPostOptions()
-  {
-    $options = $this->options;
+    /**
+     * Current merchant reconciliation identifier which should be updated.
+     *
+     * @param string $currentMerchantReconciliationIdentifier
+     *
+     * @return $this
+     */
+    public function setCurrentMerchantReconciliationIdentifier($currentMerchantReconciliationIdentifier)
+    {
+        $this->unresolvedOptions['currentMerchantReconciliationIdentifier'] = $currentMerchantReconciliationIdentifier;
 
-    return http_build_query($options, '', '&');
-  }
+        return $this;
+    }
+
+    /**
+     * A new value that will replace the current one.
+     *
+     * @param string $newMerchantReconciliationIdentifier
+     *
+     * @return $this
+     */
+    public function setNewMerchantReconciliationIdentifier($newMerchantReconciliationIdentifier)
+    {
+        $this->unresolvedOptions['newMerchantReconciliationIdentifier'] = $newMerchantReconciliationIdentifier;
+
+        return $this;
+    }
+
+    /**
+     * Configure options
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     */
+    protected function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setRequired(['currentMerchantReconciliationIdentifier', 'newMerchantReconciliationIdentifier']);
+        $resolver->setAllowedTypes('currentMerchantReconciliationIdentifier', 'string');
+        $resolver->setAllowedTypes('newMerchantReconciliationIdentifier', 'string');
+    }
+
+    /**
+     * @param Request $request
+     * @param ResponseInterface $response
+     * @return UpdateReconciliationIdentifierResponse
+     * @throws \Exception
+     */
+    protected function handleResponse(Request $request, ResponseInterface $response)
+    {
+        $body = (string)$response->getBody();
+        $xml = new \SimpleXMLElement($body);
+
+        return ResponseSerializer::serialize(UpdateReconciliationIdentifierResponse::class, $xml->Body, $xml->Header);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    protected function getBasicHeaders()
+    {
+        $headers = parent::getBasicHeaders();
+        $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+
+        return $headers;
+    }
+
+    /**
+     * Url to api call
+     *
+     * @param array<string, mixed> $options Resolved options
+     *
+     * @return string
+     */
+    protected function getUrl(array $options)
+    {
+        return 'updateOrder/' . $this->paymentId . '/reconciliationIdentifier';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getHttpMethod()
+    {
+        return 'PATCH';
+    }
+
+    /**
+     * @return \Altapay\Response\AbstractResponse|\Altapay\Response\Embeds\Transaction[]|UpdateReconciliationIdentifierResponse|string
+     * @throws ResponseHeaderException
+     * @throws ResponseMessageException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    protected function doResponse()
+    {
+        $this->doConfigureOptions();
+        $headers = $this->getBasicHeaders();
+        $requestParameters = [$this->getHttpMethod(), $this->parseUrl(), $headers];
+        $requestParameters[] = $this->getPostOptions();
+
+        $request = new Request(...$requestParameters);
+        $this->request = $request;
+        try {
+            $response = $this->getClient()->send($request);
+            $this->response = $response;
+
+            $output = $this->handleResponse($request, $response);
+            $this->validateResponse($output);
+
+            return $output;
+        } catch (GuzzleHttpClientException $e) {
+            throw new ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
+        }
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPostOptions()
+    {
+        $options = $this->options;
+
+        return http_build_query($options, '', '&');
+    }
 }

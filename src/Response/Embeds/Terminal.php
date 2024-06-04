@@ -103,6 +103,4 @@ class Terminal extends AbstractResponse
 
     /** @var bool */
     public $CanIssueNewCredit;
-
-
 }
