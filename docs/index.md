@@ -55,7 +55,7 @@ Docs: https://testgateway.altapaysecure.com/merchant.php/help/Merchant_API
 | [Invoice text](others/invoicetext.md) | This is used for gathering information to print on the customer invoice for invoice/Arvato payments |
 | [Calculate surcharge](others/calculate_surcharge.md) | This method is used to calculate the surcharge beforehand, based on a previously completed payment or a terminal, creditcard token, currency combo. |
 | [Query giftcard](others/query_giftcard.md) | This method is used to get information about a gift card. |
-
+| [Update merchant reconciliation identifier](others/update_reconciliation_identifier.md) | This method to update merchant reconciliation identifier for a given payment transaction.
 ```
 x = Docs not written
 / = Some PHP code is missing
