@@ -19,6 +19,7 @@ use GuzzleHttp\Psr7\Response;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Altapay\Response\PaymentRequestResponse;
+use Altapay\Types\LanguageTypes;
 
 class ReservationOfFixedAmountTest extends AbstractApiTest
 {
@@ -417,7 +418,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
      */
     private function allowedTypes($class, $key, $setter): void
     {
-        foreach ($class::getAllowed() as $type) {
+        foreach (LanguageTypes::getAllowed() as $type) {
             $api = $this->getapi();
             $api->setTerminal('my terminal');
             $api->setAmount(200.50);
