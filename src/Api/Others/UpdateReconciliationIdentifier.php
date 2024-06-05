@@ -44,7 +44,7 @@ class UpdateReconciliationIdentifier extends AbstractApi
     private $paymentId;
 
     /**
-     * Current merchant reconciliation identifier which should be updated.
+     * Payment id for which the related transaction is to have a merchant reconciliation identifier updated.
      *
      * @param string $paymentId
      * @return void
