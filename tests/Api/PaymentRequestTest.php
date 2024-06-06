@@ -209,7 +209,7 @@ class PaymentRequestTest extends AbstractApiTest
      */
     private function allowedTypes($class, $key, $setter): void
     {
-        foreach ($class::getAllowed() as $type) {
+        foreach (LanguageTypes::getAllowed() as $type) {
             $api = $this->getapi();
             $api->setAmount(200.50);
             $api->setCurrency(957);

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<APIResponse version="20170228">
+    <Header>
+        <Date>2024-06-04T20:47:33+02:00</Date>
+        <Path>API/updateOrder/5e8ed5c2-7cfd-430e-b6bd-7eff65bc2e2c/reconciliationIdentifier</Path>
+        <ErrorCode>0</ErrorCode>
+        <ErrorMessage/>
+    </Header>
+    <Body>
+        <Result>Success</Result>
+    </Body>
+</APIResponse>

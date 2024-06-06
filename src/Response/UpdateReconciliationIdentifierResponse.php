@@ -21,23 +21,10 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Types;
+namespace Altapay\Response;
 
-interface TypeInterface
+class UpdateReconciliationIdentifierResponse extends AbstractResponse
 {
-    /**
-     * Get allowed values
-     *
-     * @return array<int, string>
-     */
-    public static function getAllowed();
-
-    /**
-     * Is the requested value allowed
-     *
-     * @param string $value
-     *
-     * @return bool
-     */
-    public static function isAllowed($value);
+    /** @var string */
+    public $Result;
 }
