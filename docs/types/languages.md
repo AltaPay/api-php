@@ -4,8 +4,8 @@
 Following languages are accepted
 
 ```
-'cs', 'da', 'de', 'en', 'es', 'fi', 'fr', 'ja',
+'ca', 'cs', 'da', 'de', 'en', 'es', 'fi', 'fr', 'hr', 'is', 'ja',
 'lt', 'nl', 'no', 'nb', 'nn', 'pl', 'sv','th', 'tr', 'zh',
-'et', 'ee', 'it', 'pt', 'eu'
+'et', 'ee', 'it', 'pt', 'ru', 'sk', 'sl', 'eu'
 ```
 where ```nb, nn``` will be converted to ```no``` and ```ee``` to ```et```
