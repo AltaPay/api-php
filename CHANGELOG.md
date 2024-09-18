@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.4.3] - 2024-09-18
 ### Added
 - Validate gateway XML response for login API.
+- Fix: `PHP Warning:  Invalid argument supplied for foreach()` in `ResponseSerializer.php`
 
 ## [3.4.2] - 2024-08-07
 ### Added
