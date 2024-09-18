@@ -72,12 +72,12 @@ class ResponseSerializer
     ) {
         $documents = [];
 
-	    if (!empty($data) && !empty($data->{$childKey})) {
-		    foreach ($data->{$childKey} as $d) {
-			    $object      = new $objectName();
-			    $documents[] = $object->deserialize($d);
-		    }
-	    }
+        if (! empty($data) && ! empty($data->{$childKey})) {
+            foreach ($data->{$childKey} as $d) {
+                $object      = new $objectName();
+                $documents[] = $object->deserialize($d);
+            }
+        }
 
         return $documents;
     }
