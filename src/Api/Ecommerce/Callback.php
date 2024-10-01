@@ -55,6 +55,7 @@ class Callback
         $xml = new \SimpleXMLElement($this->postedData['xml']);
 
         $response = ResponseSerializer::serialize(CallbackResponse::class, $xml->Body, $xml->Header);
+
         if (isset($this->postedData['shop_orderid'])) {
             $response->shopOrderId = $this->postedData['shop_orderid'];
         }
@@ -81,10 +82,6 @@ class Callback
 
         if (isset($this->postedData['payment_id'])) {
             $response->paymentId = $this->postedData['payment_id'];
-        }
-
-        if (isset($this->postedData['shop_orderid'])) {
-            $response->shopOrderId = $this->postedData['shop_orderid'];
         }
 
         if (isset($this->postedData['nature'])) {

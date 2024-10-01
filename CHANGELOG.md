@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Validate gateway XML response for login API.
 - Fix: `PHP Warning:  Invalid argument supplied for foreach()` in `ResponseSerializer.php`
 - Provide `setLanguage` method to set `language` for `reservation` API.
+- Fix: Redundant assigning of shopOrderId in Callback.
 
 ## [3.4.2] - 2024-08-07
 ### Added
