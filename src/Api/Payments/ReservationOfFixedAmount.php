@@ -242,6 +242,20 @@ class ReservationOfFixedAmount extends AbstractApi
     }
 
     /**
+     * The language of the payment form
+     *
+     * @param string $language
+     *
+     * @return $this
+     */
+    public function setLanguage($language)
+    {
+        $this->unresolvedOptions['language'] = $language;
+
+        return $this;
+    }
+
+    /**
      * Configure options
      *
      * @param OptionsResolver $resolver
@@ -280,7 +294,8 @@ class ReservationOfFixedAmount extends AbstractApi
             'customer_info',
             'shipping_method',
             'customer_created_date',
-            'orderLines'
+            'orderLines',
+            'language'
         ]);
         $resolver->setAllowedTypes('config', Config::class);
         /** @noinspection PhpUnusedParameterInspection */
