@@ -108,9 +108,7 @@ class TestAuthentication extends AbstractApi
             $response       = $this->getClient()->send($request);
             $this->response = $response;
 
-            $output = $this->handleResponse($request, $response);
-
-            return $output;
+            return $this->handleResponse($request, $response);
         } catch (GuzzleHttpClientException $e) {
             throw new Exceptions\ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
         }
@@ -136,7 +134,14 @@ class TestAuthentication extends AbstractApi
      */
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
-        return 'ok';
+        $body = (string) $response->getBody();
+        $xml = new \SimpleXMLElement($body);
+
+        if (isset($xml->Body->Result) && (string) $xml->Body->Result === 'OK') {
+            return 'ok';
+        }
+
+        return '';
     }
 
     /**
