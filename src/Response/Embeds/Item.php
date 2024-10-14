@@ -25,36 +25,11 @@ namespace Altapay\Response\Embeds;
 
 use Altapay\Response\AbstractResponse;
 
-class RedirectResponse extends AbstractResponse
+class Item extends AbstractResponse
 {
-    /**
-     * Children of the response
-     *
-     * @var array<string, array<string, mixed>>
-     */
-    protected $childs = [
-        'Data' => [
-            'class' => Item::class,
-            'array' => 'Item'
-        ],
-    ];
-    /**
-     * @var string
-     */
-    public $Url;
-
-    /**
-     * @var string
-     */
-    public $Method;
-
-    /**
-     * @var Item
-     */
-    public $Data;
-
-    /**
-     * @var string
-     */
-    public $FlowType;
+    /** @var string */
+    public $Item;
+    
+    /** @var string */
+    public $key;
 }

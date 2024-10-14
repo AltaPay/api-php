@@ -21,11 +21,12 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Response\Embeds;
+namespace Altapay\Response;
 
-use Altapay\Response\AbstractResponse;
+use Altapay\Response\Embeds\Transaction;
+use Altapay\Response\Embeds\RedirectResponse;
 
-class RedirectResponse extends AbstractResponse
+class InitiatePaymentResponse extends AbstractResponse
 {
     /**
      * Children of the response
@@ -33,28 +34,39 @@ class RedirectResponse extends AbstractResponse
      * @var array<string, array<string, mixed>>
      */
     protected $childs = [
-        'Data' => [
-            'class' => Item::class,
-            'array' => 'Item'
+        'Transactions' => [
+          'class' => Transaction::class,
+          'array' => 'Transaction'
+        ],
+        'RedirectResponse' => [
+          'class' => RedirectResponse::class,
+          'array' => false
         ],
     ];
-    /**
-     * @var string
-     */
-    public $Url;
 
     /**
+     * Result
+     *
      * @var string
      */
-    public $Method;
+    public $Result;
+
+    /** @var string */
+    public $MerchantErrorMessage;
+
+    /** @var string */
+    public $CardHolderErrorMessage;
+
+    /** @var bool */
+    public $CardHolderMessageMustBeShown;
 
     /**
-     * @var Item
+     * Transactions
+     *
+     * @var Transaction[]
      */
-    public $Data;
+    public $Transactions;
 
-    /**
-     * @var string
-     */
-    public $FlowType;
+    /** @var string */
+    public $RedirectResponse;
 }
