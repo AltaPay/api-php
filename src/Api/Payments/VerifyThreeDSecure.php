@@ -36,20 +36,13 @@ use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * When the funds of a payment has been reserved and the goods are ready for delivery
- * your system should capture the payment.
- *
- * By default, auto reauth is enabled for all terminals (but is only supported by a few acquirers),
- * which means if the capture fails the system will automatically try to reauth the payment and then capture again.
- * Reauthed payments, however, do not have cvv or 3d-secure protection, which means the
- * protection against chargebacks is not as good.
- * If you wish to disable auto reauth for one or more of your terminals please contact Altapay.
+ * Use the verify3dSecure method to verify a result from a 3dSecure redirect from the initiatePayment method.
  */
 class VerifyThreeDSecure extends AbstractApi
 {
     /**
      * @param string $transactionId
-     * @return VerifyThreeDSecure
+     * @return $this
      */
     public function setThreeDSTransaction($transactionId)
     {
