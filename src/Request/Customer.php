@@ -228,6 +228,13 @@ class Customer extends AbstractSerializer
     private $clientScreenHeight;
 
     /**
+     * The customer's client supports javascript.
+     *
+     * @var string
+     */
+    private $clientJavascriptEnabled;
+
+    /**
      * Client Session ID.
      *
      * @var string
@@ -655,6 +662,20 @@ class Customer extends AbstractSerializer
     }
 
     /**
+     * Set if client javascript enabled or not
+     *
+     * @param string $clientScreenWidth
+     *
+     * @return $this
+     */
+    public function setClientJavascriptEnabled($clientJavascriptEnabled)
+    {
+        $this->clientJavascriptEnabled = $clientJavascriptEnabled;
+
+        return $this;
+    }
+
+    /**
      * Set Client Session ID
      *
      * @param string $clientSessionID
@@ -775,6 +796,10 @@ class Customer extends AbstractSerializer
 
         if ($this->clientScreenHeight) {
             $output['client_screen_height'] = $this->clientScreenHeight;
+        }
+
+        if ($this->clientJavascriptEnabled) {
+            $output['client_javascript_enabled'] = $this->clientJavascriptEnabled;
         }
 
         if ($this->billingRef) {
