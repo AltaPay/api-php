@@ -664,7 +664,7 @@ class Customer extends AbstractSerializer
     /**
      * Set if client javascript enabled or not
      *
-     * @param string $clientScreenWidth
+     * @param string $clientJavascriptEnabled
      *
      * @return $this
      */
