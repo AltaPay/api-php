@@ -51,7 +51,8 @@ class VerifyThreeDSecure extends AbstractApi
     }
 
     /**
-     * @param array $threeDSecureData
+     * @param array<int, string> $threeDSecureData
+     *
      * @return $this
      */
     public function setThreeDSecureV2(array $threeDSecureData)
@@ -61,7 +62,8 @@ class VerifyThreeDSecure extends AbstractApi
     }
 
     /**
-     * @param array $threeDSecureData
+     * @param array<int, string> $threeDSecureData
+     *
      * @return $this
      */
     public function setThreeDSecureNets(array $threeDSecureData)
@@ -71,7 +73,8 @@ class VerifyThreeDSecure extends AbstractApi
     }
 
     /**
-     * @param array $threeDSecureData
+     * @param array<int, string> $threeDSecureData
+     *
      * @return $this
      */
     public function setThreeDSecureRegular(array $threeDSecureData)
