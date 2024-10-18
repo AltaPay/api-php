@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Martin Aarhof
+ * Copyright (c) 2024 AltaPay
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,42 +21,34 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Types;
+namespace Altapay\Response\Embeds;
 
-class LanguageTypes implements TypeInterface
+class InitiatePaymentRedirectResponse extends RedirectResponse
 {
     /**
-     * Allowed languages
-     * nb, nn will be converted to no.
-     * ee will be converted to et
+     * Children of the response
      *
-     * @var array<int, string>
+     * @var array<string, array<string, mixed>>
      */
-    private static $languages = [
-        'br', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en', 'es', 'fi', 'fr', 'hr', 'hu', 'is', 'ja',
-        'lt', 'lv', 'nl', 'no', 'nb', 'nn', 'pl', 'sv','th', 'tr', 'zh',
-        'et', 'ee', 'it', 'pt', 'ro', 'ru', 'sk', 'sl', 'eu'
+    protected $childs = [
+        'Data' => [
+            'class' => Item::class,
+            'array' => 'Item'
+        ],
     ];
 
     /**
-     * Get allowed values
-     *
-     * @return array<int, string>
+     * @var string
      */
-    public static function getAllowed()
-    {
-        return self::$languages;
-    }
+    public $Method;
 
     /**
-     * Is the requested value allowed
-     *
-     * @param string $value
-     *
-     * @return bool
+     * @var Item
      */
-    public static function isAllowed($value)
-    {
-        return in_array($value, self::$languages);
-    }
+    public $Data;
+
+    /**
+     * @var string
+     */
+    public $FlowType;
 }

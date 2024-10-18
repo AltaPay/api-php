@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Martin Aarhof
+ * Copyright (c) 2024 AltaPay
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,42 +21,15 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Types;
+namespace Altapay\Response\Embeds;
 
-class LanguageTypes implements TypeInterface
+use Altapay\Response\AbstractResponse;
+
+class Item extends AbstractResponse
 {
-    /**
-     * Allowed languages
-     * nb, nn will be converted to no.
-     * ee will be converted to et
-     *
-     * @var array<int, string>
-     */
-    private static $languages = [
-        'br', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en', 'es', 'fi', 'fr', 'hr', 'hu', 'is', 'ja',
-        'lt', 'lv', 'nl', 'no', 'nb', 'nn', 'pl', 'sv','th', 'tr', 'zh',
-        'et', 'ee', 'it', 'pt', 'ro', 'ru', 'sk', 'sl', 'eu'
-    ];
-
-    /**
-     * Get allowed values
-     *
-     * @return array<int, string>
-     */
-    public static function getAllowed()
-    {
-        return self::$languages;
-    }
-
-    /**
-     * Is the requested value allowed
-     *
-     * @param string $value
-     *
-     * @return bool
-     */
-    public static function isAllowed($value)
-    {
-        return in_array($value, self::$languages);
-    }
+    /** @var string */
+    public $Item;
+    
+    /** @var string */
+    public $key;
 }

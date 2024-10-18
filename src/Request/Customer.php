@@ -186,6 +186,20 @@ class Customer extends AbstractSerializer
     private $clientAcceptLanguage;
 
     /**
+     * Client accept.
+     *
+     * @var string
+     */
+    private $clientAccept;
+
+    /**
+     * Client Time Zone.
+     *
+     * @var string
+     */
+    private $clientTimeZone;
+
+    /**
      * HTTP User Agent.
      *
      * @var string
@@ -198,6 +212,27 @@ class Customer extends AbstractSerializer
      * @var string
      */
     private $httpXForwardedFor;
+
+    /**
+     * Client Screen Width.
+     *
+     * @var string
+     */
+    private $clientScreenWidth;
+
+    /**
+     * Client Screen Height.
+     *
+     * @var string
+     */
+    private $clientScreenHeight;
+
+    /**
+     * The customer's client supports javascript.
+     *
+     * @var string
+     */
+    private $clientJavascriptEnabled;
 
     /**
      * Client Session ID.
@@ -543,6 +578,34 @@ class Customer extends AbstractSerializer
     }
 
     /**
+     * Set Client Accept
+     *
+     * @param string $clientAccept
+     *
+     * @return $this
+     */
+    public function setClientAccept($clientAccept)
+    {
+        $this->clientAccept = $clientAccept;
+
+        return $this;
+    }
+
+    /**
+     * Set Client Time Zone
+     *
+     * @param string $clientTimeZone
+     *
+     * @return $this
+     */
+    public function setClientTimeZone($clientTimeZone)
+    {
+        $this->clientTimeZone = $clientTimeZone;
+
+        return $this;
+    }
+
+    /**
      * Set Client Accept Language
      *
      * @param string $httpUserAgent
@@ -566,6 +629,48 @@ class Customer extends AbstractSerializer
     public function setHttpXForwardedFor($httpXForwardedFor)
     {
         $this->httpXForwardedFor = $httpXForwardedFor;
+
+        return $this;
+    }
+
+    /**
+     * Set Client Screen Width
+     *
+     * @param string $setClientScreenWidth
+     *
+     * @return $this
+     */
+    public function setClientScreenWidth($setClientScreenWidth)
+    {
+        $this->clientScreenWidth = $setClientScreenWidth;
+
+        return $this;
+    }
+
+    /**
+     * Set Client Screen Width
+     *
+     * @param string $clientScreenWidth
+     *
+     * @return $this
+     */
+    public function setClientScreenHeight($clientScreenWidth)
+    {
+        $this->clientScreenHeight = $clientScreenWidth;
+
+        return $this;
+    }
+
+    /**
+     * Set if client javascript enabled or not
+     *
+     * @param string $clientJavascriptEnabled
+     *
+     * @return $this
+     */
+    public function setClientJavascriptEnabled($clientJavascriptEnabled)
+    {
+        $this->clientJavascriptEnabled = $clientJavascriptEnabled;
 
         return $this;
     }
@@ -669,12 +774,32 @@ class Customer extends AbstractSerializer
             $output['client_accept_language'] = $this->clientAcceptLanguage;
         }
 
+        if ($this->clientAccept) {
+            $output['client_accept'] = $this->clientAccept;
+        }
+
+        if ($this->clientTimeZone) {
+            $output['client_time_zone'] = $this->clientTimeZone;
+        }
+
         if ($this->httpUserAgent) {
             $output['client_user_agent'] = $this->httpUserAgent;
         }
 
         if ($this->httpXForwardedFor) {
             $output['client_forwarded_ip'] = $this->httpXForwardedFor;
+        }
+
+        if ($this->clientScreenWidth) {
+            $output['client_screen_width'] = $this->clientScreenWidth;
+        }
+
+        if ($this->clientScreenHeight) {
+            $output['client_screen_height'] = $this->clientScreenHeight;
+        }
+
+        if ($this->clientJavascriptEnabled) {
+            $output['client_javascript_enabled'] = $this->clientJavascriptEnabled;
         }
 
         if ($this->billingRef) {
