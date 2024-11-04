@@ -248,13 +248,9 @@ abstract class AbstractApi
      */
     protected function validateResponse($response)
     {
-//        logger('validateResponse', [$response]);
-
         if ($response->Header->ErrorCode != 0) {
             throw new Exceptions\ResponseHeaderException($response->Header);
         }
-
-        logger('validateResponse called');
 
         if (property_exists($response, 'MerchantErrorMessage')) {
             if ($response->MerchantErrorMessage) {
