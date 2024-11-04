@@ -51,6 +51,18 @@ class CaptureReservationResponse extends AbstractResponse
     public $Result;
 
     /** @var string */
+    public $MerchantErrorMessage;
+
+    /** @var string */
+    public $CardHolderErrorMessage;
+
+    /** @var string */
+    public $MerchantErrorCode;
+
+    /** @var string */
+    public $CardHolderMessageMustBeShown;
+
+    /** @var string */
     public $CaptureResult;
 
     /**
