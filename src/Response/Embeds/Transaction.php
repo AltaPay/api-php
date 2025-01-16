@@ -290,7 +290,7 @@ class Transaction extends AbstractResponse
     public $InvoiceOrderInfo;
 
     /**
-     * @var string
+     * @var AuthenticationResult
      */
     public $AuthenticationResult;
 
