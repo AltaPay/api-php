@@ -28,27 +28,29 @@ use Altapay\Response\AbstractResponse;
 class AuthenticationResult extends AbstractResponse
 {
     /**
-     * @var string
+     * @var "CHALLENGE"|"FRICTIONLESS"|"UNKNOWN"
      */
     public $Flow;
 
     /**
-     * @var string
+     * @var "MERCHANT"|"ISSUER"|"UNKNOWN"
      */
     public $Liability;
 
     /**
-     * @var string
+     * @var "AUTHENTICATED"|"ACCEPTED"|"NOT_AUTHENTICATED"|"FAILED"|"REJECTED"|"INFORMATIONAL"|"UNKNOWN"
      */
     public $Result;
 
     /**
+     * Version in the format X.X.X (e.g. 1.0.0, 2.1.0, 2.2.3).
+     *
      * @var string
      */
     public $Version;
 
     /**
-     * @var string
+     * @var "3DSECURE"
      */
     public $Type;
 }
