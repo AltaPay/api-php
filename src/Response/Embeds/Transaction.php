@@ -62,6 +62,10 @@ class Transaction extends AbstractResponse
         'CardInformation'          => [
             'class' => CardInformation::class,
             'array' => false
+        ],
+        'AuthenticationResult'     => [
+            'class' => AuthenticationResult::class,
+            'array' => false
         ]
     ];
 
@@ -284,6 +288,11 @@ class Transaction extends AbstractResponse
      * @var string
      */
     public $InvoiceOrderInfo;
+
+    /**
+     * @var AuthenticationResult
+     */
+    public $AuthenticationResult;
 
     /**
      * @param string $IsTokenized
