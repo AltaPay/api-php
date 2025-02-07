@@ -184,6 +184,20 @@ class InitiatePayment extends AbstractApi
     }
 
     /**
+     * Sets the selected card scheme.
+     *
+     * @param string $selecteScheme
+     *
+     * @return $this
+     */
+    public function setSelectedScheme($selecteScheme)
+    {
+        $this->unresolvedOptions['selected_scheme'] = $selecteScheme;
+
+        return $this;
+    }
+
+    /**
      * Configure options
      *
      * @param OptionsResolver $resolver
@@ -215,8 +229,10 @@ class InitiatePayment extends AbstractApi
             'transaction_info',
             'agreement',
             'fraud_service',
-            'customer_info'
+            'customer_info',
+            'selected_scheme'
         ]);
+        $resolver->setAllowedValues('selected_scheme', Types\SelectedSchemes::getAllowed());
         $resolver->setNormalizer('cardnum', function (Options $options, $value) {
             if (isset($options['credit_card_token'])) {
                 throw new \InvalidArgumentException(
