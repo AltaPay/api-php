@@ -230,14 +230,14 @@ class Customer extends AbstractSerializer
     /**
      * The customer's client supports javascript.
      *
-     * @var boolean
+     * @var bool
      */
     private $clientJavascriptEnabled;
 
     /**
      * The customer's client supports java.
      *
-     * @var boolean
+     * @var bool
      */
     private $clientJavaEnabled;
 
@@ -678,7 +678,7 @@ class Customer extends AbstractSerializer
     /**
      * Set if client javascript enabled or not
      *
-     * @param string $clientJavascriptEnabled
+     * @param bool $clientJavascriptEnabled
      *
      * @return $this
      */
@@ -692,7 +692,7 @@ class Customer extends AbstractSerializer
     /**
      * Set if client java enabled or not
      *
-     * @param string $clientJavaEnabled
+     * @param bool $clientJavaEnabled
      *
      * @return $this
      */
