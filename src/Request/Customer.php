@@ -230,9 +230,23 @@ class Customer extends AbstractSerializer
     /**
      * The customer's client supports javascript.
      *
-     * @var string
+     * @var bool
      */
     private $clientJavascriptEnabled;
+
+    /**
+     * The customer's client supports java.
+     *
+     * @var bool
+     */
+    private $clientJavaEnabled;
+
+    /**
+     * The customer's client screen color depth.
+     *
+     * @var string
+     */
+    private $clientColorDepth;
 
     /**
      * Client Session ID.
@@ -664,13 +678,41 @@ class Customer extends AbstractSerializer
     /**
      * Set if client javascript enabled or not
      *
-     * @param string $clientJavascriptEnabled
+     * @param bool $clientJavascriptEnabled
      *
      * @return $this
      */
     public function setClientJavascriptEnabled($clientJavascriptEnabled)
     {
         $this->clientJavascriptEnabled = $clientJavascriptEnabled;
+
+        return $this;
+    }
+
+    /**
+     * Set if client java enabled or not
+     *
+     * @param bool $clientJavaEnabled
+     *
+     * @return $this
+     */
+    public function setClientJavaEnabled($clientJavaEnabled)
+    {
+        $this->clientJavaEnabled = $clientJavaEnabled;
+
+        return $this;
+    }
+
+    /**
+     * Set Client Screen Width
+     *
+     * @param string $clientColorDepth
+     *
+     * @return $this
+     */
+    public function setClientColorDepth($clientColorDepth)
+    {
+        $this->clientColorDepth = $clientColorDepth;
 
         return $this;
     }
@@ -798,8 +840,16 @@ class Customer extends AbstractSerializer
             $output['client_screen_height'] = $this->clientScreenHeight;
         }
 
-        if ($this->clientJavascriptEnabled) {
+        if ($this->clientJavascriptEnabled !== null) {
             $output['client_javascript_enabled'] = $this->clientJavascriptEnabled;
+        }
+
+        if ($this->clientJavaEnabled !== null) {
+            $output['client_java_enabled'] = $this->clientJavaEnabled;
+        }
+
+        if ($this->clientColorDepth) {
+            $output['client_color_depth'] = $this->clientColorDepth;
         }
 
         if ($this->billingRef) {
