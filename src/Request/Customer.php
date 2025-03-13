@@ -230,9 +230,23 @@ class Customer extends AbstractSerializer
     /**
      * The customer's client supports javascript.
      *
-     * @var string
+     * @var boolean
      */
     private $clientJavascriptEnabled;
+
+    /**
+     * The customer's client supports java.
+     *
+     * @var boolean
+     */
+    private $clientJavaEnabled;
+
+    /**
+     * The customer's client screen color depth.
+     *
+     * @var string
+     */
+    private $clientColorDepth;
 
     /**
      * Client Session ID.
@@ -676,6 +690,34 @@ class Customer extends AbstractSerializer
     }
 
     /**
+     * Set if client java enabled or not
+     *
+     * @param string $clientJavaEnabled
+     *
+     * @return $this
+     */
+    public function setClientJavaEnabled($clientJavaEnabled)
+    {
+        $this->clientJavaEnabled = $clientJavaEnabled;
+
+        return $this;
+    }
+
+    /**
+     * Set Client Screen Width
+     *
+     * @param string $clientColorDepth
+     *
+     * @return $this
+     */
+    public function setClientColorDepth($clientColorDepth)
+    {
+        $this->clientColorDepth = $clientColorDepth;
+
+        return $this;
+    }
+
+    /**
      * Set Client Session ID
      *
      * @param string $clientSessionID
@@ -798,8 +840,16 @@ class Customer extends AbstractSerializer
             $output['client_screen_height'] = $this->clientScreenHeight;
         }
 
-        if ($this->clientJavascriptEnabled) {
+        if ($this->clientJavascriptEnabled !== null) {
             $output['client_javascript_enabled'] = $this->clientJavascriptEnabled;
+        }
+
+        if ($this->clientJavaEnabled !== null) {
+            $output['client_java_enabled'] = $this->clientJavaEnabled;
+        }
+
+        if ($this->clientColorDepth) {
+            $output['client_color_depth'] = $this->clientColorDepth;
         }
 
         if ($this->billingRef) {
