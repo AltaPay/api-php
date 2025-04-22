@@ -258,6 +258,20 @@ class PaymentRequest extends AbstractApi
     }
 
     /**
+     * Additional merchant provided information that will be passed to Klarna.
+     *
+     * @param string $extraMerchantData // JSON-encoded string
+     *
+     * @return $this
+     */
+    public function setExtraMerchantData($extraMerchantData)
+    {
+        $this->unresolvedOptions['extra_merchant_data'] = $extraMerchantData;
+
+        return $this;
+    }
+
+    /**
      * Configure options
      *
      * @param OptionsResolver $resolver
@@ -285,7 +299,8 @@ class PaymentRequest extends AbstractApi
             'shipping_method',
             'organisation_number',
             'account_offer',
-            'orderLines'
+            'orderLines',
+            'extra_merchant_data'
         ]);
 
         $resolver->setAllowedValues('language', Types\LanguageTypes::getAllowed());

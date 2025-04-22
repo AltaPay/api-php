@@ -10,6 +10,7 @@ Because this call does not happen in the browser, you do not need to worry about
         * [Example](#example)
     + [Optional](#optional)
         * [Optional parameters for invoice payments](#optional-parameters-for-invoice-payments)
+        * [Extra merchant data](#extra-merchant-data)
     + [Required on specific payments](#required-on-specific-payments)
         * [Mandatory parameters if MCC is 6012](#mandatory-parameters-if-mcc-is-6012)
         * [Mandatory parameters for invoice payments](#mandatory-parameters-for-invoice-payments)
@@ -73,8 +74,10 @@ $request->setCurrency('SEK');
 | setCookie(string) | Additionally a cookie parameter can be sent to createPaymentRequest, which is then passed back as the complete cookie for the callbacks.<br />For example, if the cookie parameter is set to: "PHPSESSID=asdfasdfdf23; mycookie=mycookievalue", the Cookie header in the callback to your page will be:<br />Cookie: PHPSESSID=asdfasdfdf23; mycookie=mycookievalue | string
 | setPaymentSource(string) | The source of the payment. Default is "eCommerce" | string - [See Payment sources](../types/paymentsources.md)
 | setCustomerInfo(Customer) | Customer info | Customer object [See customer info](../request/customerinfo.md) |
+| setCustomerCreatedDate(Date) | This is the date when the customer account was first created in your shopping system. Fraud detection services use this parameter in the fraud detection calculations. | Date (yyyy-mm-dd)
 | setConfig(Config) | used to overwrite the terminal settings | Config object [See config](../request/config.md)
-| orderLines(array or OrderLine) | Order lines | array of OrderLine objects - [See OrderLine](../request/orderline.md)
+| setOrderLines(array) | Order lines | array of OrderLine objects - [See OrderLine](../request/orderline.md)
+| setAgreement(array) | This parameters should be provided only in case the type parameter is subscription, subscriptionAndCharge or subscriptionAndReserve | array
 
 ##### Optional parameters for invoice payments
 
@@ -82,6 +85,12 @@ $request->setCurrency('SEK');
 |---|---|---|
 | setOrganisationNumber(string) | If the organisation_number parameter is given the organisation number field in the invoice payment form is pre-populated, and if no other payment options is enabled on the terminal the form will auto submit. | string
 | setAccountOffer(string) | To require having account enabled for an invoice payment for this specific customer, set this to required. To disable account for this specific customer, set to disabled. | string
+
+##### Extra merchant data
+
+| Method  | Description | Type |
+|---|---|---|
+| setExtraMerchantData(JSON) | Additional merchant provided information that will be passed to Klarna. Field has to be sent as JSON object specified in [Klarna docs](https://docs.klarna.com/api/extra-merchant-data/)| JSON ([Schema](https://docs.klarna.com/api/extra-merchant-data.json))
 
 ### Required on specific payments
 
