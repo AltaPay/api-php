@@ -36,6 +36,7 @@
 | `$object->UpdatedDate` | | DateTime
 | `$object->PaymentNature` | | string
 | `$object->PaymentSchemeName` | | string
+| `$object->AuthorisationExpiryDate` | | DateTime
 | `$object->PaymentSource` | | string
 | `$object->PaymentNatureService` | array of `\Altapay\Response\Embeds\PaymentNatureService` objects | array
 | `$object->FraudRiskScore` | | float
