@@ -34,7 +34,6 @@ class HeaderTest extends AbstractApiTest
             $api = $this->getapi();
             $api->call();
         } catch (ResponseHeaderException $e) {
-            $this->assertInstanceOf(Header::class, $e->getHeader());
             $this->assertSame('200', $e->getHeader()->ErrorCode);
             $this->assertSame('This request has error', $e->getHeader()->ErrorMessage);
         }
