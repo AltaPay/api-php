@@ -27,7 +27,10 @@ abstract class AbstractFunctionalTest extends AbstractTest
      */
     protected function getAuth()
     {
-        return new Authentication($_ENV['USERNAME'], $_ENV['PASSWORD'], $this->getBaseUrl());
+        $username = $_ENV['USERNAME'] ?? null;
+        $password = $_ENV['PASSWORD'] ?? null;
+
+        return new Authentication(is_string($username) ? $username : '', is_string($password) ? $password : '', $this->getBaseUrl());
     }
 
     /**
@@ -35,7 +38,9 @@ abstract class AbstractFunctionalTest extends AbstractTest
      */
     protected function getBaseUrl()
     {
-        return $_ENV['BASEURL'];
+        $baseUrl = $_ENV['BASEURL'] ?? null;
+
+        return is_string($baseUrl) ? $baseUrl : '';
     }
 
     /**
@@ -43,7 +48,9 @@ abstract class AbstractFunctionalTest extends AbstractTest
      */
     protected function getTerminal()
     {
-        return $_ENV['TERMINAL'];
+        $terminal = $_ENV['TERMINAL'] ?? null;
+
+        return is_string($terminal) ? $terminal : '';
     }
 
     /**

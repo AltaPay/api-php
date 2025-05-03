@@ -31,7 +31,7 @@ class FraudServices implements TypeInterface
     /**
      * Allowed fraud services
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     private static $services = [
         'none',
@@ -43,7 +43,7 @@ class FraudServices implements TypeInterface
     /**
      * Get allowed values
      *
-     * @return array<int, string>
+     * @return list<string>
      */
     public static function getAllowed()
     {

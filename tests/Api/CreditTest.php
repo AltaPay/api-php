@@ -84,7 +84,7 @@ class CreditTest extends AbstractApiTest
     }
 
     /**
-     * @return array<int, array<int, string>>
+     * @return list<list<string>>
      */
     public function paymentSourceDataProvider()
     {

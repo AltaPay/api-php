@@ -291,10 +291,10 @@ class CardWalletAuthorize extends AbstractApi
         $resolver->setAllowedValues('language', Types\LanguageTypes::getAllowed());
         $resolver->setDefault('type', 'payment');
         $resolver->setAllowedValues('type', Types\PaymentTypes::getAllowed());
-        $resolver->setAllowedValues('sale_reconciliation_identifier', function ($value) {
+        $resolver->setAllowedValues('sale_reconciliation_identifier', function (string $value) {
             return mb_strlen($value) <= 100;
         });
-        $resolver->setAllowedValues('sale_invoice_number', function ($value) {
+        $resolver->setAllowedValues('sale_invoice_number', function (string $value) {
             return mb_strlen($value) <= 100;
         });
         $resolver->setAllowedTypes('sales_tax', ['int', 'float']);
@@ -305,7 +305,7 @@ class CardWalletAuthorize extends AbstractApi
         $resolver->setNormalizer('config', function (Options $options, Config $value) {
             return $value->serialize();
         });
-        $resolver->setAllowedValues('organisation_number', function ($value) {
+        $resolver->setAllowedValues('organisation_number', function (string $value) {
             return mb_strlen($value) <= 20;
         });
         $resolver->setAllowedTypes('account_offer', 'bool');

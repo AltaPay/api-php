@@ -35,7 +35,7 @@ trait CsvToArrayTrait
      *
      * @param bool $includeHeader
      *
-     * @return array<int, array<int, string|null>>
+     * @return list<list<string|null>>
      */
     public function __toArray($includeHeader = false)
     {

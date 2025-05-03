@@ -841,11 +841,11 @@ class Customer extends AbstractSerializer
         }
 
         if ($this->clientJavascriptEnabled !== null) {
-            $output['client_javascript_enabled'] = $this->clientJavascriptEnabled;
+            $output['client_javascript_enabled'] = (string)$this->clientJavascriptEnabled;
         }
 
         if ($this->clientJavaEnabled !== null) {
-            $output['client_java_enabled'] = $this->clientJavaEnabled;
+            $output['client_java_enabled'] = (string)$this->clientJavaEnabled;
         }
 
         if ($this->clientColorDepth) {
