@@ -1,7 +1,7 @@
 [<](../index.md) Altapay - PHP Api - Customer Info
 ==================================================
 
-A customer object requries a billing address
+Previously a billing address was **required**:
 
 ```php
 $billingAddress = new \Altapay\Request\Address();
@@ -12,7 +12,12 @@ $billingAddress->City = 'City';
 $billingAddress->PostalCode = 'Postal code';
 $billingAddress->Region = 'Region';
 $billingAddress->Country = 'Country';
+
+// 1) With a billing address:
 $customer = new Altapay\Request\Customer($billingAddress);
+
+// 2) Without a billing address:
+$customer = new Altapay\Request\Customer();
 ```
 
 We can also add a shipping address
