@@ -1,7 +1,7 @@
 [<](../index.md) Altapay - PHP Api - Customer Info
 ==================================================
 
-Previously a billing address was **required**:
+You can optionally supply a billing address when you instantiate a Customer object.
 
 ```php
 $billingAddress = new \Altapay\Request\Address();
