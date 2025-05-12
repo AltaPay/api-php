@@ -125,7 +125,7 @@ class Customer extends AbstractSerializer
     /**
      * Billing address
      *
-     * @var Address
+     * @var Address|null
      */
     private $billing;
 
