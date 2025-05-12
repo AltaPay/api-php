@@ -132,7 +132,7 @@ class Customer extends AbstractSerializer
     /**
      * Shipping address
      *
-     * @var Address
+     * @var Address|null
      */
     private $shipping;
 
