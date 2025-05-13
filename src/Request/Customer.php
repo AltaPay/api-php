@@ -125,14 +125,14 @@ class Customer extends AbstractSerializer
     /**
      * Billing address
      *
-     * @var Address
+     * @var Address|null
      */
     private $billing;
 
     /**
      * Shipping address
      *
-     * @var Address
+     * @var Address|null
      */
     private $shipping;
 
@@ -265,9 +265,9 @@ class Customer extends AbstractSerializer
     /**
      * Customer constructor.
      *
-     * @param Address $billingAddress Billing address
+     * @param Address|null $billingAddress Billing address
      */
-    public function __construct(Address $billingAddress)
+    public function __construct(Address $billingAddress = null)
     {
         $this->billing = $billingAddress;
     }
@@ -860,8 +860,13 @@ class Customer extends AbstractSerializer
             $output['shipping_ref'] = $this->shippingRef;
         }
 
-        $this->setAddress($output, 'billing_', $this->billing);
-        $this->setAddress($output, 'shipping_', $this->shipping);
+        if ($this->billing) {
+            $this->setAddress($output, 'billing_', $this->billing);
+        }
+
+        if ($this->shipping) {
+            $this->setAddress($output, 'shipping_', $this->shipping);
+        }
 
         return $output;
     }
