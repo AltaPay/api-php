@@ -31,7 +31,7 @@ class SelectedSchemes implements TypeInterface
     /**
      * Allowed selected schemes
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     private static $schemes = [
         'VISA',
@@ -51,7 +51,7 @@ class SelectedSchemes implements TypeInterface
     /**
      * Get allowed values
      *
-     * @return array<int, string>
+     * @return list<string>
      */
     public static function getAllowed()
     {

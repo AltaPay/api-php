@@ -303,7 +303,7 @@ class ReservationOfFixedAmount extends AbstractApi
             return $value->serialize();
         });
         $resolver->setAllowedTypes('surcharge', ['int', 'float']);
-        $resolver->setAllowedValues('sale_invoice_number', function ($value) {
+        $resolver->setAllowedValues('sale_invoice_number', function (string $value) {
             return mb_strlen($value) <= 100;
         });
         $resolver->setNormalizer('cardnum', function (Options $options, $value) {

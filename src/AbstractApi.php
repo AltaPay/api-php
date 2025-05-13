@@ -128,7 +128,7 @@ abstract class AbstractApi
      * @param Request           $request
      * @param ResponseInterface $response
      *
-     * @return AbstractResponse|string|array<Transaction>
+     * @return AbstractResponse|string|list<Transaction>
      */
     abstract protected function handleResponse(Request $request, ResponseInterface $response);
 
@@ -157,7 +157,7 @@ abstract class AbstractApi
     /**
      * Generate the response
      *
-     * @return AbstractResponse|string|array<Transaction>
+     * @return AbstractResponse|string|list<Transaction>
      * @throws GuzzleException
      * @throws ResponseHeaderException
      * @throws ResponseMessageException
@@ -233,7 +233,9 @@ abstract class AbstractApi
         $this->setCustomerInfoResolver($resolver);
         $this->setValidationUrlResolver($resolver);
         $this->setAppleDomainResolver($resolver);
-        $this->options = $resolver->resolve($this->unresolvedOptions);
+        /** @var array<string, mixed> */
+        $options = $resolver->resolve($this->unresolvedOptions);
+        $this->options = $options;
     }
 
     /**
@@ -253,13 +255,13 @@ abstract class AbstractApi
         }
 
         if (property_exists($response, 'MerchantErrorMessage')) {
-            if ($response->MerchantErrorMessage) {
+            if ($response->MerchantErrorMessage && is_string($response->MerchantErrorMessage)) {
                 throw new Exceptions\ResponseMessageException($response->MerchantErrorMessage);
             }
         }
 
         if (property_exists($response, 'CardHolderErrorMessage') && property_exists($response, 'CardHolderMessageMustBeShown')) {
-            if ($response->CardHolderMessageMustBeShown) {
+            if ($response->CardHolderMessageMustBeShown && is_string($response->CardHolderErrorMessage)) {
                 throw new Exceptions\ResponseMessageException($response->CardHolderErrorMessage);
             }
         }
@@ -268,7 +270,7 @@ abstract class AbstractApi
     /**
      * Generate the response
      *
-     * @return AbstractResponse|string|array<Transaction>
+     * @return AbstractResponse|string|list<Transaction>
      * @throws GuzzleException
      * @throws ClientException
      * @throws ResponseHeaderException
@@ -318,7 +320,7 @@ abstract class AbstractApi
     /**
      * Get User Agent details
      *
-     * @return string
+     * @return ?string
      */
     protected function getUserAgent()
     {
@@ -328,14 +330,14 @@ abstract class AbstractApi
             $userAgent = 'api-php/' . self::PHP_API_VERSION;
             if (extension_loaded('curl') && function_exists('curl_version')) {
                 $curlInfo = \curl_version();
-                if (is_array($curlInfo) && array_key_exists("version", $curlInfo)) {
+                if (is_array($curlInfo) && array_key_exists("version", $curlInfo) && is_string($curlInfo["version"])) {
                     $userAgent .= ' curl/' . $curlInfo["version"];
                 }
             }
             $userAgent .= ' PHP/' . PHP_VERSION;
         }
 
-        return $userAgent;
+        return is_string($userAgent) ? $userAgent : null;
     }
 
     /**
@@ -380,7 +382,10 @@ abstract class AbstractApi
             );
         }
 
-        $headers['User-Agent'] = $this->getUserAgent();
+        $userAgen = $this->getUserAgent();
+        if ($userAgen) {
+            $headers['User-Agent'] = $userAgen;
+        }
 
         return $headers;
     }

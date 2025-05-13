@@ -62,7 +62,7 @@ class ResponseSerializer
      * @param \SimpleXMLElement $data
      * @param string            $childKey
      *
-     * @return array<int, T>
+     * @return list<T>
      * @throws \InvalidArgumentException
      */
     public static function serializeChildren(
@@ -72,7 +72,7 @@ class ResponseSerializer
     ) {
         $documents = [];
 
-        if (! empty($data) && ! empty($data->{$childKey})) {
+        if (! empty($data) && ! empty($data->{$childKey}) && $data->{$childKey} instanceof \SimpleXMLElement) {
             foreach ($data->{$childKey} as $d) {
                 $object      = new $objectName();
                 $documents[] = $object->deserialize($d);

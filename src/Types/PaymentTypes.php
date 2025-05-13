@@ -31,7 +31,7 @@ class PaymentTypes implements TypeInterface
     /**
      * Allowed payment types
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     private static $types = [
         'payment',
@@ -45,7 +45,7 @@ class PaymentTypes implements TypeInterface
     /**
      * Get allowed values
      *
-     * @return array<int, string>
+     * @return list<string>
      */
     public static function getAllowed()
     {

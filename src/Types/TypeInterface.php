@@ -28,7 +28,7 @@ interface TypeInterface
     /**
      * Get allowed values
      *
-     * @return array<int, string>
+     * @return list<string>
      */
     public static function getAllowed();
 
