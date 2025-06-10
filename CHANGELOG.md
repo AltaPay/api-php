@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.5.1] - 2025-06-11
+### Added
+- Improve type hinting.
+- Improve return type annotations for better type clarity.
+- Improve error handling by validating error message types.
+- Add null check before setting the User-Agent header.
+- Restrict supported PHP versions to 7.0 and above.
+
 ## [3.5.0] - 2025-05-12
 ### Added
 - Make billing and shipping address optional for Customer Info
