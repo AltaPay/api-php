@@ -355,8 +355,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
                 'agreement[unscheduled]' => 'incremental'
             ]
         );
-        $transactionInfo[] = 'Trans 1';
-        $transactionInfo[] = 'Trans 2';
+        $transactionInfo = ['Trans 1', 'Trans 2'];
         $api->setTransactionInfo($transactionInfo);
         $api->call();
 
@@ -412,7 +411,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
     }
 
     /**
-     * @param string|TypeInterface $class
+     * @param class-string<TypeInterface>|TypeInterface $class
      * @param string               $key
      * @param string               $setter
      */
@@ -437,7 +436,7 @@ class ReservationOfFixedAmountTest extends AbstractApiTest
     }
 
     /**
-     * @param string|TypeInterface $class
+     * @param class-string<TypeInterface>|TypeInterface $class
      * @param string               $key
      * @param string               $method
      */

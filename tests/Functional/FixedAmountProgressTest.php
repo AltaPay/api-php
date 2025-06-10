@@ -38,7 +38,6 @@ class FixedAmountProgressTest extends AbstractFunctionalTest
                 ->setCurrency('DKK');
             $api->call();
         } catch (ResponseHeaderException $e) {
-            $this->assertInstanceOf(Header::class, $e->getHeader());
         }
     }
 

@@ -51,7 +51,7 @@ trait CurrencyTrait
     protected function setCurrencyResolver(OptionsResolver $resolver)
     {
         $resolver->setAllowedTypes('currency', ['string', 'int']);
-        $resolver->setAllowedValues('currency', function ($value) {
+        $resolver->setAllowedValues('currency', function (string $value) {
             return CurrencyTypes::currencyCodeExists($value) || CurrencyTypes::currencyNumberExists($value);
         });
     }
