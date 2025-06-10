@@ -60,7 +60,15 @@ trait OrderlinesTrait
         $resolver->setNormalizer('orderLines', function (Options $options, array $value) {
             $output = [];
             foreach ($value as $object) {
-                assert($object instanceof OrderLine);
+	            if (!$object instanceof OrderLine) {
+		            throw new \InvalidArgumentException(
+			            sprintf(
+				            'orderLines should all be a instance of "%s"',
+				            OrderLine::class
+			            )
+		            );
+	            }
+
                 $output[] = $object->serialize();
             }
             return $output;
