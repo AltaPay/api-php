@@ -77,16 +77,13 @@ class FundingListTest extends AbstractApiTest
         $response = $api->call();
         $this->assertInstanceOf(FundingsResponse::class, $response);
         $funding = $response->Fundings[0];
-        $this->assertInstanceOf(Funding::class, $funding);
 
         $this->assertSame('CreatedByTest', $funding->Filename);
         $this->assertSame('1234567890123456', $funding->ContractIdentifier);
         $this->assertCount(2, $funding->Shops);
         $this->assertSame('TestAcquirer', $funding->Acquirer);
-        $this->assertInstanceOf(\DateTime::class, $funding->FundingDate);
         $this->assertSame('26-09-2010', $funding->FundingDate->format('d-m-Y'));
         $this->assertSame('50.00 EUR', $funding->Amount);
-        $this->assertInstanceOf(\DateTime::class, $funding->CreatedDate);
         $this->assertSame('27-09-2010', $funding->CreatedDate->format('d-m-Y'));
         $this->assertSame('http://localhost/merchant.php/API/fundingDownload?id=1', $funding->DownloadLink);
     }

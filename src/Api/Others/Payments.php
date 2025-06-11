@@ -97,7 +97,7 @@ class Payments extends AbstractApi
      * @param Request $request
      * @param ResponseInterface $response
      *
-     * @return Transaction[]
+     * @return list<Transaction>
      * @throws \Exception
      */
     protected function handleResponse(Request $request, ResponseInterface $response)

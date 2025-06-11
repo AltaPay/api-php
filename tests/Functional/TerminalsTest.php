@@ -11,6 +11,7 @@ class TerminalsTest extends AbstractFunctionalTest
     {
         $response = (new Terminals($this->getAuth()))->call();
         $this->assertInstanceOf(TerminalsResponse::class, $response);
-        $this->assertCount($_ENV['NUMBER_OF_TERMINALS'], $response->Terminals);
+        $this->assertTrue(is_numeric($_ENV['NUMBER_OF_TERMINALS']));
+        $this->assertCount((int)$_ENV['NUMBER_OF_TERMINALS'], $response->Terminals);
     }
 }

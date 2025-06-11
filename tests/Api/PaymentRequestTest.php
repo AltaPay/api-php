@@ -117,7 +117,6 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertSame('kg', $line['unitCode']);
 
         // Config
-        $this->assertIsArray($parts['config']);
         /** @var array<string> $config */
         $config = $parts['config'];
         $this->assertSame(sprintf('%s/%s', self::CONFIG_URL, 'form'), $config['callback_form']);
@@ -203,7 +202,7 @@ class PaymentRequestTest extends AbstractApiTest
     }
 
     /**
-     * @param string|TypeInterface $class
+     * @param class-string<TypeInterface>|TypeInterface $class
      * @param string               $key
      * @param string               $setter
      */
@@ -228,7 +227,7 @@ class PaymentRequestTest extends AbstractApiTest
     }
 
     /**
-     * @param string|TypeInterface $class
+     * @param class-string<TypeInterface>|TypeInterface $class
      * @param string               $key
      * @param string               $method
      */
