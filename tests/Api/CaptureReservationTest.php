@@ -54,7 +54,6 @@ class CaptureReservationTest extends AbstractApiTest
         $response = $api->call();
         $this->assertInstanceOf(CaptureReservationResponse::class, $response);
         $transaction = $response->Transactions[0];
-        $this->assertInstanceOf(Transaction::class, $transaction);
         $this->assertSame('1', $transaction->TransactionId);
         $this->assertSame('978', $transaction->MerchantCurrency);
         $this->assertSame(13.37, $transaction->FraudRiskScore);
