@@ -73,6 +73,7 @@ class PaymentsTest extends AbstractApiTest
             ->setPaymentId('mypaymentid');
         $api->call();
 
+        $this->assertInstanceOf(Request::class, $api->getRawRequest());
         $this->assertInstanceOf(Response::class, $api->getRawResponse());
 
         $this->assertSame($this->getExceptedUri('payments/'), $api->getRawRequest()->getUri()->getPath());
@@ -119,6 +120,7 @@ class PaymentsTest extends AbstractApiTest
     public function test_multiple_payment_transaction_data(): void
     {
         $data = $this->getMultiplePaymentTransaction()[0];
+        $this->assertInstanceOf(Transaction::class, $data);
 
         $this->assertSame('1', $data->TransactionId);
         $this->assertSame('ccc1479c-37f9-4962-8d2c-662d75117e9d', $data->PaymentId);
@@ -142,6 +144,8 @@ class PaymentsTest extends AbstractApiTest
         $this->assertSame(1.00, $data->CapturedAmount);
         $this->assertSame(0.0, $data->RefundedAmount);
         $this->assertSame(0.0, $data->RecurringDefaultAmount);
+        $this->assertInstanceOf(\DateTime::class, $data->CreatedDate);
+        $this->assertInstanceOf(\DateTime::class, $data->UpdatedDate);
         $this->assertSame('28-09-2010', $data->CreatedDate->format('d-m-Y'));
         $this->assertSame('28-09-2010', $data->UpdatedDate->format('d-m-Y'));
         $this->assertSame('CreditCard', $data->PaymentNature);
@@ -149,8 +153,14 @@ class PaymentsTest extends AbstractApiTest
         $this->assertSame(13.37, $data->FraudRiskScore);
         $this->assertSame('Fraud detection explanation', $data->FraudExplanation);
 
+        // Payment nature service
+        $this->assertInstanceOf(PaymentNatureService::class, $data->PaymentNatureService);
+
         // Payment Infos
         $this->assertCount(3, $data->PaymentInfos);
+
+        // Customer info
+        $this->assertInstanceOf(CustomerInfo::class, $data->CustomerInfo);
 
         // ReconciliationIdentifiers
         $this->assertCount(1, $data->ReconciliationIdentifiers);
@@ -162,6 +172,7 @@ class PaymentsTest extends AbstractApiTest
     public function test_multiple_payment_paymentnatureservice_data(): void
     {
         $data = $this->getMultiplePaymentTransaction()[0]->PaymentNatureService;
+        $this->assertInstanceOf(PaymentNatureService::class, $data);
 
         $this->assertSame('TestAcquirer', $data->name);
         $this->assertTrue($data->SupportsRefunds);
@@ -223,12 +234,17 @@ class PaymentsTest extends AbstractApiTest
         $this->assertSame('support', $data->Username);
         $this->assertSame('+45 7020 0056', $data->CustomerPhone);
         $this->assertSame('12345678', $data->OrganisationNumber);
+        $this->assertInstanceOf(Country::class, $data->CountryOfOrigin);
 
         $country = $data->CountryOfOrigin;
+        $this->assertInstanceOf(Country::class, $country);
         $this->assertSame('DK', $country->Country);
         $this->assertSame('BillingAddress', $country->Source);
 
+        $this->assertInstanceOf(Address::class, $data->BillingAddress);
+
         $address = $data->BillingAddress;
+        $this->assertInstanceOf(Address::class, $address);
         $this->assertSame('Palle', $address->Firstname);
         $this->assertSame('Simonsen', $address->Lastname);
         $this->assertSame('Rosenkæret 13', $address->Address);
@@ -236,13 +252,18 @@ class PaymentsTest extends AbstractApiTest
         $this->assertSame('2860', $address->PostalCode);
         $this->assertSame('DK', $address->Country);
 
+        $this->assertInstanceOf(Address::class, $data->ShippingAddress);
+
         $address = $data->ShippingAddress;
+        $this->assertInstanceOf(Address::class, $address);
         $this->assertNull($address->Firstname);
         $this->assertNull($address->Lastname);
         $this->assertNull($address->Address);
         $this->assertNull($address->City);
         $this->assertNull($address->PostalCode);
         $this->assertNull($address->Country);
+
+        $this->assertInstanceOf(Address::class, $data->RegisteredAddress);
     }
 
     /**
@@ -251,10 +272,12 @@ class PaymentsTest extends AbstractApiTest
     public function test_multiple_payment_reconciliationidentifiers_data(): void
     {
         $data = $this->getMultiplePaymentTransaction()[0]->ReconciliationIdentifiers[0];
+        $this->assertInstanceOf(ReconciliationIdentifier::class, $data);
 
         $this->assertSame('f4e2533e-c578-4383-b075-bc8a6866784a', $data->Id);
         $this->assertSame(1.00, $data->Amount);
         $this->assertSame('captured', $data->Type);
+        $this->assertInstanceOf(\DateTime::class, $data->Date);
         $this->assertSame('28-09-2010', $data->Date->format('d-m-Y'));
         $this->assertSame('978', $data->currency);
     }

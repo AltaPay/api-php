@@ -117,6 +117,7 @@ class PaymentRequestTest extends AbstractApiTest
         $this->assertSame('kg', $line['unitCode']);
 
         // Config
+        $this->assertIsArray($parts['config']);
         /** @var array<string> $config */
         $config = $parts['config'];
         $this->assertSame(sprintf('%s/%s', self::CONFIG_URL, 'form'), $config['callback_form']);

@@ -162,6 +162,7 @@ XML
     {
         $call     = new Callback($this->data);
         $response = $call->call();
+        $this->assertInstanceOf(CallbackResponse::class, $response);
         $this->assertSame('d28df6b4-122d-49e2-add0-19c8271260b0', $response->paymentId);
         $this->assertSame('000000022', $response->shopOrderId);
         $this->assertSame('incomplete', $response->status);

@@ -58,11 +58,14 @@ class InvoiceTextTest extends AbstractApiTest
         $this->assertStringStartsWith('Fordringen er overdraget', $response->MandatoryInvoiceText);
         $this->assertSame('7373', $response->InvoiceNumber);
         $this->assertSame('832', $response->CustomerNumber);
+        $this->assertInstanceOf(\DateTime::class, $response->InvoiceDate);
         $this->assertSame('10-03-2011', $response->InvoiceDate->format('d-m-Y'));
+        $this->assertInstanceOf(\DateTime::class, $response->DueDate);
         $this->assertSame('24-03-2011', $response->DueDate->format('d-m-Y'));
         $this->assertCount(1, $response->TextInfos);
         $this->assertSame('Password', $response->TextInfos[0]->Name);
         $this->assertSame('xxxxxx', $response->TextInfos[0]->Value);
+        $this->assertInstanceOf(Address::class, $response->Address);
         $this->assertSame('John', $response->Address->Firstname);
         $this->assertSame('John', $response->Address->Lastname);
         $this->assertSame('Anywhere Street 12', $response->Address->Address);
