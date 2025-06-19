@@ -44,17 +44,6 @@ trait OrderlinesTrait
         }
 
         if (is_array($orderLines)) {
-            foreach ($orderLines as $orderLine) {
-                if (!$orderLine instanceof OrderLine) {
-                    throw new \InvalidArgumentException(
-                        sprintf(
-                            'orderLines should all be a instance of "%s"',
-                            OrderLine::class
-                        )
-                    );
-                }
-            }
-
             $this->unresolvedOptions['orderLines'] = $orderLines;
         }
 
@@ -68,10 +57,18 @@ trait OrderlinesTrait
     {
         $resolver->addAllowedTypes('orderLines', 'array');
         /** @noinspection PhpUnusedParameterInspection */
-        $resolver->setNormalizer('orderLines', function (Options $options, $value) {
+        $resolver->setNormalizer('orderLines', function (Options $options, array $value) {
             $output = [];
-            /** @var OrderLine $object */
             foreach ($value as $object) {
+                if (!$object instanceof OrderLine) {
+                    throw new \InvalidArgumentException(
+                        sprintf(
+                            'orderLines should all be a instance of "%s"',
+                            OrderLine::class
+                        )
+                    );
+                }
+
                 $output[] = $object->serialize();
             }
             return $output;
