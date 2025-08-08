@@ -85,7 +85,7 @@ class Transaction extends AbstractResponse
     public $CardStatus;
 
     /**
-     * @var CreditCard
+     * @var ?CreditCard
      */
     public $CreditCardExpiry;
 
