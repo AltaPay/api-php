@@ -301,6 +301,11 @@ class Transaction extends AbstractResponse
     public $Authentication;
 
     /**
+     * @var DateTime
+     */
+    public $AuthorisationExpiryDate;
+
+    /**
      * @param string $IsTokenized
      *
      * @return $this
