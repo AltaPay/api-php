@@ -69,7 +69,6 @@ class Transaction extends AbstractResponse
         ]
     ];
 
-
     /**
      * @var string
      */
