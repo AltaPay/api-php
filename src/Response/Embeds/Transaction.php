@@ -290,7 +290,7 @@ class Transaction extends AbstractResponse
     public $InvoiceOrderInfo;
 
     /**
-     * @var AuthenticationResult
+     * @var Authentication
      * @deprecated Use $Authentication instead.
      */
     public $AuthenticationResult;
