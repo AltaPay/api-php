@@ -63,11 +63,12 @@ class Transaction extends AbstractResponse
             'class' => CardInformation::class,
             'array' => false
         ],
-        'AuthenticationResult'     => [
-            'class' => AuthenticationResult::class,
+        'Authentication'     => [
+            'class' => Authentication::class,
             'array' => false
         ]
     ];
+
 
     /**
      * @var string
@@ -291,13 +292,14 @@ class Transaction extends AbstractResponse
 
     /**
      * @var AuthenticationResult
+     * @deprecated Use $Authentication instead.
      */
     public $AuthenticationResult;
 
     /**
-     * @var DateTime
+     * @var Authentication
      */
-    public $AuthorisationExpiryDate;
+    public $Authentication;
 
     /**
      * @param string $IsTokenized
