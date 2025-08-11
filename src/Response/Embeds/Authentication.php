@@ -50,7 +50,7 @@ class Authentication extends AbstractResponse
     public $Version;
 
     /**
-     * @var "3DSECURE"
+     * @var "3DSECURE"|"UNKNOWN"
      */
     public $Type;
 }
