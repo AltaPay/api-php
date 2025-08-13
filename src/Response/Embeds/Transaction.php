@@ -63,8 +63,8 @@ class Transaction extends AbstractResponse
             'class' => CardInformation::class,
             'array' => false
         ],
-        'AuthenticationResult'     => [
-            'class' => AuthenticationResult::class,
+        'Authentication'     => [
+            'class' => Authentication::class,
             'array' => false
         ]
     ];
@@ -290,9 +290,15 @@ class Transaction extends AbstractResponse
     public $InvoiceOrderInfo;
 
     /**
-     * @var AuthenticationResult
+     * @var Authentication
+     * @deprecated Use $Authentication instead.
      */
     public $AuthenticationResult;
+
+    /**
+     * @var Authentication
+     */
+    public $Authentication;
 
     /**
      * @var DateTime

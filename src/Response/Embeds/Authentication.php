@@ -25,7 +25,7 @@ namespace Altapay\Response\Embeds;
 
 use Altapay\Response\AbstractResponse;
 
-class AuthenticationResult extends AbstractResponse
+class Authentication extends AbstractResponse
 {
     /**
      * @var "CHALLENGE"|"FRICTIONLESS"|"UNKNOWN"
@@ -50,7 +50,7 @@ class AuthenticationResult extends AbstractResponse
     public $Version;
 
     /**
-     * @var "3DSECURE"
+     * @var "3DSECURE"|"UNKNOWN"
      */
     public $Type;
 }
