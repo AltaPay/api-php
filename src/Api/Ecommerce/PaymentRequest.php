@@ -271,19 +271,18 @@ class PaymentRequest extends AbstractApi
         return $this;
     }
 
-	/**
-	 * Set the form_template to the Payment Request.
-	 *
-	 * @param string $formTemplate
-	 *
-	 * @return $this
-	 */
-	public function setFormTemplate($formTemplate)
-	{
-		$this->unresolvedOptions['form_template'] = $formTemplate;
-		
+    /**
+     * Set the form_template to the Payment Request.
+     *
+     * @param string $formTemplate
+     *
+     * @return $this
+     */
+    public function setFormTemplate($formTemplate)
+    {
+        $this->unresolvedOptions['form_template'] = $formTemplate;
         return $this;
-	}
+    }
 
     /**
      * Configure options
