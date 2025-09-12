@@ -78,6 +78,7 @@ $request->setCurrency('SEK');
 | setConfig(Config) | used to overwrite the terminal settings | Config object [See config](../request/config.md)
 | setOrderLines(array) | Order lines | array of OrderLine objects - [See OrderLine](../request/orderline.md)
 | setAgreement(array) | This parameters should be provided only in case the type parameter is subscription, subscriptionAndCharge or subscriptionAndReserve | array
+| setFormTemplate(string) | If you wish to force a specific template for the credit card form. Possible values include form_checkout_div, form_checkout, form_checkout_standalone, form_dynamic_div, etc. If not specified, the template configured for the terminal will be used. See the gateway documentation for the complete list. | string |
 
 ##### Optional parameters for invoice payments
 
