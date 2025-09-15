@@ -272,6 +272,19 @@ class PaymentRequest extends AbstractApi
     }
 
     /**
+     * Set the form_template to the Payment Request.
+     *
+     * @param string $formTemplate
+     *
+     * @return $this
+     */
+    public function setFormTemplate($formTemplate)
+    {
+        $this->unresolvedOptions['form_template'] = $formTemplate;
+        return $this;
+    }
+
+    /**
      * Configure options
      *
      * @param OptionsResolver $resolver
@@ -300,7 +313,8 @@ class PaymentRequest extends AbstractApi
             'organisation_number',
             'account_offer',
             'orderLines',
-            'extra_merchant_data'
+            'extra_merchant_data',
+            'form_template'
         ]);
 
         $resolver->setAllowedValues('language', Types\LanguageTypes::getAllowed());
