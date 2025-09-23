@@ -49,7 +49,7 @@ abstract class AbstractResponse
      * @return void
      * @throws \InvalidArgumentException
      */
-    public function headerSetter(\SimpleXMLElement $xml = null)
+    public function headerSetter(?\SimpleXMLElement $xml = null)
     {
         if ($xml) {
             $this->Header = ResponseSerializer::serialize(Header::class, $xml);
@@ -64,7 +64,7 @@ abstract class AbstractResponse
      * @return static
      * @throws \InvalidArgumentException
      */
-    public function deserialize(\SimpleXMLElement $xml = null)
+    public function deserialize(?\SimpleXMLElement $xml = null)
     {
         $object = clone $this;
 

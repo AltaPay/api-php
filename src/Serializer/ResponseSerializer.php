@@ -45,7 +45,7 @@ class ResponseSerializer
     public static function serialize(
         $objectName,
         \SimpleXMLElement $data,
-        \SimpleXMLElement $header = null
+        ?\SimpleXMLElement $header = null
     ) {
         $object = new $objectName();
         $object->headerSetter($header);
