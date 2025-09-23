@@ -63,7 +63,7 @@ class Factory
      * @return T
      * @throws ClassDoesNotExistsException
      */
-    public static function create($class, Authentication $authentication = null)
+    public static function create($class, ?Authentication $authentication = null)
     {
         if (class_exists($class)) {
             return new $class($authentication);
