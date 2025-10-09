@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.5.5] - 2025-10-09
 ### Fixes
 - Fix deprecation warnings on PHP 8.4
+- Restrict supported PHP versions to 7.1 and above.
 
 ## [3.5.4] - 2025-09-12
 ### Added
