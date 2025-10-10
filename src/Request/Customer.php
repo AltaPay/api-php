@@ -267,7 +267,7 @@ class Customer extends AbstractSerializer
      *
      * @param Address|null $billingAddress Billing address
      */
-    public function __construct(Address $billingAddress = null)
+    public function __construct(?Address $billingAddress = null)
     {
         $this->billing = $billingAddress;
     }
