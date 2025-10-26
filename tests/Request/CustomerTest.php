@@ -21,11 +21,11 @@ class CustomerTest extends AbstractTest
         $customer->setGender('f');
         $serialized = $customer->serialize();
 
-        $this->assertArrayHasKey('organisationNumber', $serialized);
+        $this->assertArrayHasKey('organisation_number', $serialized);
         $this->assertArrayHasKey('personalIdentifyNumber', $serialized);
         $this->assertArrayHasKey('gender', $serialized);
 
-        $this->assertSame('123', $serialized['organisationNumber']);
+        $this->assertSame('123', $serialized['organisation_number']);
         $this->assertSame('20304050', $serialized['personalIdentifyNumber']);
         $this->assertSame('F', $serialized['gender']);
 
