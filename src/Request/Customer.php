@@ -47,7 +47,7 @@ class Customer extends AbstractSerializer
 
     /**
      * Indicator of whether the customer is an individual or a business.
-     * 
+     *
      * @deprecated Any customer_info[organisation_*] field set will trigger the business customer indicator.
      * @var string
      */
@@ -55,7 +55,7 @@ class Customer extends AbstractSerializer
 
     /**
      * Name of the customer,if the customer type is Business.
-     * 
+     *
      * @deprecated Please use customer_info[organisation_name] field instead.
      * @var string
      */
@@ -63,7 +63,7 @@ class Customer extends AbstractSerializer
 
     /**
      * The nature of the company.
-     * 
+     *
      * @deprecated Please use customer_info[organisation_entity_type] field instead.
      * @var string
      */
@@ -71,7 +71,7 @@ class Customer extends AbstractSerializer
 
     /**
      * The company's VAT registration number.
-     * 
+     *
      * @deprecated Please use customer_info[organisation_vat_id] field instead.
      * @var string
      */
@@ -356,7 +356,7 @@ class Customer extends AbstractSerializer
     /**
      * Set Company Name
      *
-     * @deprecated Please use setOrganisationName() method instead.
+     * @deprecated Use setOrganisationName() method instead.
      * @param string $companyName
      *
      * @return $this
@@ -371,7 +371,7 @@ class Customer extends AbstractSerializer
     /**
      * Set Company Type
      *
-     * @deprecated Please use setOrganisationEntityType() method instead.
+     * @deprecated Use setOrganisationEntityType() method instead.
      * @param string $companyType
      *
      * @return $this
@@ -386,7 +386,7 @@ class Customer extends AbstractSerializer
     /**
      * Set VAT Id
      *
-     * @deprecated Please use setOrganisationVatId() method instead. The vat_id field is deprecated.
+     * @deprecated Use setOrganisationVatId() method instead. The vat_id field is deprecated.
      * @param string $vatId
      *
      * @return $this
