@@ -46,9 +46,17 @@ setBankPhone(string) | Customer bank phone | string
 setBirthdate(DateTime) | Customer birthdate | DateTime
 setCreatedDate(DateTime) | When was the customer created | DateTime
 setOrganisationNumber(string) | The country specific organisation number for the customer, if it is a corporate customer. | string
+setOrganisationName(string) | The organisation name. **Preferred over setCompanyName()** | string
+setOrganisationEntityType(string) | The organisation nature. **Validated values:** ltd (limited company), plc (public limited company), public_institution (public institution), other (all other types). **Preferred over setCompanyType()** | string
+setVatId(string) | **Deprecated:** The VAT identifier. Use setOrganisationVatId() instead | string
+setOrganisationVatId(string) | The organisation VAT identifier. **Preferred method for VAT ID** | string
 setPersonalIdentifyNumber(string) | The country specific personal identity number for the customer, for countries where it is applicable. eg. Norway, Sweden, Finland | string
 setGender(string) | What gender is the customer | String (f, female, m, male)
 setCardHolderName(string) | Set the cardholder name associated with the customer | string
+**Deprecated Methods** | |
+setType(string) | **Deprecated:** Customer type indicator. Any organisation_* field automatically triggers business customer | string
+setCompanyName(string) | **Deprecated:** Use setOrganisationName() instead | string
+setCompanyType(string) | **Deprecated:** Use setOrganisationEntityType() instead | string
 ```php
 $customer->setEmail('email@email.com');
 $customer->setBirthdate(new \DateTime('1982-07-23'));

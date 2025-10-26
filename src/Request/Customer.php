@@ -24,6 +24,7 @@
 namespace Altapay\Request;
 
 use Altapay\Exceptions\Exception;
+use Altapay\Types\OrganisationEntityTypes;
 
 class Customer extends AbstractSerializer
 {
@@ -46,28 +47,32 @@ class Customer extends AbstractSerializer
 
     /**
      * Indicator of whether the customer is an individual or a business.
-     *
+     * 
+     * @deprecated Any customer_info[organisation_*] field set will trigger the business customer indicator.
      * @var string
      */
     private $type;
 
     /**
      * Name of the customer,if the customer type is Business.
-     *
+     * 
+     * @deprecated Please use customer_info[organisation_name] field instead.
      * @var string
      */
     private $companyName;
 
     /**
      * The nature of the company.
-     *
+     * 
+     * @deprecated Please use customer_info[organisation_entity_type] field instead.
      * @var string
      */
     private $companyType;
 
     /**
      * The company's VAT registration number.
-     *
+     * 
+     * @deprecated Please use customer_info[organisation_vat_id] field instead.
      * @var string
      */
     private $vatId;
@@ -113,6 +118,27 @@ class Customer extends AbstractSerializer
      * @var string
      */
     private $organisationNumber;
+
+    /**
+     * The organisation name.
+     *
+     * @var string
+     */
+    private $organisationName;
+
+    /**
+     * The organisation nature (ltd, plc, public_institution, other).
+     *
+     * @var string
+     */
+    private $organisationEntityType;
+
+    /**
+     * The organisation VAT identifier.
+     *
+     * @var string
+     */
+    private $organisationVatId;
 
     /**
      * The country specific personal identity number for the customer,
@@ -315,6 +341,7 @@ class Customer extends AbstractSerializer
     /**
      * Set Customer Type
      *
+     * @deprecated Any customer_info[organisation_*] field set will trigger the business customer indicator.
      * @param string $type
      *
      * @return $this
@@ -329,6 +356,7 @@ class Customer extends AbstractSerializer
     /**
      * Set Company Name
      *
+     * @deprecated Please use setOrganisationName() method instead.
      * @param string $companyName
      *
      * @return $this
@@ -343,6 +371,7 @@ class Customer extends AbstractSerializer
     /**
      * Set Company Type
      *
+     * @deprecated Please use setOrganisationEntityType() method instead.
      * @param string $companyType
      *
      * @return $this
@@ -357,6 +386,7 @@ class Customer extends AbstractSerializer
     /**
      * Set VAT Id
      *
+     * @deprecated Please use setOrganisationVatId() method instead. The vat_id field is deprecated.
      * @param string $vatId
      *
      * @return $this
@@ -496,6 +526,54 @@ class Customer extends AbstractSerializer
     public function setOrganisationNumber($organisationNumber)
     {
         $this->organisationNumber = $organisationNumber;
+
+        return $this;
+    }
+
+    /**
+     * Set Organisation Name
+     *
+     * @param string $organisationName
+     *
+     * @return $this
+     */
+    public function setOrganisationName($organisationName)
+    {
+        $this->organisationName = $organisationName;
+
+        return $this;
+    }
+
+    /**
+     * Set Organisation Entity Type
+     *
+     * @param string $organisationEntityType
+     *
+     * @return $this
+     *
+     * @throws Exception
+     */
+    public function setOrganisationEntityType($organisationEntityType)
+    {
+        if (!OrganisationEntityTypes::isAllowed($organisationEntityType)) {
+            throw new Exception('setOrganisationEntityType() only allows the values: ' . implode(', ', OrganisationEntityTypes::getAllowed()));
+        }
+
+        $this->organisationEntityType = $organisationEntityType;
+
+        return $this;
+    }
+
+    /**
+     * Set Organisation VAT ID
+     *
+     * @param string $organisationVatId
+     *
+     * @return $this
+     */
+    public function setOrganisationVatId($organisationVatId)
+    {
+        $this->organisationVatId = $organisationVatId;
 
         return $this;
     }
@@ -793,9 +871,20 @@ class Customer extends AbstractSerializer
         }
 
         if ($this->organisationNumber) {
-            $output['organisationNumber'] = $this->organisationNumber;
+            $output['organisation_number'] = $this->organisationNumber;
         }
 
+        if ($this->organisationName) {
+            $output['organisation_name'] = $this->organisationName;
+        }
+
+        if ($this->organisationEntityType) {
+            $output['organisation_entity_type'] = $this->organisationEntityType;
+        }
+
+        if ($this->organisationVatId) {
+            $output['organisation_vat_id'] = $this->organisationVatId;
+        }
         if ($this->personalIdentifyNumber) {
             $output['personalIdentifyNumber'] = $this->personalIdentifyNumber;
         }
