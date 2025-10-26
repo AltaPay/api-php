@@ -56,7 +56,7 @@ class Customer extends AbstractSerializer
     /**
      * Name of the customer,if the customer type is Business.
      *
-     * @deprecated Please use customer_info[organisation_name] field instead.
+     * @deprecated Use customer_info[organisation_name] field instead.
      * @var string
      */
     private $companyName;
@@ -64,7 +64,7 @@ class Customer extends AbstractSerializer
     /**
      * The nature of the company.
      *
-     * @deprecated Please use customer_info[organisation_entity_type] field instead.
+     * @deprecated Use customer_info[organisation_entity_type] field instead.
      * @var string
      */
     private $companyType;
@@ -72,7 +72,7 @@ class Customer extends AbstractSerializer
     /**
      * The company's VAT registration number.
      *
-     * @deprecated Please use customer_info[organisation_vat_id] field instead.
+     * @deprecated Use customer_info[organisation_vat_id] field instead.
      * @var string
      */
     private $vatId;
