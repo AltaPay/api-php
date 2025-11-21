@@ -33,12 +33,14 @@ use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Altapay\Traits\TransactionInfoTrait;
 
 /**
  * Used to update merchant reconciliation identifier for a given payment transaction.
  */
 class UpdateReconciliationIdentifier extends AbstractApi
 {
+    use TransactionInfoTrait;
 
     /** @var string */
     private $paymentId;
@@ -92,6 +94,7 @@ class UpdateReconciliationIdentifier extends AbstractApi
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(['currentMerchantReconciliationIdentifier', 'newMerchantReconciliationIdentifier']);
+        $resolver->setDefined(['transaction_info']);
         $resolver->setAllowedTypes('currentMerchantReconciliationIdentifier', 'string');
         $resolver->setAllowedTypes('newMerchantReconciliationIdentifier', 'string');
     }
