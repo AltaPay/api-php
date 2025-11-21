@@ -51,6 +51,7 @@ class RefundCapturedReservation extends AbstractApi
     use Traits\TransactionsTrait;
     use Traits\OrderlinesTrait;
     use Traits\AmountTrait;
+    use Traits\TransactionInfoTrait;
 
     /**
      * If you wish to define the reconciliation identifier used in the reconciliation csv files
@@ -111,7 +112,8 @@ class RefundCapturedReservation extends AbstractApi
             'reconciliation_identifier',
             'invoice_number',
             'allow_over_refund',
-            'orderLines'
+            'orderLines',
+            'transaction_info'
         ]);
         $resolver->addAllowedTypes('reconciliation_identifier', 'string');
         $resolver->addAllowedTypes('invoice_number', ['string', 'int']);

@@ -32,6 +32,7 @@ use Altapay\Serializer\ResponseSerializer;
 use Altapay\Traits\AmountTrait;
 use Altapay\Traits\OrderlinesTrait;
 use Altapay\Traits\TransactionsTrait;
+use Altapay\Traits\TransactionInfoTrait;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
@@ -53,6 +54,7 @@ class CaptureReservation extends AbstractApi
     use TransactionsTrait;
     use OrderlinesTrait;
     use AmountTrait;
+    use TransactionInfoTrait;
 
     /**
      * If you wish to define the reconciliation identifier used in the reconciliation csv files
@@ -128,7 +130,8 @@ class CaptureReservation extends AbstractApi
             'invoice_number',
             'sales_tax',
             'orderLines',
-            'shippingTrackingInfo'
+            'shippingTrackingInfo',
+            'transaction_info'
         ]);
         $resolver->addAllowedTypes('reconciliation_identifier', 'string');
         $resolver->addAllowedTypes('invoice_number', 'string');
