@@ -163,9 +163,7 @@ class CheckoutSession extends AbstractApi
     protected function getBasicHeaders()
     {
         $headers = parent::getBasicHeaders();
-        if (mb_strtolower($this->getHttpMethod()) === 'post') {
-            $headers['Content-Type'] = 'application/x-www-form-urlencoded';
-        }
+        $headers['Content-Type'] = 'application/x-www-form-urlencoded';
 
         return $headers;
     }
@@ -179,14 +177,7 @@ class CheckoutSession extends AbstractApi
      */
     protected function getUrl(array $options)
     {
-
-        $url = 'checkoutSession';
-        if (mb_strtolower($this->getHttpMethod()) === 'get') {
-            $query = $this->buildUrl($options);
-            $url = sprintf('%s/?%s', $url, $query);
-        }
-
-        return $url;
+        return 'checkoutSession';
     }
 
     /**
