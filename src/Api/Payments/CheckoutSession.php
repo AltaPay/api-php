@@ -187,9 +187,6 @@ class CheckoutSession extends AbstractApi
         }
 
         return $url;
-
-        return 'checkoutSession';
-        
     }
 
     /**
