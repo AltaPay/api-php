@@ -285,6 +285,20 @@ class PaymentRequest extends AbstractApi
     }
 
     /**
+     * Set the session_id to the Payment Request.
+     *
+     * @param string $sessionId
+     *
+     * @return $this
+     */
+    public function setSessionId($sessionId)
+    {
+        $this->unresolvedOptions['session_id'] = $sessionId;
+
+        return $this;
+    }
+    
+    /**
      * Configure options
      *
      * @param OptionsResolver $resolver
@@ -314,7 +328,8 @@ class PaymentRequest extends AbstractApi
             'account_offer',
             'orderLines',
             'extra_merchant_data',
-            'form_template'
+            'form_template',
+            'session_id',
         ]);
 
         $resolver->setAllowedValues('language', Types\LanguageTypes::getAllowed());

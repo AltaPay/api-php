@@ -1,0 +1,231 @@
+<?php
+/**
+ * Copyright (c) 2026 AltaPay
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is furnished
+ * to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+namespace Altapay\Api\Payments;
+
+use Altapay\AbstractApi;
+use Altapay\Exceptions\ClientException;
+use Altapay\Exceptions\ResponseHeaderException;
+use Altapay\Exceptions\ResponseMessageException;
+use Altapay\Serializer\ResponseSerializer;
+use Altapay\Response\CheckoutSessionResponse;
+use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Psr7\Request;
+use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class CheckoutSession extends AbstractApi
+{
+    /**
+     * Set the list of terminals available for the user
+     *
+     * @param array<string> $terminals
+     *
+     * @return $this
+     */
+    public function setTerminals(array $terminals)
+    {
+        $this->unresolvedOptions['terminals'] = $terminals;
+
+        return $this;
+    }
+
+    /**
+     * Set optional session identifier
+     *
+     * @param string $sessionId
+     *
+     * @return $this
+     */
+    public function setSessionId($sessionId)
+    {
+        $this->unresolvedOptions['session_id'] = $sessionId;
+
+        return $this;
+    }
+
+    /**
+     * Set shop order ID
+     *
+     * @param string $shopOrderId
+     *
+     * @return $this
+     */
+    public function setShopOrderId($shopOrderId)
+    {
+        $this->unresolvedOptions['shop_orderid'] = $shopOrderId;
+
+        return $this;
+    }
+
+    /**
+     * Set amount
+     *
+     * @param float $amount
+     *
+     * @return $this
+     */
+    public function setAmount($amount)
+    {
+        $this->unresolvedOptions['amount'] = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Set currency
+     *
+     * @param string $currency
+     *
+     * @return $this
+     */
+    public function setCurrency($currency)
+    {
+        $this->unresolvedOptions['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Set config parameters
+     *
+     * @param array<string, mixed> $config
+     *
+     * @return $this
+     */
+    public function setConfig(array $config)
+    {
+        $this->unresolvedOptions['config'] = $config;
+
+        return $this;
+    }
+
+    /**
+     * Configure options
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     */
+    protected function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setRequired(['terminals']);
+        $resolver->setDefined(['session_id', 'shop_orderid', 'amount', 'currency', 'config']);
+        $resolver->addAllowedTypes('terminals', 'array');
+        $resolver->addAllowedTypes('session_id', 'string');
+        $resolver->addAllowedTypes('shop_orderid', 'string');
+        $resolver->addAllowedTypes('amount', ['int', 'float']);
+        $resolver->addAllowedTypes('currency', 'string');
+        $resolver->addAllowedTypes('config', 'array');
+    }
+
+    /**
+     * Handle response
+     *
+     * @param Request $request
+     * @param ResponseInterface $response
+     *
+     * @return CheckoutSessionResponse
+     * @throws \Exception
+     */
+    protected function handleResponse(Request $request, ResponseInterface $response)
+    {
+        $body = (string)$response->getBody();
+        $xml = new \SimpleXMLElement($body);
+
+        return ResponseSerializer::serialize(CheckoutSessionResponse::class, $xml->Body, $xml->Header);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    protected function getBasicHeaders()
+    {
+        $headers = parent::getBasicHeaders();
+        $headers['Content-Type'] = 'application/x-www-form-urlencoded';
+
+        return $headers;
+    }
+
+    /**
+     * Url to api call
+     *
+     * @param array<string, mixed> $options Resolved options
+     *
+     * @return string
+     */
+    protected function getUrl(array $options)
+    {
+        return 'checkoutSession';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getHttpMethod()
+    {
+        return 'POST';
+    }
+
+    /**
+     * Generate the response
+     *
+     * @throws \Exception
+     * @throws ClientException
+     * @throws GuzzleException
+     * @throws ResponseHeaderException
+     * @throws ResponseMessageException
+     */
+    protected function doResponse()
+    {
+        $this->doConfigureOptions();
+        $headers = $this->getBasicHeaders();
+        $request = new Request(
+            $this->getHttpMethod(),
+            $this->parseUrl(),
+            $headers,
+            $this->getPostOptions()
+        );
+        $this->request = $request;
+        
+        try {
+            $response = $this->getClient()->send($request);
+            $this->response = $response;
+            $output = $this->handleResponse($request, $response);
+            $this->validateResponse($output);
+
+            return $output;
+        } catch (GuzzleHttpClientException $e) {
+            throw new ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
+        }
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPostOptions()
+    {
+        return http_build_query($this->options, '', '&');
+    }
+}
