@@ -29,6 +29,7 @@ use Altapay\Exceptions\ResponseHeaderException;
 use Altapay\Exceptions\ResponseMessageException;
 use Altapay\Serializer\ResponseSerializer;
 use Altapay\Response\CheckoutSessionResponse;
+use Altapay\Traits\TerminalTrait;
 use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
@@ -37,6 +38,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CheckoutSession extends AbstractApi
 {
+    use TerminalTrait;
     /**
      * Set the list of terminals available for the user
      *
@@ -131,7 +133,7 @@ class CheckoutSession extends AbstractApi
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(['terminals']);
-        $resolver->setDefined(['session_id', 'shop_orderid', 'amount', 'currency', 'config']);
+        $resolver->setDefined(['session_id', 'shop_orderid', 'amount', 'currency', 'config', 'terminal']);
         $resolver->addAllowedTypes('terminals', 'array');
         $resolver->addAllowedTypes('session_id', 'string');
         $resolver->addAllowedTypes('shop_orderid', 'string');
