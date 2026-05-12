@@ -25,7 +25,7 @@ namespace Altapay\Response;
 
 use Altapay\Response\Embeds\Session;
 
-class CheckoutSessionResponse extends AbstractResponse
+class CheckoutSessionResponse extends PaymentRequestResponse
 {
     /**
      * Children of the response
