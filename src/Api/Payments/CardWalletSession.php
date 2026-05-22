@@ -23,44 +23,47 @@
 
 namespace Altapay\Api\Payments;
 
-use Altapay\AbstractApi;
-use Altapay\Exceptions\ClientException;
-use Altapay\Exceptions\ResponseHeaderException;
-use Altapay\Exceptions\ResponseMessageException;
+use Altapay\Api\Ecommerce\PaymentRequest;
+use Altapay\Response\CardWalletSessionResponse;
 use Altapay\Serializer\ResponseSerializer;
-use Altapay\Traits\TerminalTrait;
-use Altapay\Response\PaymentRequestResponse;
-use GuzzleHttp\Exception\ClientException as GuzzleHttpClientException;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CardWalletSession extends AbstractApi
+class CardWalletSession extends PaymentRequest
 {
-    use TerminalTrait;
-
     /**
-     * @param string $identifier
+     * @param string $url The validation URL from the Apple Pay event
      *
      * @return $this
      */
-    public function setValidationUrl($identifier)
+    public function setValidationUrl($url)
     {
-        $this->unresolvedOptions['validationUrl'] = $identifier;
+        $this->unresolvedOptions['validationUrl'] = $url;
 
         return $this;
     }
 
     /**
-     *
-     * @param string $identifier
+     * @param string $domain The domain initializing the request
      *
      * @return $this
      */
-    public function setDomain($identifier)
+    public function setDomain($domain)
     {
-        $this->unresolvedOptions['domain'] = $identifier;
+        $this->unresolvedOptions['domain'] = $domain;
+
+        return $this;
+    }
+
+    /**
+     * @param array<string, string> $applePayRequestData
+     *
+     * @return $this
+     */
+    public function setApplePayRequestData(array $applePayRequestData)
+    {
+        $this->unresolvedOptions['applePayRequestData'] = $applePayRequestData;
 
         return $this;
     }
@@ -74,39 +77,30 @@ class CardWalletSession extends AbstractApi
      */
     protected function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired(['terminal', 'validationUrl', 'domain']);
+        parent::configureOptions($resolver);
+
+        $resolver->setDefined(['validationUrl', 'domain', 'applePayRequestData']);
+
         $resolver->addAllowedTypes('validationUrl', 'string');
         $resolver->addAllowedTypes('domain', 'string');
+        $resolver->addAllowedTypes('applePayRequestData', 'array'); // validationUrl, domain, source
     }
 
     /**
      * Handle response
      *
-     * @param Request $request
+     * @param Request           $request
      * @param ResponseInterface $response
      *
-     * @return PaymentRequestResponse
+     * @return CardWalletSessionResponse
      * @throws \Exception
      */
     protected function handleResponse(Request $request, ResponseInterface $response)
     {
         $body = (string)$response->getBody();
-        $xml = new \SimpleXMLElement($body);
+        $xml  = new \SimpleXMLElement($body);
 
-        return ResponseSerializer::serialize(PaymentRequestResponse::class, $xml->Body, $xml->Header);
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    protected function getBasicHeaders()
-    {
-        $headers = parent::getBasicHeaders();
-        if (mb_strtolower($this->getHttpMethod()) === 'post') {
-            $headers['Content-Type'] = 'application/x-www-form-urlencoded';
-        }
-
-        return $headers;
+        return ResponseSerializer::serialize(CardWalletSessionResponse::class, $xml->Body, $xml->Header);
     }
 
     /**
@@ -118,62 +112,6 @@ class CardWalletSession extends AbstractApi
      */
     protected function getUrl(array $options)
     {
-        $url = 'cardWallet/session';
-        if (mb_strtolower($this->getHttpMethod()) === 'get') {
-            $query = $this->buildUrl($options);
-            $url = sprintf('%s/?%s', $url, $query);
-        }
-
-        return $url;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getHttpMethod()
-    {
-        return 'POST';
-    }
-
-    /**
-     * Generate the response
-     *
-     * @throws \Exception
-     * @throws ClientException
-     * @throws GuzzleException
-     * @throws ResponseHeaderException
-     * @throws ResponseMessageException
-     */
-    protected function doResponse()
-    {
-        $this->doConfigureOptions();
-        $headers = $this->getBasicHeaders();
-        $requestParameters = [$this->getHttpMethod(), $this->parseUrl(), $headers];
-        if (mb_strtolower($this->getHttpMethod()) === 'post') {
-            $requestParameters[] = $this->getPostOptions();
-        }
-
-        $request = new Request(...$requestParameters);
-        $this->request = $request;
-        try {
-            $response = $this->getClient()->send($request);
-            $this->response = $response;
-            $output = $this->handleResponse($request, $response);
-            $this->validateResponse($output);
-
-            return $output;
-        } catch (GuzzleHttpClientException $e) {
-            throw new ClientException($e->getMessage(), $e->getRequest(), $e->getResponse(), $e);
-        }
-    }
-
-    /**
-     * @return string
-     */
-    protected function getPostOptions()
-    {
-        $options = $this->options;
-
-        return http_build_query($options, '', '&');
+        return 'cardWallet/session';
     }
 }
