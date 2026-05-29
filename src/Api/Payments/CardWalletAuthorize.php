@@ -259,6 +259,18 @@ class CardWalletAuthorize extends AbstractApi
     }
 
     /**
+     * @param string $paymentId
+     *
+     * @return $this
+     */
+    public function setPaymentId($paymentId)
+    {
+        $this->unresolvedOptions['payment_id'] = $paymentId;
+
+        return $this;
+    }
+
+    /**
      * Configure options
      *
      * @param OptionsResolver $resolver
@@ -285,7 +297,8 @@ class CardWalletAuthorize extends AbstractApi
             'customer_created_date',
             'shipping_method',
             'organisation_number',
-            'account_offer'
+            'account_offer',
+            'payment_id',
         ]);
         $resolver->addAllowedTypes('provider_data', 'string');
         $resolver->setAllowedValues('language', Types\LanguageTypes::getAllowed());
@@ -313,6 +326,7 @@ class CardWalletAuthorize extends AbstractApi
         $resolver->setNormalizer('account_offer', function (Options $options, $value) {
             return $value ? 'required' : 'disabled';
         });
+        $resolver->addAllowedTypes('payment_id', 'string');
     }
 
     /**
