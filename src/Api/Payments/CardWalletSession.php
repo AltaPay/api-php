@@ -69,6 +69,15 @@ class CardWalletSession extends PaymentRequest
     }
 
     /**
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     */
+    protected function setupRequirements(OptionsResolver $resolver)
+    {
+    }
+
+    /**
      * Configure options
      *
      * @param OptionsResolver $resolver
@@ -79,7 +88,15 @@ class CardWalletSession extends PaymentRequest
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefined(['validationUrl', 'domain', 'applePayRequestData']);
+        $resolver->setDefined([
+            'terminal',
+            'shop_orderid',
+            'amount',
+            'currency',
+            'validationUrl',
+            'domain',
+            'applePayRequestData'
+        ]);
 
         $resolver->addAllowedTypes('validationUrl', 'string');
         $resolver->addAllowedTypes('domain', 'string');
