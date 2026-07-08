@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add support for new parameters in `cardWallet/session` and `cardWallet/authorize`.
 
+> **Note:** This change is backward compatible for existing merchants using the legacy Apple Pay integration. Merchants who want to migrate to the new Apple Pay flow can follow the migration guide below:
+>
+> [Migration guideline for legacy Apple Pay integration](https://documentation.altapay.com/Content/Ecom/Payment%20Types/Payment%20Provider%20Specifics/Apple%20Pay.htm)
+
 ## [3.5.9] - 2026-05-08
 ### Added
 - Refactor `checkoutSession` to extend `PaymentRequest` to enable support for all standard payment parameters.
