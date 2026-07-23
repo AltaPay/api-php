@@ -307,7 +307,7 @@ class PaymentRequest extends AbstractApi
      */
     protected function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired(['terminal', 'shop_orderid', 'amount', 'currency']);
+        $this->setupRequirements($resolver);
         $resolver->setDefined([
             'language',
             'transaction_info',
@@ -357,6 +357,16 @@ class PaymentRequest extends AbstractApi
         $resolver->setNormalizer('account_offer', function (Options $options, $value) {
             return $value ? 'required' : 'disabled';
         });
+    }
+
+    /**
+     * @param OptionsResolver $resolver
+     *
+     * @return void
+     */
+    protected function setupRequirements(OptionsResolver $resolver)
+    {
+        $resolver->setRequired(['terminal', 'shop_orderid', 'amount', 'currency']);
     }
 
     /**
