@@ -72,7 +72,7 @@ class ResponseSerializer
     ) {
         $documents = [];
 
-        if (! empty($data) && ! empty($data->{$childKey}) && $data->{$childKey} instanceof \SimpleXMLElement) {
+        if (! empty($data) && isset($data->{$childKey}) && $data->{$childKey} instanceof \SimpleXMLElement) {
             foreach ($data->{$childKey} as $d) {
                 $object      = new $objectName();
                 $documents[] = $object->deserialize($d);

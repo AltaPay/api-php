@@ -271,6 +271,18 @@ class CardWalletAuthorize extends AbstractApi
     }
 
     /**
+     * @param string $sessionId
+     *
+     * @return $this
+     */
+    public function setSessionId($sessionId)
+    {
+        $this->unresolvedOptions['session_id'] = $sessionId;
+
+        return $this;
+    }
+
+    /**
      * Configure options
      *
      * @param OptionsResolver $resolver
@@ -299,6 +311,7 @@ class CardWalletAuthorize extends AbstractApi
             'organisation_number',
             'account_offer',
             'payment_id',
+            'session_id',
         ]);
         $resolver->addAllowedTypes('provider_data', 'string');
         $resolver->setAllowedValues('language', Types\LanguageTypes::getAllowed());
@@ -327,6 +340,7 @@ class CardWalletAuthorize extends AbstractApi
             return $value ? 'required' : 'disabled';
         });
         $resolver->addAllowedTypes('payment_id', 'string');
+        $resolver->addAllowedTypes('session_id', 'string');
     }
 
     /**

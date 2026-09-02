@@ -53,6 +53,14 @@ class Terminal extends AbstractResponse
             'class' => PrimaryMethod::class,
             'array' => false
         ],
+        'MethodConfigurations' => [
+            'class' => MethodConfig::class,
+            'array' => 'MethodConfig'
+        ],
+        'Schemes' => [
+            'class' => Scheme::class,
+            'array' => 'Scheme'
+        ],
     ];
 
     /** @var string */
@@ -103,4 +111,14 @@ class Terminal extends AbstractResponse
 
     /** @var bool */
     public $CanIssueNewCredit;
+
+    /**
+     * @var MethodConfig[]
+     */
+    public $MethodConfigurations = [];
+
+    /**
+     * @var Scheme[]
+     */
+    public $Schemes = [];
 }
