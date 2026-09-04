@@ -84,6 +84,6 @@ class PaymentRequestResponse extends AbstractResponse
     /** @var string */
     public $CardHolderMessageMustBeShown;
 
-    /** @var string */
+    /** @var InitiatePaymentRedirectResponse|null */
     public $RedirectResponse = null;
 }
