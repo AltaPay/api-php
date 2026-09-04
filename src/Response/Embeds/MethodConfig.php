@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016 Martin Aarhof
+ * Copyright (c) 2026 AltaPay
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,69 +21,30 @@
  * THE SOFTWARE.
  */
 
-namespace Altapay\Response;
+namespace Altapay\Response\Embeds;
 
-use Altapay\Response\Embeds\Transaction;
-use Altapay\Response\Embeds\InitiatePaymentRedirectResponse;
+use Altapay\Response\AbstractResponse;
 
-class PaymentRequestResponse extends AbstractResponse
+class MethodConfig extends AbstractResponse
 {
-    /**
-     * Children of the response
-     *
-     * @var array<string, array<string, mixed>>
-     */
-    protected $childs = [
-        'Transactions' => [
-            'class' => Transaction::class,
-            'array' => 'Transaction'
-        ],
-        'RedirectResponse' => [
-            'class' => InitiatePaymentRedirectResponse::class,
-            'array' => false
-        ],
-    ];
-
-    /**
-     * The result
-     *
-     * @var string
-     */
-    public $Result;
+    /** @var string */
+    public $method;
 
     /** @var string */
-    public $PaymentRequestId;
+    public $identifier;
 
     /** @var string */
-    public $Url;
+    public $WalletEnvironment;
 
     /** @var string */
-    public $RedirectUrl;
+    public $MerchantId;
 
     /** @var string */
-    public $DynamicJavascriptUrl;
+    public $MerchantName;
 
     /** @var string */
-    public $AppUrl;
+    public $ClientId;
 
     /** @var string */
-    public $Transactions;
-
-    /** @var string */
-    public $ApplePaySession;
-
-    /** @var string */
-    public $MerchantErrorMessage;
-
-    /** @var string */
-    public $CardHolderErrorMessage;
-   
-    /** @var string */
-    public $MerchantErrorCode;
-    
-    /** @var string */
-    public $CardHolderMessageMustBeShown;
-
-    /** @var InitiatePaymentRedirectResponse|null */
-    public $RedirectResponse = null;
+    public $SupportedCustomerType;
 }

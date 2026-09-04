@@ -34,6 +34,8 @@ Docs: https://testgateway.altapaysecure.com/merchant.php/help/Merchant_API
 | x [Credit](payments/credit.md) | This will create a Credit payment. The payment can be made with a credit card, or a credit card token and the CVV |
 | x [Update Order](payments/update_order.md) | This method is used to update the order amount and add, remove or update order lines |
 | - [Invoice reservation](payments/invoice_reservation.md) | |
+| [Card wallet session](payments/card_wallet_session.md) | This endpoint initiates a new payment using the Card Wallet flow and retrieves merchant session data. |
+| [Card wallet authorize](payments/card_wallet_authorize.md) | This step finalizes the Card Wallet payment by authorizing the previously registered payment. |
 
 ### Subscription
 

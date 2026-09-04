@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.6.2] - 2026-09-02
+### Added
+- Add support for the `session_id` parameter in `cardWallet/authorize`.
+- Add support for the `RedirectResponse` of `PaymentRequestResponse`, used for 3D Secure redirects.
+- Add support for `MethodConfigurations` and `Schemes` of a terminal in `getTerminals`.
+
+### Fixes
+- Fix reading of child elements that carry only attributes.
+
 ## [3.6.1] - 2026-06-23
 ### Added
 - Add support for new parameters in `cardWallet/session` and `cardWallet/authorize`.

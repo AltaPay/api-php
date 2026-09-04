@@ -12,6 +12,8 @@
 | `$object->Methods`    | array of `\Altapay\Response\Embeds\Method` objects | array
 | `$object->Products`   | array of `\Altapay\Response\Embeds\Product` objects | array
 | `$object->PrimaryMethod`   |  | `\Altapay\Response\Embeds\PrimaryMethod`
+| `$object->MethodConfigurations`   | array of `\Altapay\Response\Embeds\MethodConfig` objects | array
+| `$object->Schemes`   | array of `\Altapay\Response\Embeds\Scheme` objects | array
 | `$object->CanUseCredit`   |                                               | boolean
 | `$object->CanIssueNewCredit`   |                                          | boolean
 | `$object->LogoUrl`   |                                                    | string
@@ -42,6 +44,27 @@
 | `$object->Nature` | | string
 | `$object->Identifier` | | string
 | `$object->SupportedAgreementTypes` | | array of `\Altapay\Response\Embeds\AgreementType` objects
+
+### `\Altapay\Response\Embeds\MethodConfig`
+
+The configuration of one of the acquirers of the terminal. The details a wallet needs on the frontend, such as the environment and the merchant identity, are found here.
+
+| Method  | Description | Type |
+|---|---|---|
+| `$object->method` | | string
+| `$object->identifier` | | string
+| `$object->WalletEnvironment` | | string
+| `$object->MerchantId` | | string
+| `$object->MerchantName` | | string
+| `$object->ClientId` | | string
+| `$object->SupportedCustomerType` | | string
+
+### `\Altapay\Response\Embeds\Scheme`
+
+| Method  | Description | Type |
+|---|---|---|
+| `$object->code` | | string
+| `$object->Scheme` | | string
 
 ### `\Altapay\Response\Embeds\AgreementType`
 
